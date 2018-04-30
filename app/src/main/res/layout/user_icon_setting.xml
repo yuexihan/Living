@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_weight="1"
+        android:layout_height="313dp"
+        android:layout_weight="2"
         android:gravity="top"
         android:orientation="horizontal">
 
@@ -61,7 +62,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -83,10 +84,5 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listViewForUser"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
 
 </LinearLayout>
