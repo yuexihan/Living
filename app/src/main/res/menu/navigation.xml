@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_record"
+        android:icon="@drawable/record"
+        android:title="@string/nav_item_record" />
+
+    <item
+        android:id="@+id/navigation_ground"
+        android:icon="@drawable/ground"
+        android:title="@string/nav_item_ground" />
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/message"
+        android:title="@string/nav_item_message" />
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/user"
+        android:title="@string/nav_item_user" />
+
+</menu>

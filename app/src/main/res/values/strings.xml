@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Living</string>
+    <string name="nav_item_record">记录</string>
+    <string name="nav_item_ground">广场</string>
+    <string name="nav_item_message">消息</string>
+    <string name="nav_item_user">我的</string>
+    <string name="record_camera_but">我最懂你</string>
+    <string name="record_pub_switch">公开</string>
+    <string name="record_pub_button">发布</string>
+    <string name="record_emo_text">我的心情</string>
+    <string name="record_rbut_happy">开心</string>
+    <string name="rbut_anger">愤怒</string>
+    <string name="rbut_sad">忧伤</string>
+    <string name="rbut_calm">平静</string>
+    <string name="record_p_text">心情强度</string>
+    <string name="record_edit_text">记录</string>
+    <string name="camera_dialog_title">心情识别</string>
+    <string name="camera_dialog_item1">拍摄</string>
+    <string name="camera_dialog_item2">相册</string>
+    <string name="ground_but_all">全部</string>
+    <string name="ground_but_happy">开心</string>
+    <string name="ground_but_anger">愤怒</string>
+    <string name="ground_but_sad">伤心</string>
+    <string name="ground_but_calm">平静</string>
+    <string name="ground_more_comment_but">查看更多评论......</string>
+    <string name="ground_respond_text">回复</string>
+</resources>

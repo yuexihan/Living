@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/commentFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="xxx"
+        android:textColor="@android:color/holo_green_light" />
+
+    <TextView
+        android:id="@+id/respondText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="@string/ground_respond_text"
+        android:textColor="@android:color/holo_purple" />
+
+    <TextView
+        android:id="@+id/commentTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="dddd"
+        android:textColor="@android:color/holo_green_light" />
+
+    <TextView
+        android:id="@+id/commetTo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text=":"
+        android:textColor="@android:color/holo_purple" />
+
+    <TextView
+        android:id="@+id/commentContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="这是评论的内容哦" />
+
+    <TextView
+        android:id="@+id/commetTo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/commentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="2018-11-13 15:11"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="8sp" />
+</LinearLayout>

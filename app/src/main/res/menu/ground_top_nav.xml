@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@android:drawable/btn_star"
+        android:title="@string/ground_but_all" />
+    <item
+        android:id="@+id/item_happy"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/ground_but_happy" />
+    <item
+        android:id="@+id/item_anger"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/ground_but_anger" />
+    <item
+        android:id="@+id/item_sad"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/ground_but_sad" />
+    <item
+        android:id="@+id/item_calm"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="@string/ground_but_calm" />
+</menu>
