@@ -23,29 +23,32 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <Button
-                android:id="@+id/pub_switch"
+            <ImageButton
+                android:id="@+id/self_pub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="false"
-                android:layout_toLeftOf="@+id/pub_but"
-                android:text="@string/record_pub_switch"
-                android:textSize="18sp" />
+                android:layout_toLeftOf="@+id/pub_pub"
+                android:background="@android:color/transparent"
+                android:src="@drawable/pub_to_self_button" />
 
-            <Button
-                android:id="@+id/pub_but"
+            <ImageButton
+                android:id="@+id/pub_pub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="@string/record_pub_button" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/pub_to_pub_button" />
         </RelativeLayout>
 
         <ImageButton
             android:id="@+id/camera_but"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="0"
             android:adjustViewBounds="false"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/record_camera_but"
             android:src="@drawable/camera" />
 
