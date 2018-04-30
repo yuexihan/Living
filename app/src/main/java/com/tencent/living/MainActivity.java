@@ -1,5 +1,9 @@
 package com.tencent.living;
 
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager homeViewPager;
     private BottomNavigationView navigation;
+    private TextView title;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,8 +51,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        title = (TextView) findViewById(R.id.toolbar_title);
+        Shader textShader=new LinearGradient(0, 0, 500, 0,
+                new int[]{Color.argb(0xff, 254, 197, 181),
+                        Color.argb(0xff, 0xff, 0xf7, 0xa8)},
+                null, Shader.TileMode.CLAMP);
+        title.getPaint().setShader(textShader);
+        title.setTypeface(title.getTypeface(), Typeface.ITALIC);
         initViewPager();
         initNavigation();
     }
