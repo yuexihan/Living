@@ -8,18 +8,18 @@
         android:title="@string/ground_but_all" />
     <item
         android:id="@+id/item_happy"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/happy"
         android:title="@string/ground_but_happy" />
     <item
         android:id="@+id/item_anger"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/anger"
         android:title="@string/ground_but_anger" />
     <item
         android:id="@+id/item_sad"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/sad"
         android:title="@string/ground_but_sad" />
     <item
         android:id="@+id/item_calm"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/calm"
         android:title="@string/ground_but_calm" />
 </menu>
