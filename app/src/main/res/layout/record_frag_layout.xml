@@ -129,6 +129,7 @@
             android:layout_weight="0"
             android:max="5"
             android:progress="@android:integer/config_shortAnimTime"
+            android:progressDrawable="@drawable/seekbar_bg"
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:visibility="visible" />
 

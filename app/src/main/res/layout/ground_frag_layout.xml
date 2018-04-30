@@ -6,20 +6,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.BottomNavigationView
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:background="#59d9ec"
-        app:menu="@menu/ground_top_nav" >
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="9dp">
 
-    </android.support.design.widget.BottomNavigationView>
+        <RadioButton
+            android:id="@+id/rbut_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/radio_all_bg"
+            android:text="@string/ground_but_all"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rbut_happy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/radio_happy_bg"
+            android:text="@string/ground_but_happy"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rbut_anger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0"
+            android:button="@null"
+            android:drawableTop="@drawable/radio_anger_bg"
+            android:text="@string/ground_but_anger"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rbut_sad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0"
+            android:button="@null"
+            android:drawableTop="@drawable/radio_sad_bg"
+            android:text="@string/ground_but_sad"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/rbut_calm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:button="@null"
+            android:drawableTop="@drawable/radio_calm_bg"
+            android:text="@string/ground_but_calm"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+    </RadioGroup>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0"
-        />
+        android:layout_weight="1">
+
+    </ListView>
 
 </LinearLayout>
