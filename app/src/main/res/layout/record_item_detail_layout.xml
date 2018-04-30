@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Raylhuang"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/time"
@@ -76,7 +76,7 @@
         android:layout_margin="10dp"
         android:layout_weight="0"
         android:text="真的好气啊！hahahahahahahahahahhahahfdafdafdafda"
-        android:textSize="18sp" />
+        android:textSize="21sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
