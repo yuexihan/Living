@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:padding="16dp"
     android:scrollbarAlwaysDrawHorizontalTrack="false"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
@@ -13,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="0dp"
+        android:padding="10dp"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:weightSum="0">
@@ -27,6 +25,7 @@
                 android:id="@+id/self_pub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_alignParentLeft="false"
                 android:layout_toLeftOf="@+id/pub_pub"
                 android:background="@android:color/transparent"
@@ -36,6 +35,7 @@
                 android:id="@+id/pub_pub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_alignParentRight="true"
                 android:background="@android:color/transparent"
                 android:src="@drawable/pub_to_pub_button" />
@@ -46,19 +46,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="0"
-            android:adjustViewBounds="false"
             android:background="@android:color/transparent"
             android:contentDescription="@string/record_camera_but"
-            android:src="@drawable/camera" />
+            android:src="@drawable/camera"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="0"
             android:text="@string/record_emo_text"
-            android:textSize="18sp" />
+            android:textSize="15dp" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -68,6 +70,8 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:id="@+id/rbut_happy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,9 +82,12 @@
                 android:drawableTop="@drawable/radio_happy_bg"
                 android:text="@string/ground_but_happy"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textColor="@drawable/radio_text_color"
+                android:textSize="20sp" />
 
             <RadioButton
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:id="@+id/rbut_anger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,9 +97,12 @@
                 android:drawableTop="@drawable/radio_anger_bg"
                 android:text="@string/ground_but_anger"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textColor="@drawable/radio_text_color"
+                android:textSize="20sp" />
 
             <RadioButton
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:id="@+id/rbut_sad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,9 +112,12 @@
                 android:drawableTop="@drawable/radio_sad_bg"
                 android:text="@string/ground_but_sad"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textColor="@drawable/radio_text_color"
+                android:textSize="20sp" />
 
             <RadioButton
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:id="@+id/rbut_calm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,26 +126,29 @@
                 android:drawableTop="@drawable/radio_calm_bg"
                 android:text="@string/ground_but_calm"
                 android:textAlignment="center"
-                android:textSize="10sp" />
+                android:textColor="@drawable/radio_text_color"
+                android:textSize="20sp" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="0"
-            android:text="@string/record_p_text"
-            android:textSize="18sp" />
+            android:text="心情强度"
+            android:textSize="15dp" />
 
         <SeekBar
             android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:max="5"
-            android:progress="@android:integer/config_shortAnimTime"
+            android:max="100"
+            android:progress="50"
             android:progressDrawable="@drawable/seekbar_bg"
+            android:thumb="@drawable/seekbar_thumb"
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:visibility="visible" />
 
@@ -141,19 +157,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
             android:text="@string/nav_item_record"
-            android:textSize="18sp" />
+            android:textSize="15dp" />
 
         <EditText
             android:id="@+id/pub_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_weight="2"
-            android:background="@color/colorPrimaryDark"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:maxLength="2"
+            android:layout_margin="5dp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength ="2000"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint ="记录这一刻"
+            android:scrollHorizontally="false"
+            android:background="#eeeeee"
             android:minHeight="100dp" />
     </LinearLayout>
 </ScrollView>
