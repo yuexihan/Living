@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="设置" >
+    <PreferenceCategory
+        android:summary="分组1"
+        android:title="设置" >
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dialogTitle="对话框标题"
+            android:key="myListPreference"
+            android:summary="Gerald"
+            android:title="昵称" />
+        <ListPreference
+            android:dialogTitle="对话框标题"
+            android:key="myListPreference"
+            android:summary="10000"
+            android:title="关联qq" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:summary="分组2"
+        android:title="关于">
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dialogTitle="对话框标题"
+            android:key="myListPreference"
+            android:summary="0.1"
+            android:title="版本" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:dialogTitle="对话框标题"
+            android:key="myListPreference"
+            android:summary="abc@tencent.com"
+            android:title="联系我们" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory>
+
+    </PreferenceCategory>
+    <PreferenceCategory>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </PreferenceCategory>
+    <Preference
+        android:key="loginButtons"
+        android:layout="@layout/logout_button" />
+
+</PreferenceScreen>
