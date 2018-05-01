@@ -1,10 +1,12 @@
 package com.tencent.living;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.tencent.living.Data.Comment;
@@ -13,6 +15,7 @@ import com.tencent.living.Data.Record;
 public class UserFragment extends Fragment {
     private ListView listView;
     private RecordItemAdapter listViewAdapter;
+    private ImageButton settingsbutton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -22,7 +25,17 @@ public class UserFragment extends Fragment {
         //设置适配器
         listViewAdapter = new RecordItemAdapter(this.getContext());
         listView.setAdapter(listViewAdapter);
-
+        settingsbutton = (ImageButton) view.findViewById(R.id.settingsbtn);
+        settingsbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                // 设置要跳转的页面
+                intent.setClass(getActivity(), SettingsActivity.class);
+                // 开始Activity
+                startActivity(intent);
+            }
+        });
 
         /* 测试数据 */
         for (int i = 0; i < 5 ;i++) {
