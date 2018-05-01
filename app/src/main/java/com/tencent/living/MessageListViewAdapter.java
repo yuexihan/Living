@@ -71,7 +71,7 @@ public class MessageListViewAdapter extends BaseAdapter {
             holder.praiseImage.setImageResource(R.drawable.heart);
             holder.praiseNum.setText("+1");
         }else{
-            holder.praiseImage.setImageResource(0);
+            holder.praiseImage.setImageResource(0);  //
             holder.praiseNum.setText("");
         }
 
