@@ -25,8 +25,8 @@
                 android:id="@+id/self_pub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:layout_alignParentLeft="false"
+                android:layout_margin="5dp"
                 android:layout_toLeftOf="@+id/pub_pub"
                 android:background="@android:color/transparent"
                 android:src="@drawable/pub_to_self_button" />
