@@ -20,8 +20,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 
@@ -46,6 +44,8 @@ public class RecordFragment extends Fragment {
     private ImageButton camera_button;
     private SeekBar degreeBar;
     private TextView degreeText;
+    private ImageButton selfPubButton;
+    private ImageButton pubPubButton;
 
     //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
@@ -110,6 +110,21 @@ public class RecordFragment extends Fragment {
         }
     };
 
+    //点击发布给自己按钮时被调用
+    private View.OnClickListener selfPubListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //@TODO 这里要写发布给自己的逻辑
+        }
+    };
+
+    //点击发布到广场按钮时被调用
+    private View.OnClickListener pubPubListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //@TODO 这里要写发布到广场的逻辑
+        }
+    };
     private void startCamera(){
         File dir = new File(Environment.getExternalStorageDirectory(),"pictures");
         if(dir.exists()){
@@ -146,11 +161,15 @@ public class RecordFragment extends Fragment {
         radioGroup = (RadioGroup)view.findViewById(R.id.emoGroup);
         degreeBar = (SeekBar)view.findViewById(R.id.degreeBar);
         degreeText = (TextView)view.findViewById(R.id.degreeText);
+        selfPubButton = (ImageButton)view.findViewById(R.id.self_pub);
+        pubPubButton = (ImageButton)view.findViewById(R.id.pub_pub);
 
         camera_button.setOnClickListener(camera_but_lis);
         emotionProgressDialog = new ProgressDialog(this.getActivity());
         degreeBar.setOnSeekBarChangeListener(seekBarListener);
         degreeText.setText(getString(R.string.emotion_value) + degreeBar.getProgress());
+        selfPubButton.setOnClickListener(selfPubListener);
+        pubPubButton.setOnClickListener(pubPubListener);
         return view;
     }
     @Override
