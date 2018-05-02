@@ -45,12 +45,13 @@
             android:id="@+id/camera_but"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:contentDescription="@string/record_camera_but"
-            android:src="@drawable/camera"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/camera" />
 
         <TextView
             android:id="@+id/textView"
@@ -62,6 +63,7 @@
             android:textSize="15dp" />
 
         <RadioGroup
+            android:id="@+id/emoGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -69,8 +71,6 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:scaleX="0.7"
-                android:scaleY="0.7"
                 android:id="@+id/rbut_happy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,14 +79,14 @@
                 android:button="@null"
                 android:checked="true"
                 android:drawableTop="@drawable/radio_happy_bg"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:text="@string/ground_but_happy"
                 android:textAlignment="center"
                 android:textColor="@drawable/radio_text_color"
                 android:textSize="20sp" />
 
             <RadioButton
-                android:scaleX="0.7"
-                android:scaleY="0.7"
                 android:id="@+id/rbut_anger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,14 +94,14 @@
                 android:layout_weight="0"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_anger_bg"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:text="@string/ground_but_anger"
                 android:textAlignment="center"
                 android:textColor="@drawable/radio_text_color"
                 android:textSize="20sp" />
 
             <RadioButton
-                android:scaleX="0.7"
-                android:scaleY="0.7"
                 android:id="@+id/rbut_sad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,20 +109,22 @@
                 android:layout_weight="0"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_sad_bg"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:text="@string/ground_but_sad"
                 android:textAlignment="center"
                 android:textColor="@drawable/radio_text_color"
                 android:textSize="20sp" />
 
             <RadioButton
-                android:scaleX="0.7"
-                android:scaleY="0.7"
                 android:id="@+id/rbut_calm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_calm_bg"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:text="@string/ground_but_calm"
                 android:textAlignment="center"
                 android:textColor="@drawable/radio_text_color"
@@ -130,24 +132,24 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/degreeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="0"
-            android:text="心情强度"
+            android:text="@string/emotion_value"
             android:textSize="15dp" />
 
         <SeekBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/degreeBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:max="100"
             android:progress="50"
             android:progressDrawable="@drawable/seekbar_bg"
-            android:thumb="@drawable/seekbar_thumb"
             android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:thumb="@drawable/seekbar_thumb"
             android:visibility="visible" />
 
         <TextView

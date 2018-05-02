@@ -2,8 +2,10 @@ package com.tencent.living;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,15 +16,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.microsoft.projectoxford.face.contract.Emotion;
+import com.microsoft.projectoxford.face.contract.Face;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class RecordFragment extends Fragment {
-    private ImageButton camera_button;
-    private File newImageFile;//用于存储拍到图片
+    //用于存储拍到图片
+    private File newImageFile;
+
+    //用于Activity跳转
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int GALLERY_REQUEST_CODE = 2;
+
+    //用于心情识别的时候弹出正在检测
+    private ProgressDialog emotionProgressDialog;
+
+    //界面组件
+    private RadioGroup radioGroup;
+    private ImageButton camera_button;
+    private SeekBar degreeBar;
+    private TextView degreeText;
+
+    //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -44,6 +69,44 @@ public class RecordFragment extends Fragment {
                 }
             });
             listDialog.show();
+        }
+    };
+    //心情时候结束后的函数
+    private FaceDetect.FaceDetectDoneAction faceDetectDoneAction = new FaceDetect.FaceDetectDoneAction(){
+       public void onDetectDone(Face face[]){
+            //这里要根据检测结果做一些操作
+           String result = "";
+           if (face == null || face.length == 0){
+               result = getString(R.string.emotion_detect_fail);
+           }else{
+               int[] emo = getRealEmotionString(face[0].faceAttributes.emotion);
+               RadioButton targetEmoButton = (RadioButton)radioGroup.getChildAt(emo[0]);
+               result = getString(R.string.emotion_type) + targetEmoButton.getText() + "\n"
+                       + getString(R.string.emotion_value) + emo[1];
+
+               //帮用户选择心情
+               targetEmoButton.setChecked(true);
+               degreeBar.setProgress(emo[1]);
+               degreeText.setText(getString(R.string.emotion_value) + emo[1]);
+           }
+
+           //显示一个对话框提醒用户检测结果
+           final AlertDialog.Builder normalDialog =
+                   new AlertDialog.Builder(RecordFragment.this.getActivity());
+           normalDialog.setTitle(R.string.emotion_dia_title);
+           normalDialog.setMessage(result);
+           normalDialog.show();
+       }
+    };
+
+    //心情强度条被滑动时候的回调函数
+    private SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            degreeText.setText(getString(R.string.emotion_value) + progress);
+        }
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+        public void onStopTrackingTouch(SeekBar seekBar) {
         }
     };
 
@@ -72,7 +135,6 @@ public class RecordFragment extends Fragment {
         Intent choosePicture = new Intent(Intent.ACTION_PICK);
         choosePicture.setType("image/*");
         startActivityForResult(choosePicture, GALLERY_REQUEST_CODE);
-
     }
 
     @Override
@@ -81,7 +143,14 @@ public class RecordFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.record_frag_layout, container, false);
         camera_button = (ImageButton)view.findViewById(R.id.camera_but);
+        radioGroup = (RadioGroup)view.findViewById(R.id.emoGroup);
+        degreeBar = (SeekBar)view.findViewById(R.id.degreeBar);
+        degreeText = (TextView)view.findViewById(R.id.degreeText);
+
         camera_button.setOnClickListener(camera_but_lis);
+        emotionProgressDialog = new ProgressDialog(this.getActivity());
+        degreeBar.setOnSeekBarChangeListener(seekBarListener);
+        degreeText.setText(getString(R.string.emotion_value) + degreeBar.getProgress());
         return view;
     }
     @Override
@@ -106,10 +175,70 @@ public class RecordFragment extends Fragment {
     private void onGetPictureReturn(Intent data){
         if (data.getData() == null && data.getExtras() == null)
             return ;
-        Uri uri = data.getData();
-        camera_button.setImageURI(uri);
-        /**
-         * @TODO 这里进行人脸识别处理
-         */
+        // Put the image into an input stream for detection.
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        Bitmap mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(
+                data.getData(), getActivity().getContentResolver());
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+
+        if (mBitmap != null)
+            camera_button.setImageBitmap(mBitmap);
+
+        // Start a background task to detect faces in the image.
+        FaceDetect faceDetect = new FaceDetect();
+        faceDetect.setDetectDoneAction(faceDetectDoneAction);
+        faceDetect.setProgressDialog(emotionProgressDialog);
+        faceDetect.execute(new ByteArrayInputStream(output.toByteArray()));
+    }
+
+
+    //从Emotion的各种表情可能性中获得最佳可能性的表情
+    //返回一个int表示表情，返回一个int表示数值
+    //表情类型0 = 开心，1 = 愤怒， 2 = 伤心，3 = 平静
+    public static int[] getRealEmotionString(Emotion emotion)
+    {
+        int emotionType = 0;
+        double emotionValue = 0.0;
+        if (emotion.anger > emotionValue)
+        {
+            emotionValue = emotion.anger;
+            emotionType = 1;
+        }
+        if (emotion.contempt > emotionValue)
+        {
+            emotionValue = emotion.contempt;
+            emotionType = 1;
+        }
+        if (emotion.disgust > emotionValue)
+        {
+            emotionValue = emotion.disgust;
+            emotionType = 1;
+        }
+        if (emotion.fear > emotionValue)
+        {
+            emotionValue = emotion.fear;
+            emotionType = 2;
+        }
+        if (emotion.happiness > emotionValue)
+        {
+            emotionValue = emotion.happiness;
+            emotionType = 0;
+        }
+        if (emotion.neutral > emotionValue)
+        {
+            emotionValue = emotion.neutral;
+            emotionType = 3;
+        }
+        if (emotion.sadness > emotionValue)
+        {
+            emotionValue = emotion.sadness;
+            emotionType = 2;
+        }
+        if (emotion.surprise > emotionValue)
+        {
+            emotionValue = emotion.surprise;
+            emotionType = 0;
+        }
+        return new int[]{emotionType, (int)(emotionValue * 100)};
     }
 }

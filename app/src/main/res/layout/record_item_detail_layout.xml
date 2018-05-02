@@ -64,7 +64,7 @@
             android:layout_marginLeft="0dp"
             android:layout_weight="1"
             android:max="6"
-            android:progress="3"
+            android:progressDrawable="@drawable/seekbar_bg"
             android:visibility="visible" />
 
     </LinearLayout>
