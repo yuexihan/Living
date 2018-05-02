@@ -7,13 +7,13 @@
     android:orientation="vertical">
 
     <RadioGroup
+        android:id="@+id/emoGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="@color/colorAccent"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="9dp">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rbut_all"
@@ -24,9 +24,12 @@
             android:button="@null"
             android:checked="true"
             android:drawableTop="@drawable/radio_all_bg"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:text="@string/ground_but_all"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textColor="@drawable/radio_text_color"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbut_happy"
@@ -37,9 +40,12 @@
             android:button="@null"
             android:checked="true"
             android:drawableTop="@drawable/radio_happy_bg"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:text="@string/ground_but_happy"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textColor="@drawable/radio_text_color"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbut_anger"
@@ -49,9 +55,12 @@
             android:layout_weight="0"
             android:button="@null"
             android:drawableTop="@drawable/radio_anger_bg"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:text="@string/ground_but_anger"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textColor="@drawable/radio_text_color"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbut_sad"
@@ -61,9 +70,12 @@
             android:layout_weight="0"
             android:button="@null"
             android:drawableTop="@drawable/radio_sad_bg"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:text="@string/ground_but_sad"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textColor="@drawable/radio_text_color"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbut_calm"
@@ -72,17 +84,21 @@
             android:layout_weight="0"
             android:button="@null"
             android:drawableTop="@drawable/radio_calm_bg"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:text="@string/ground_but_calm"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textColor="@drawable/radio_text_color"
+            android:textSize="20sp" />
     </RadioGroup>
-
-    <ListView
-        android:id="@+id/listView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swipe_ly"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </ListView>
-
+        android:layout_height="match_parent" >
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
