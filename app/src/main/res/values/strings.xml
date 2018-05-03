@@ -114,4 +114,9 @@
 
     <string name="login_button">登录</string>
     <string name="reg_button">切换到注册页面</string>
+
+    <string name="nickname">昵称</string>
+    <string name="random_try">随机一个?</string>
+    <string name="confirm_button">完成</string>
+    <string name="choose_a_profile">选择头像</string>
 </resources>

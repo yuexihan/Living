@@ -27,8 +27,8 @@ public class LoginActivity extends Activity {
         FontManager.markAsIconContainer(findViewById(R.id.icon_mobile), iconFont);
         FontManager.markAsIconContainer(findViewById(R.id.icon_lock), iconFont);
 
-        Button login_btn = (Button) findViewById(R.id.login_button);
-        Button register_btn = (Button) findViewById(R.id.register_button);
+        Button login_btn = findViewById(R.id.login_button);
+        Button register_btn = findViewById(R.id.register_button);
         EditText et_phone = findViewById(R.id.phone_input);
         EditText et_pwd = findViewById(R.id.pwd_input);
 
@@ -39,10 +39,11 @@ public class LoginActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
-                username = (TextView) findViewById(R.id.phone_input);
-                password = (TextView) findViewById(R.id.pwd_input);
+                username = findViewById(R.id.phone_input);
+                password = findViewById(R.id.pwd_input);
                 user = username.getText().toString();
                 pwd = password.getText().toString();
+                //ToDo 与用户数据库做比较确认登入
 //                onlineDB db = new onlineDB();
 //                if ( !db.connect() ){
 //                    Toast.makeText(LoginActivity.this, "无法连接服务器，请稍后重试", Toast.LENGTH_SHORT).show();
@@ -69,7 +70,6 @@ public class LoginActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);

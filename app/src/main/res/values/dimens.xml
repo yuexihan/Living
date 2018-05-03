@@ -7,7 +7,9 @@
     <dimen name="input_text_size">13sp</dimen>
     <dimen name="index_text_size">16sp</dimen>
     <dimen name="index_icon_size">35sp</dimen>
+    <dimen name="button_text_size">25sp</dimen>
 
     <dimen name="button_padding_LR">25dp</dimen>
     <dimen name="button_padding_UD">10dp</dimen>
+    <dimen name="profile_square_size">75dp</dimen>
 </resources>

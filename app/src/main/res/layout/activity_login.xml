@@ -114,7 +114,7 @@
         android:paddingTop="@dimen/button_padding_UD"
         android:paddingBottom="@dimen/button_padding_UD"
         android:text="@string/login_button"
-        android:textSize="25sp"
+        android:textSize="@dimen/button_text_size"
         android:background="@drawable/shape_button"/>
 
     <LinearLayout
@@ -133,7 +133,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="20" />
+            android:layout_weight="20"/>
         <!--设置background="@null"去掉原来的那条边框-->
     </LinearLayout>
 
