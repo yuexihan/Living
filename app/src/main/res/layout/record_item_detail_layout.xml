@@ -7,6 +7,12 @@
     android:background="@android:color/background_light"
     android:orientation="vertical">
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        app:srcCompat="@android:drawable/ic_media_rew" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +62,7 @@
             android:scaleY="0.4">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/emoView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -131,5 +137,11 @@
             android:textSize="10sp" />
 
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/commentsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
 </LinearLayout>

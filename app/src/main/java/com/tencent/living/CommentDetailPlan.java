@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.living.Data.Comment;
 /*
@@ -18,6 +19,7 @@ public class CommentDetailPlan {
     private TextView commentTo;
     private TextView commentTime;
     private TextView respondText;
+    private OnCommentClickListener oclistern;
     public CommentDetailPlan(Context context, Comment comment){
         this.context = context;
         this.comment = comment;
@@ -35,6 +37,7 @@ public class CommentDetailPlan {
         if (comment.getCommentTo() == null ||
                 comment.getCommentTo().equals(""))
             respondText.setText("");
+        view.setOnClickListener(clickListener);
     }
     //通过获得View可以让这个界面给其他组件复用
     public View getView(){
@@ -43,5 +46,19 @@ public class CommentDetailPlan {
 
     public Comment getData(){
         return comment;
+    }
+
+    public void setOnCommentClick(OnCommentClickListener oclistern){
+        this.oclistern = oclistern;
+    }
+    private View.OnClickListener clickListener = new View.OnClickListener(){
+        public void onClick(View v) {
+            if (oclistern == null)
+                return ;
+            oclistern.onCommentClick(comment);
+        }
+    };
+    public interface OnCommentClickListener{
+        void onCommentClick(Comment comment);
     }
 }

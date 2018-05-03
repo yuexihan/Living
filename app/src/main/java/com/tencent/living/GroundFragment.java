@@ -25,6 +25,7 @@ public class GroundFragment extends Fragment {
     private RecordsRefreshListManager refreshListManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RadioGroup radioGroup;
+    private static final int MAX_COMMENTS_LINE = 3;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -34,7 +35,7 @@ public class GroundFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.id_swipe_ly);
         radioGroup = (RadioGroup)view.findViewById(R.id.emoGroup);
         radioGroup.setOnCheckedChangeListener(checkedChangeListener);
-        refreshListManager = new RecordsRefreshListManager(swipeRefreshLayout, listView);
+        refreshListManager = new RecordsRefreshListManager(swipeRefreshLayout, listView, MAX_COMMENTS_LINE);
         setRefreshTarget();
         refreshListManager.updateData();
         return view;
@@ -64,8 +65,27 @@ public class GroundFragment extends Fragment {
     private RadioGroup.OnCheckedChangeListener checkedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            setRefreshTarget();
-            refreshListManager.onRefresh();
+            if (refreshListManager != null){
+                switch (checkedId){
+                    case R.id.rbut_all:
+                        refreshListManager.setTargetEmotion(-1);
+                        break;
+                    case R.id.rbut_happy:
+                        refreshListManager.setTargetEmotion(0);
+                        break;
+                    case R.id.rbut_anger:
+                        refreshListManager.setTargetEmotion(1);
+                        break;
+                    case R.id.rbut_sad:
+                        refreshListManager.setTargetEmotion(2);
+                        break;
+                    case R.id.rbut_calm:
+                        refreshListManager.setTargetEmotion(3);
+                        break;
+                }
+                setRefreshTarget();
+                refreshListManager.onRefresh();
+            }
         }
     };
 }

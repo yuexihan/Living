@@ -2,6 +2,7 @@ package com.tencent.living;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tencent.living.Data.Comment;
 import com.tencent.living.Data.Record;
@@ -53,20 +54,28 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
         this.user = user;
     }
 
-    public RecordsRefreshListManager(SwipeRefreshLayout layout, ListView list){
+    public RecordsRefreshListManager(SwipeRefreshLayout layout, ListView list, int maxCommentsLine){
         listView = list;
         this.layout = layout;
-        adapter = new RecordItemAdapter(list.getContext());
+        adapter = new RecordItemAdapter(list.getContext(),maxCommentsLine);
         listView.setAdapter(adapter);
         layout.setOnRefreshListener(this);
     }
 
 
-    //@TODO 在这里刷新数据,注意targetEmotion和user限制
+
     public void updateData(){
+
+        Toast.makeText(listView.getContext(), "更新数据", 3000).show();
+
+        //@TODO 在这里刷新数据,注意targetEmotion和user限制
         adapter.clear();
         /* 测试数据 */
         for (int i = 0; i < 20 ;i++) {
+
+            if ((i % 4) != targetEmotion && targetEmotion != -1)
+                continue;
+
             Record record = new Record();
             record.setUserName("RaylHuang" + i);
             record.setEmoDegree(i);
@@ -86,7 +95,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             record.setUpCount(i);
             record.setCommentCount(i * 100);
             adapter.addItem(record);
-
         }
     }
 

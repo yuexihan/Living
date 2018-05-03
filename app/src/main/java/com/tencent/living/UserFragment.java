@@ -23,7 +23,7 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.user_frag_layout, container, false);
         listView = (ListView)view.findViewById(R.id.listViewForUser);
         //设置适配器
-        listViewAdapter = new RecordItemAdapter(this.getContext());
+        listViewAdapter = new RecordItemAdapter(this.getContext(),3);
         listView.setAdapter(listViewAdapter);
         settingsbutton = (ImageButton) view.findViewById(R.id.settingsbtn);
         settingsbutton.setOnClickListener(new View.OnClickListener() {

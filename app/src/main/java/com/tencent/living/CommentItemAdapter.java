@@ -4,16 +4,17 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.tencent.living.Data.Comment;
 import com.tencent.living.Data.Record;
 
 import java.util.ArrayList;
 import java.util.List;
-public class RecordItemAdapter extends BaseAdapter {
-    private List<RecordDetailPlan> data = new ArrayList<>();
+
+public class CommentItemAdapter extends BaseAdapter {
+    private List<CommentDetailPlan> data = new ArrayList<>();
     private Context context;
-    private int commentsLineLimit;
-    public RecordItemAdapter(Context context, int commentsLineLimit) {
-        this.commentsLineLimit = commentsLineLimit;
+    public CommentItemAdapter(Context context) {
         this.context = context;
     }
     public int getCount() {
@@ -25,12 +26,10 @@ public class RecordItemAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    public RecordDetailPlan addItem(Record record){
-        RecordDetailPlan rdp = new RecordDetailPlan(context, record, commentsLineLimit);
-        rdp.setBackButtonVisiable(false);
-        rdp.setClickAble(true);
-        data.add(rdp);
-        return rdp;
+    public CommentDetailPlan addItem(Comment comment){
+        CommentDetailPlan cdp = new CommentDetailPlan(context, comment);
+        data.add(cdp);
+        return cdp;
     }
     public View getView(int position, View convertView, ViewGroup parent) {
         return data.get(position).getView();
