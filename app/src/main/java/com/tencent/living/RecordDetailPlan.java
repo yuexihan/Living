@@ -1,5 +1,6 @@
 package com.tencent.living;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class RecordDetailPlan {
     private TextView upCount;
     private ImageButton commentButton;
     private TextView commentCount;
-    private Button moreCommentBut;
+    private TextView moreComment;
     private View view;
     private Context context;
     private Record record;
@@ -46,6 +47,7 @@ public class RecordDetailPlan {
     private CommentItemAdapter adapter;
     private int commentsLineLimit;
     private ImageButton backButton;
+
 
     //是否支持点击进入详情页
     private boolean isClickAble = true;
@@ -64,6 +66,7 @@ public class RecordDetailPlan {
         linearLayout = (LinearLayout)view.findViewById(R.id.linearLayout);
         commentsList = (ListView)view.findViewById(R.id.commentsList);
         backButton = (ImageButton)view.findViewById(R.id.backButton);
+        moreComment = (TextView) view.findViewById(R.id.moreComments);
     }
 
     private void setListViewHeightBasedOnChildren() {
@@ -105,25 +108,15 @@ public class RecordDetailPlan {
         if (commentsLineLimit != COMMENT_LINES_NO_LIMIT)
             setListViewHeightBasedOnChildren();
 
-        if (comments.size() >= commentsLineLimit && moreCommentBut == null){
-            moreCommentBut = new Button(this.context);
-            moreCommentBut.setText(view.getContext().getString(R.string.ground_more_comment_but));
-            moreCommentBut.setTextColor(Color.BLUE);
-            moreCommentBut.getBackground().setAlpha(0);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    0
-            );
-            moreCommentBut.setOnClickListener(planClickListener);
-            moreCommentBut.setLayoutParams(lp);
-            linearLayout.addView(moreCommentBut);
-        }
+        if (comments.size() >= commentsLineLimit){
+            moreComment.setVisibility(View.VISIBLE);
+        }else
+            moreComment.setVisibility(View.INVISIBLE);
     }
 
     private void resetCompsContent(){
-        //@TODO 这里需要设置头像
         //profile.set  ...................
+        profile.setImageResource(Living.profileID[record.getImageType()]);
         //其他属性设置
         userName.setText(record.getUserName());
         time.setText(record.getTime());

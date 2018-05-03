@@ -82,6 +82,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             record.setContent("this is test " + i);
             record.setTime("2018-4-30 2:19");
             record.setEmoType(i%4);
+            record.setImageType(i%9);
+
             //捏造几个评论
             for (int j = 0; j < i % 8; j++){
                 Comment c = new Comment();

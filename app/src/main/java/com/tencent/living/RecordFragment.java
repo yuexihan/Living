@@ -20,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 
@@ -115,6 +117,7 @@ public class RecordFragment extends Fragment {
         @Override
         public void onClick(View v) {
             //@TODO 这里要写发布给自己的逻辑
+            Toast.makeText(getContext(),"发布给自己", 3000).show();
         }
     };
 
@@ -123,6 +126,7 @@ public class RecordFragment extends Fragment {
         @Override
         public void onClick(View v) {
             //@TODO 这里要写发布到广场的逻辑
+            Toast.makeText(getContext(),"发布到广场", 3000).show();
         }
     };
     private void startCamera(){
