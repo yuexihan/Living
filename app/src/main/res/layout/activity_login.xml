@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/icon_mobile"
+        android:layout_width="31dp"
+        android:layout_height="25dp"
+        android:text="@string/fa_mobile"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <TextView
+        android:id="@+id/icon_lock"
+        android:layout_width="31dp"
+        android:layout_height="25dp"
+        android:text="@string/fa_unlock_alt"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/label_mobile"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <TextView
+        android:id="@+id/label_pwd"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="158dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="168dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="167dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="295dp" />
+
+
+</android.support.constraint.ConstraintLayout>
