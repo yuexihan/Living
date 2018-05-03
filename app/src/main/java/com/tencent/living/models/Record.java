@@ -15,6 +15,15 @@ public class Record {
     private int like_cnt;
     private int comment_cnt;
     private int is_like;
+    private String userID;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String id) {
+        this.userID = id;
+    }
 
     public String getContent() {
         return content;

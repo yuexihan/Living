@@ -34,10 +34,6 @@ public class RecordFragment extends Fragment {
     //用于存储拍到图片
     private File newImageFile;
 
-    //用于Activity跳转
-    private static final int CAMERA_REQUEST_CODE = 1;
-    private static final int GALLERY_REQUEST_CODE = 2;
-
     //用于心情识别的时候弹出正在检测
     private ProgressDialog emotionProgressDialog;
 
@@ -145,12 +141,12 @@ public class RecordFragment extends Fragment {
         Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         it.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newImageFile));
         it.putExtra("android.intent.extras.CAMERA_FACING", 1);
-        startActivityForResult(it, CAMERA_REQUEST_CODE);
+        startActivityForResult(it, MainActivity.CAMERA_REQUEST_CODE);
     }
     private void startGallery(){
         Intent choosePicture = new Intent(Intent.ACTION_PICK);
         choosePicture.setType("image/*");
-        startActivityForResult(choosePicture, GALLERY_REQUEST_CODE);
+        startActivityForResult(choosePicture, MainActivity.GALLERY_REQUEST_CODE);
     }
 
     @Override
@@ -178,12 +174,12 @@ public class RecordFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK)
             return ;
         switch(requestCode){
-            case CAMERA_REQUEST_CODE:
-                //如果是摄像机拍的照片，是不会将uri放在data里的
-                //为了进行统一处理。我们这里自己放进去
+            //如果是摄像机拍的照片，是不会将uri放在data里的
+            //为了进行统一处理。我们这里自己放进去
+            case MainActivity.CAMERA_REQUEST_CODE:
                 data.setData(Uri.fromFile(newImageFile));
                 /* pass ↓ */
-            case GALLERY_REQUEST_CODE:
+            case MainActivity.GALLERY_REQUEST_CODE:
                 onGetPictureReturn(data);
                 break;
         }

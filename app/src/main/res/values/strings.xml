@@ -33,7 +33,7 @@
     <string name="emotion_value">心情强度: </string>
     <string name="emotion_dia_title">心情识别结果</string>
     <string name="emotion_detecing">正在识别.....</string>
-
+    <string name="send">发送</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
