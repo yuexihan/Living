@@ -78,14 +78,12 @@ public class RecordFragment extends Fragment {
        public void onDetectDone(Face face[]){
             //这里要根据检测结果做一些操作
            String result = "";
+           int[] emo = new int[2];
            if (face == null || face.length == 0){
-               result = getString(R.string.emotion_detect_fail);
+               emo[0] = -1;
            }else{
-               int[] emo = getRealEmotionString(face[0].faceAttributes.emotion);
+               emo = getRealEmotionString(face[0].faceAttributes.emotion);
                RadioButton targetEmoButton = (RadioButton)radioGroup.getChildAt(emo[0]);
-               result = getString(R.string.emotion_type) + targetEmoButton.getText() + "\n"
-                       + getString(R.string.emotion_value) + emo[1];
-
                //帮用户选择心情
                targetEmoButton.setChecked(true);
                degreeBar.setProgress(emo[1]);
@@ -93,11 +91,10 @@ public class RecordFragment extends Fragment {
            }
 
            //显示一个对话框提醒用户检测结果
-           final AlertDialog.Builder normalDialog =
-                   new AlertDialog.Builder(RecordFragment.this.getActivity());
-           normalDialog.setTitle(R.string.emotion_dia_title);
-           normalDialog.setMessage(result);
-           normalDialog.show();
+           final EmotionDetectResultDialog resultDialog =
+                   new EmotionDetectResultDialog(RecordFragment.this.getActivity());
+           resultDialog.setEmotionVaule(emo[0], emo[1]);
+           resultDialog.show();
        }
     };
 
