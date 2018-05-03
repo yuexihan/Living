@@ -29,4 +29,7 @@ public class RecordItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         return data.get(position).getView();
     }
+    public void clear(){
+        data.clear();
+    }
 }

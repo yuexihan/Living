@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tencent.living.Data.Comment;
@@ -24,7 +25,7 @@ public class RecordDetailPlan  {
     private TextView userName;
     private TextView time;
     private TextView content;
-    private TextProgressBar emoDegree;
+    private ProgressBar emoDegree;
     private ImageButton upButton;
     private TextView upCount;
     private ImageButton commentButton;
@@ -45,7 +46,7 @@ public class RecordDetailPlan  {
         userName = (TextView)view.findViewById(R.id.userName);
         time = (TextView)view.findViewById(R.id.time);
         content = (TextView)view.findViewById(R.id.content);
-        emoDegree = (TextProgressBar)view.findViewById(R.id.emoBar);
+        emoDegree = (ProgressBar)view.findViewById(R.id.emoBar);
         upButton = (ImageButton)view.findViewById(R.id.upButton);
         upCount = (TextView)view.findViewById(R.id.upCount);
         commentButton = (ImageButton)view.findViewById(R.id.commentButton);
@@ -69,12 +70,12 @@ public class RecordDetailPlan  {
 
         //我们最多只显示MAX_VISIABLE_COMMENT_ITEM条评论，如果评论多于三条，则会显示出查看更多评论的按钮
         List<Comment> comments = record.getComments();
-        for (int i = 0 ; i < comments.size(); i++) {
+        for (int i = 0 ; i < comments.size() && i < MAX_VISIABLE_COMMENT_ITEM; i++) {
             CommentDetailPlan cdp = new CommentDetailPlan(this.context, comments.get(i));
             linearLayout.addView(cdp.getView());
             commentItems.add(cdp);
         }
-        //如果大于三条就需要为其添加一个查看更多按钮
+        //如果大于MAX_VISIABLE_COMMENT_ITEM条就需要为其添加一个查看更多按钮
         if (comments.size() >= MAX_VISIABLE_COMMENT_ITEM){
             moreCommentBut = new Button(this.context);
             moreCommentBut.setText(view.getContext().getString(R.string.ground_more_comment_but));
@@ -87,7 +88,6 @@ public class RecordDetailPlan  {
             );
             moreCommentBut.setLayoutParams(lp);
             linearLayout.addView(moreCommentBut);
-
         }
     }
 

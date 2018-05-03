@@ -21,6 +21,14 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     private int targetEmotion = -1; //-1表示全部
     private String user = null; //null 表示全部
 
+    public RecordItemAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(RecordItemAdapter adapter) {
+        this.adapter = adapter;
+    }
+
     public ListView getListView() {
         return listView;
     }
@@ -48,27 +56,25 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     public RecordsRefreshListManager(SwipeRefreshLayout layout, ListView list){
         listView = list;
         this.layout = layout;
-
         adapter = new RecordItemAdapter(list.getContext());
         listView.setAdapter(adapter);
         layout.setOnRefreshListener(this);
     }
 
-    @Override
-    public void onRefresh() {
-        //@TODO 在这里刷新数据,注意targetEmotion和user限制
-        //@TODO 利用adapter的add方法填充数据
 
-
+    //@TODO 在这里刷新数据,注意targetEmotion和user限制
+    public void updateData(){
+        adapter.clear();
         /* 测试数据 */
-        for (int i = 0; i < 5 ;i++) {
+        for (int i = 0; i < 20 ;i++) {
             Record record = new Record();
             record.setUserName("RaylHuang" + i);
             record.setEmoDegree(i);
             record.setContent("this is test " + i);
             record.setTime("2018-4-30 2:19");
+            record.setEmoType(i%4);
             //捏造几个评论
-            for (int j = 0; j < i; j++){
+            for (int j = 0; j < i % 8; j++){
                 Comment c = new Comment();
                 c.setCommentContent("haha"  + j);
                 c.setCommentFrom("User" + i + j);
@@ -80,9 +86,15 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             record.setUpCount(i);
             record.setCommentCount(i * 100);
             adapter.addItem(record);
-            adapter.notifyDataSetChanged();
-        }
 
-        layout.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        updateData();
+        if (layout.isRefreshing())
+            layout.setRefreshing(false);
+        adapter.notifyDataSetChanged();
     }
 }
