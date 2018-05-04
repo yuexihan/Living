@@ -105,4 +105,18 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <string name="mobile">手机</string>
+    <string name="password">密码</string>
+    <string name="intro">记录，寻找心情共鸣</string>
+    <string name="pls_input_pwd">请输入密码(6—14字符)</string>
+    <string name="pls_input_phonenum">在这里输入手机号</string>
+
+    <string name="login_button">登录</string>
+    <string name="reg_button">切换到注册页面</string>
+
+    <string name="nickname">昵称</string>
+    <string name="random_try">随机一个?</string>
+    <string name="confirm_button">完成</string>
+    <string name="choose_a_profile">选择头像</string>
 </resources>
