@@ -7,6 +7,10 @@ public class ResultData<T> {
     private int ret_code = -1;
     private String message;
 
+    public boolean isOk(){
+        return conn_code == 200;
+    }
+
     public T getData() {
         return data;
     }

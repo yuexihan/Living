@@ -20,6 +20,27 @@ public class Living  extends Application{
             R.drawable.profile8
     };
 
+    public static final String[] nickNames = {
+            "佩奇",
+            "伏地魔",
+            "刘备",
+            "麦兜",
+            "葫芦娃",
+            "奥特曼",
+            "孙悟空",
+            "哈利波特",
+            "马老师",
+            "PDD",
+            "盲僧",
+            "亚瑟王",
+            "孙尚香",
+            "甄姬",
+            "女娲",
+            "大乔",
+            "小乔"
+    };
+
+
     @Override
     public void onCreate() {
         super.onCreate();

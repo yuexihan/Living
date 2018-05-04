@@ -1,6 +1,7 @@
 package com.tencent.living;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,12 +12,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.living.dataHelper.UserHelper;
+import com.tencent.living.models.Post;
+import com.tencent.living.models.ResultData;
+import com.tencent.living.models.User;
 import com.tencent.living.tools.FontManager;
 
 public class LoginActivity extends Activity {
 
-    private TextView username,password;
-    private String user,pwd;
+    private TextView username, password;
+    private String user, pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,44 +40,37 @@ public class LoginActivity extends Activity {
         et_phone.setInputType(InputType.TYPE_CLASS_PHONE);
         et_pwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        login_btn.setOnClickListener(new View.OnClickListener()
-        {
+        login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 username = findViewById(R.id.phone_input);
                 password = findViewById(R.id.pwd_input);
                 user = username.getText().toString();
                 pwd = password.getText().toString();
-                //ToDo 与用户数据库做比较确认登入
-//                onlineDB db = new onlineDB();
-//                if ( !db.connect() ){
-//                    Toast.makeText(LoginActivity.this, "无法连接服务器，请稍后重试", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    if (db.userCheck(user, pwd)) {
-//                        Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("mode","online");
-//                        bundle.putString("username",user);
-//                        Intent intent = new Intent();
-//                        intent.setClass(LoginActivity.this,MainActivity.class);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                        LoginActivity.this.finish();
-//                    } else {
-//                        Toast.makeText(LoginActivity.this, "登陆失败，请检查用户名和密码", Toast.LENGTH_SHORT).show();
-//                    }
+                //检测登录
+                ResultData<Post> res = UserHelper.postLogin(user, pwd);
+                if (res.isOk()) {
+                    //初始化全局User;
+                    ResultData<User> userRes = UserHelper.getUserInfo(res.getData().getToken());
+                    if (userRes.isOk()){
+                        Living.user = userRes.getData();
                         Intent intent = new Intent();
-                        intent.setClass(LoginActivity.this,MainActivity.class);
+                        intent.setClass(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
+                        return;
+                    }
+                    Toast.makeText(LoginActivity.this,"123", 2000).show();
+                    return ;
+                }
+                Toast.makeText(LoginActivity.this,R.string.login_failed, 2000).show();
             }
         });
-        register_btn.setOnClickListener(new View.OnClickListener()
-        {
+        register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(LoginActivity.this,RegisterActivity.class);
+                intent.setClass(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });

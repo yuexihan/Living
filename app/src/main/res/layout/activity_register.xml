@@ -40,25 +40,28 @@
         android:orientation="horizontal">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="5dp"
+            android:text="@string/nickname"
+            android:textSize="@dimen/index_text_size" />
+
+        <TextView
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/nickname"
-            android:textSize="@dimen/index_text_size"
-            android:layout_weight="3" />
-        <EditText
-            android:id="@+id/nickname_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:layout_weight="10"
+            android:background="@drawable/edit_bg"
+            android:clickable="true"
+            android:editable="true"
             android:ems="8"
-            android:textSize="@dimen/input_text_size"
+            android:enabled="true"
             android:hint="@string/random_try"
             android:inputType="text"
-            android:background="@drawable/edit_bg"
-            android:layout_weight="10"/>
+            android:padding="5dp"
+            android:textSize="@dimen/input_text_size" />
     </LinearLayout>
 
 
@@ -86,28 +89,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
+
         <RadioGroup
+            android:id="@+id/choose_profile_RG"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal"
             android:checkedButton="@+id/b0"
-            android:id="@+id/choose_profile_RG">
+            android:orientation="horizontal">
+
             <RadioButton
+                android:id="@+id/b0"
                 android:layout_width="@dimen/profile_square_size"
                 android:layout_height="@dimen/profile_square_size"
-                android:background="@drawable/profile0"
-                android:id="@+id/b0"/>
+                android:background="@drawable/profile0" />
+
             <RadioButton
+                android:id="@+id/b1"
                 android:layout_width="@dimen/profile_square_size"
                 android:layout_height="@dimen/profile_square_size"
-                android:background="@drawable/profile1"
-                android:id="@+id/b1"/>
+                android:background="@drawable/profile1" />
+
             <RadioButton
+                android:id="@+id/b2"
                 android:layout_width="@dimen/profile_square_size"
                 android:layout_height="@dimen/profile_square_size"
-                android:background="@drawable/profile2"
-                android:id="@+id/b2"/>
+                android:background="@drawable/profile2" />
         </RadioGroup>
     </LinearLayout>
 
