@@ -18,10 +18,12 @@ public class RegisterActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
+                //ToDo 用户数据库写入新成员
+                //直接到主界面
                 Intent intent = new Intent();
                 intent.setClass(RegisterActivity.this,MainActivity.class);
                 startActivity(intent);
-                //ToDo 用户数据库写入新成员
+                finish();
             }
         });
 
