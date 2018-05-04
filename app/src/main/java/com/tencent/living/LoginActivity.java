@@ -20,9 +20,6 @@ import com.tencent.living.models.ResultData;
 import com.tencent.living.models.User;
 import com.tencent.living.tools.FontManager;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     private Button login_btn;
@@ -114,7 +111,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         ResultData<Post> res = UserHelper.postLogin(user, pwd);
         if (res != null && res.isOk()) {
             //初始化全局User;
-            ResultData<User> userRes = UserHelper.getUserInfo(res.getData().getToken());
+            Living.token = res.getData().getToken();
+            ResultData<User> userRes = UserHelper.getUserInfo();
             if (userRes.isOk()) {
                 Living.user = userRes.getData();
                 return true;

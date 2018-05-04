@@ -9,7 +9,7 @@ import com.tencent.living.models.User;
 public class Living  extends Application{
     //当前正在登录的用户信息，在LoginActivity的doLogin中被初始化
     public static User user;
-
+    public static String token;
     //配置文件名字
     public static String config = ".MyConfig";
 
