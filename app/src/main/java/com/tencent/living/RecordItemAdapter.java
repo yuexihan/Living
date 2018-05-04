@@ -12,6 +12,7 @@ public class RecordItemAdapter extends BaseAdapter {
     private List<RecordDetailPlan> data = new ArrayList<>();
     private Context context;
     private int commentsLineLimit;
+
     public RecordItemAdapter(Context context, int commentsLineLimit) {
         this.commentsLineLimit = commentsLineLimit;
         this.context = context;

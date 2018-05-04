@@ -12,9 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.TextView;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
@@ -27,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager homeViewPager;
     private BottomNavigationView navigation;
     private TextView title;
+    //用于Activity跳转
+    public static final int CAMERA_REQUEST_CODE = 1;
+    public static final int GALLERY_REQUEST_CODE = 2;
+    public static final int COMMENT_EDIT_REQUEST_CODE = 3;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

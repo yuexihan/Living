@@ -3,7 +3,6 @@ package com.tencent.living.models;
 /**
  * Created by doublewu on 2018/4/30.
  */
-
 public class Record {
     private String content;
     private int label_id;
@@ -16,6 +15,15 @@ public class Record {
     private int like_cnt;
     private int comment_cnt;
     private int is_like;
+    private String userID;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String id) {
+        this.userID = id;
+    }
 
     public String getContent() {
         return content;
@@ -104,7 +112,4 @@ public class Record {
     public void setIs_like(int is_like) {
         this.is_like = is_like;
     }
-
-
-
 }
