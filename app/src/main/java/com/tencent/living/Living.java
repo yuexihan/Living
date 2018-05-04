@@ -7,7 +7,10 @@ import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.tencent.living.models.User;
 
 public class Living  extends Application{
+    //当前正在登录的用户信息，在LoginActivity的doLogin中被初始化
     public static User user;
+
+    //头像表
     public static final int profileID[] = {
             R.drawable.profile0,
             R.drawable.profile1,
@@ -19,7 +22,7 @@ public class Living  extends Application{
             R.drawable.profile7,
             R.drawable.profile8
     };
-
+    //昵称表
     public static final String[] nickNames = {
             "佩奇",
             "伏地魔",
