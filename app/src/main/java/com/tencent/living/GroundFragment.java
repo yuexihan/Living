@@ -1,5 +1,6 @@
 package com.tencent.living;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ public class GroundFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RadioGroup radioGroup;
     private static final int MAX_COMMENTS_LINE = 3;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -88,4 +90,14 @@ public class GroundFragment extends Fragment {
             }
         }
     };
+
+    /**
+     * 用于处理Activity的会跳
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+    }
 }

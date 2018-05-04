@@ -12,6 +12,11 @@ import java.io.InputStream;
 
 public class FaceDetect extends AsyncTask<InputStream, String, Face[]> {
 
+    public static final int EMOTION_HAPPY = 0;
+    public static final int EMOTION_ANGER = 1;
+    public static final int EMOTION_SAD = 2;
+    public static final int EMOTION_CALM = 3;
+
     // Progress dialog popped up when communicating with server.
     private ProgressDialog mProgressDialog;
     // 当检测结束之后会调用action中的onDetectDone

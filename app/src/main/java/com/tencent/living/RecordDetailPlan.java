@@ -1,5 +1,7 @@
 package com.tencent.living;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -47,7 +49,6 @@ public class RecordDetailPlan {
     private CommentItemAdapter adapter;
     private int commentsLineLimit;
     private ImageButton backButton;
-
 
     //是否支持点击进入详情页
     private boolean isClickAble = true;
@@ -184,22 +185,31 @@ public class RecordDetailPlan {
      */
     private View.OnClickListener upClickListener = new View.OnClickListener(){
         public void onClick(View v) {
-            if (!isClickAble)
-                return ;
             //@TODO 以下逻辑需要被替换成点赞的真正处理逻辑
             Toast.makeText(context, "点赞", 3000).show();
         }
     };
+
+    private void startFloatEditor(String from, String to, String fromID, String toID){
+        Intent intent = new Intent();
+        // 设置要跳转的页面
+        intent.setClass((Activity)context , FloatEditorActivity.class);
+        intent.putExtra("from", from);
+        intent.putExtra("to", to);
+        intent.putExtra("fromID", fromID);
+        intent.putExtra("toID", toID);
+        // 开始Activity
+        ((Activity)context).startActivityForResult(intent ,MainActivity.COMMENT_EDIT_REQUEST_CODE);
+    }
 
     /**
      * 当评论按钮被点击的时候
      */
     private View.OnClickListener commentClickListener = new View.OnClickListener(){
         public void onClick(View v) {
-            if (!isClickAble)
-                return ;
             //@TODO 以下逻辑需要被替换成真正的评论逻辑
             Toast.makeText(context, "评论", 3000).show();
+            startFloatEditor("","","","");
         }
     };
 
