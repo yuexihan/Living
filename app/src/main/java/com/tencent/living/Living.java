@@ -4,9 +4,10 @@ import android.app.Application;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
+import com.tencent.living.models.User;
 
 public class Living  extends Application{
-
+    public static User user;
     public static final int profileID[] = {
             R.drawable.profile0,
             R.drawable.profile1,

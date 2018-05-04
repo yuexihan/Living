@@ -11,13 +11,11 @@ import android.widget.ListView;
 
 import com.tencent.living.Data.Comment;
 import com.tencent.living.Data.Record;
-import com.tencent.living.models.User;
 
 public class UserFragment extends Fragment {
     private ListView listView;
     private RecordItemAdapter listViewAdapter;
     private ImageButton settingsbutton;
-    public static User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
