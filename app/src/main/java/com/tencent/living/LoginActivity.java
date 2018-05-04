@@ -77,7 +77,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         ResultData<Post> res = UserHelper.postLogin(user, pwd);
         if (res != null && res.isOk()) {
             //初始化全局User;
-            ResultData<User> userRes = UserHelper.getUserInfo(res.getData().getToken());
+              ResultData<User> userRes = UserHelper.getUserInfo(res.getData().getToken());
             if (userRes.isOk()) {
                 Living.user = userRes.getData();
                 return true;

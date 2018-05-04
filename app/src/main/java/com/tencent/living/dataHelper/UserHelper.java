@@ -1,4 +1,5 @@
 package com.tencent.living.dataHelper;
+import com.google.gson.reflect.TypeToken;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
 import com.tencent.living.models.User;
@@ -9,7 +10,8 @@ public class UserHelper {
         lsa.setAction(LivingServerAgent.ACTION_LOGIN);
         lsa.putData("phone_number", phone_number);
         lsa.putData("password", password);
-        return  lsa.execAndGetResult();
+        return  lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
+        }.getType());
     }
     public static ResultData<Post> postRegister(String phone_number, String nickname, String password, String avatar) {
         LivingServerAgent lsa = new LivingServerAgent();
@@ -18,13 +20,15 @@ public class UserHelper {
         lsa.putData("password", password);
         lsa.putData("nickname", nickname);
         lsa.putData("avatar", avatar);
-        return  lsa.execAndGetResult();
+        return  lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
+        }.getType());
     }
     public static ResultData<User> getUserInfo(String token) {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_GET_USER);
         lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
         lsa.putParam("token", token);
-        return  lsa.execAndGetResult();
+        return  lsa.execAndGetResult(new TypeToken<ResultData<User>>() {
+        }.getType());
     }
 }

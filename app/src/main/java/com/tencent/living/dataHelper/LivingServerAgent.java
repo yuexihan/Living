@@ -48,7 +48,7 @@ public class LivingServerAgent {
     }
 
     public void setHttpsMethod(String m){
-        this.method = method;
+        this.method = m;
     }
 
     private String getParamString(){
@@ -61,35 +61,35 @@ public class LivingServerAgent {
             Map.Entry<String, String> entry =  it.next();
             if (!isFirst)
                 ret += "&";
-            ret += entry.getKey() + " = " + entry.getValue();
+            ret += entry.getKey() + "=" + entry.getValue();
             isFirst = false;
         }
         return ret;
     }
 
-    public <T> ResultData<T> execAndGetResult(){
+    public <T> ResultData<T> execAndGetResult(Type objectType){
         ResultData<T> resultData = new ResultData<>();
         try{
             //初始化连接
             URL url = new URL(HOST_URL + action+ getParamString()) ;
             connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(10000);
+            connection.setConnectTimeout(5000);
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            connection.setDoOutput(true);
             connection.setDoInput(true);
-            //添加参数
+
             Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
-            String param = gson.toJson(bodyParm);
-            OutputStream out = connection.getOutputStream();
-            out.write(param.getBytes("utf-8"));
-            out.close();
+            //添加参数
+            if (method.equals(LivingServerAgent.HTTP_METHOD_POST)) {
+                String param = gson.toJson(bodyParm);
+                OutputStream out = connection.getOutputStream();
+                out.write(param.getBytes("utf-8"));
+                out.close();
+            }
             //获得结果
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) { //请求成功 获得返回的流
                 String json = getResponseBody(connection.getInputStream()) ;
-                Type objectType = new TypeToken<ResultData<T>>() {
-                }.getType();
                 resultData = gson.fromJson(json, objectType);
             }
             if (resultData != null)

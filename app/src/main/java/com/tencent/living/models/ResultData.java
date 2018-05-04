@@ -8,7 +8,7 @@ public class ResultData<T> {
     private String message;
 
     public boolean isOk(){
-        return conn_code == 200;
+        return conn_code == 200 && ret_code == 0;
     }
 
     public T getData() {
