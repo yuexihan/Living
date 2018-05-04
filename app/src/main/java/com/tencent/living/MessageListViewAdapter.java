@@ -7,20 +7,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.tencent.living.Data.MessageListItem;
+import com.tencent.living.models.Message;
 
 import java.util.List;
 
+import static com.tencent.living.Living.profileID;
+
 public class MessageListViewAdapter extends BaseAdapter {
 
-    public List<MessageListItem> list;
+    public List<Message> list;
     public LayoutInflater inflater;
 
-    public MessageListViewAdapter(MessageFragment messageFragment, List<MessageListItem> list1) {
+    public MessageListViewAdapter(MessageFragment messageFragment, List<Message> list1) {
     }
 
-    public MessageListViewAdapter(Context context, List<MessageListItem> list) {
+    public MessageListViewAdapter(Context context, List<Message> list) {
         this.list = list;
         this.inflater = LayoutInflater.from(context);
     }
@@ -31,7 +32,7 @@ public class MessageListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public MessageListItem getItem(int position) {
+    public Message getItem(int position) {
         return list.get(position);
     }
 
@@ -40,7 +41,7 @@ public class MessageListViewAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void updateView(List<MessageListItem> nowList)
+    public void updateView(List<Message> nowList)
     {
         this.list = nowList;
         this.notifyDataSetChanged();//强制动态刷新数据进而调用getView方法
@@ -49,7 +50,7 @@ public class MessageListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
         ViewHolder holder = null;
-        MessageListItem item = list.get(position);
+        Message message = list.get(position);
         if(convertView == null)
         {
             view = inflater.inflate(R.layout.message_item, null);
@@ -65,16 +66,16 @@ public class MessageListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.headImage.setImageResource(R.drawable.head);
-        holder.content.setText(item.getMessageContent());
-        if(item.isPraised()){
+
+        holder.headImage.setImageResource(profileID[message.getPoster()]);
+        holder.content.setText(message.getContentString());
+        if(message.getType() == 1){
             holder.praiseImage.setImageResource(R.drawable.heart);
             holder.praiseNum.setText("+1");
         }else{
             holder.praiseImage.setImageResource(0);  //
             holder.praiseNum.setText("");
         }
-
         return view;
     }
 
