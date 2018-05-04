@@ -59,4 +59,21 @@ public class Message {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public String getContentString(){
+        if(type == 1){   //点赞
+            return nickname+"点赞了你的状态";
+        }
+        if(type == 2){   //评论
+            return nickname+"评论了你发布的状态："+comment;
+        }
+        if(type == 3){   //回复
+            return nickname+"回复了你的评论："+comment;
+        }
+        else{
+            return null;
+        }
+    }
+
+
 }

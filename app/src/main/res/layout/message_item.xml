@@ -7,6 +7,10 @@
         android:id="@+id/headImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
         />
 
     <LinearLayout
@@ -21,10 +25,9 @@
             android:id="@+id/newsContent"
             android:layout_width="match_parent"
             android:paddingTop="8dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:lines= "2"
             android:ellipsize="end"
-            android:maxEms="8"
             android:text="" />
 
         <LinearLayout

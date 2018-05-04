@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
-import com.tencent.living.Data.MessageListItem;
+
+import com.tencent.living.models.Message;
+
 import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +23,25 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
     public int total_index;
     public boolean isLoading = false;//表示是否正处于加载状态
     public MessageListViewAdapter adapter;
-    public List<MessageListItem> list1 = new ArrayList<MessageListItem>();
-    public List<MessageListItem> list2 = new ArrayList<MessageListItem>();
+    public List<Message> list1 = new ArrayList<Message>();
+    public List<Message> list2 = new ArrayList<Message>();
 
-    public String data1 = "{\"error\":false,\"results\":[{\"content\":\"asoon点赞了你的状态\",\"headimage\":\"head\",\"praise\":true},{\"content\":\"BBBBBBBBBB\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"CCCCCCCCCC\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"felixliwang评价了你的状态:在第19行获得了加载更多的刷新视图并且第20行设置该视图是可见的，因为我们模拟的是要加载两页的数据，这样的话第一页加载结束之后需要显示加载更多的视图\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"EEEEEEEEEE\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"FFFFFFFFFF\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"GGGGGGGGGG\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"HHHHHHHHHH\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"IIIIIIIIII\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"JJJJJJJJJJ\",\"headimage\":\"head\",\"praise\":false}]}";
-    public String data2 = "{\"error\":false,\"results\":[{\"content\":\"aaaaaaaaaa\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"bbbbbbbbbb\",\"headimage\":\"head\",\"praise\":true},{\"content\":\"cccccccccc\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"dddddddddd\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"eeeeeeeeee\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"ffffffffff\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"gggggggggg\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"hhhhhhhhhh\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"iiiiiiiiii\",\"headimage\":\"head\",\"praise\":false},{\"content\":\"jjjjjjjjjj\",\"headimage\":\"head\",\"praise\":false}]}";
 
-    MessageItemApi itemApi;
+
+    public String data1 = "{\"error\":false,\"results\":\n" +
+            "[{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"压力测试，就是  被测试的系统，在一定的访问压力下，看程序运行是否稳定/服务器运行是否稳定（资源占用情况）\",\"avatar\":\"0\",\"poster\":0,\"type\":2,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"一二三四五六七八\",\"avatar\":\"0\",\"poster\":1,\"type\":3,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":2,\"type\":1,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":3,\"type\":1,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":4,\"type\":1,\"nickname\":\"felixliwang\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"aaaaa\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"aaaaa\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"aaaaa\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"aaaaa\"},\n" +
+            "{\"emotion_id\":0,\"comment\":\"\",\"avatar\":\"0\",\"poster\":0,\"type\":1,\"nickname\":\"aaaaa\"}]}";
+    public String data2 = data1;
+
 
 
     @Override
@@ -36,7 +50,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
     {
         View view = inflater.inflate(R.layout.message_frag_layout, container, false);
         loadmoreView = inflater.inflate(R.layout.message_load_more, null);//获得刷新视图
-        loadmoreView.setVisibility(View.VISIBLE);//设置刷新视图默认情况下是不可见的
+
         listView = (ListView) view.findViewById(R.id.message_frag_layout);
         try {
             initList();
@@ -44,9 +58,28 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
             e.printStackTrace();
         }
         adapter = new MessageListViewAdapter(getActivity(), list1);
+
+        if(list1.size()<10){
+            loadmoreView.setVisibility(View.INVISIBLE);//设置刷新视图默认情况下是不可见的
+        }else{
+            loadmoreView.setVisibility(View.VISIBLE);
+        }
+
         listView.setOnScrollListener((AbsListView.OnScrollListener) this);
         listView.addFooterView(loadmoreView,null,false);
         listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("emotion_id", list1.get(arg2).getEmotion_id());
+//                Intent intent = new Intent();
+//                intent.putExtras(bundle);
+//                intent.setClass(MessageFragment.this, MessageContent.class);
+//                startActivity(intent);
+//            }
+//        });
         return view;
     }
 
@@ -56,15 +89,15 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
      * @param
      */
     public void initList() throws JSONException {
-        itemApi = new MessageItemApi();
-        list1 = itemApi.parseData(data1);
-        list2 = itemApi.parseData(data1);
+        list1 = MessageItemApi.parseData(data1);
+        list2 = MessageItemApi.parseData(data1);
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         last_index = firstVisibleItem+visibleItemCount;
         total_index = totalItemCount;
+
     }
 
 
@@ -93,26 +126,31 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
             //模拟耗时操作
             //实际为网络请求
             Thread.sleep(500);
-            List<MessageListItem> newList = new ArrayList<MessageListItem>();
-            newList = itemApi.parseData(data2);
-            list2.addAll(newList);
+            List<Message> newList = new ArrayList<Message>();
+            newList = MessageItemApi.parseData(data2);
+            if(newList == null){
+                loadComplete();
 
+            }else{
+                list2.addAll(newList);
+                if(adapter == null)
+                {
+                    adapter = new MessageListViewAdapter(this, list1);
+                    listView.setAdapter(adapter);
+                }else
+                {
+                    adapter.updateView(list2);
+
+                }
+                isLoading = false;
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
-        if(adapter == null)
-        {
-            adapter = new MessageListViewAdapter(this, list1);
-            listView.setAdapter(adapter);
-        }else
-        {
-            adapter.updateView(list2);
 
-        }
-        isLoading = false;
-//        loadComplete();//刷新结束
     }
 
     /**
