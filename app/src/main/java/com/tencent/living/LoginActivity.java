@@ -5,18 +5,29 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.living.dataHelper.UserHelper;
+import com.tencent.living.models.Post;
+import com.tencent.living.models.ResultData;
 import com.tencent.living.tools.FontManager;
 
 public class LoginActivity extends Activity {
 
-    private TextView username,password;
+    private TextView userphone,password;
     private String user,pwd;
+    //RETURN CODE
+    public static final int SUCCESSFUL_CODE = 0;
+    public static final int FAILED_CODE = -1;
+    public static final int COMMENT_EDIT_REQUEST_CODE = 3;
+    private UserHelper userHelper = new UserHelper();
+    private int return_code;
+    private String msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +39,7 @@ public class LoginActivity extends Activity {
         FontManager.markAsIconContainer(findViewById(R.id.icon_lock), iconFont);
 
         Button login_btn = findViewById(R.id.login_button);
-        Button register_btn = findViewById(R.id.register_button);
+        final Button register_btn = findViewById(R.id.register_button);
         EditText et_phone = findViewById(R.id.phone_input);
         EditText et_pwd = findViewById(R.id.pwd_input);
 
@@ -39,31 +50,28 @@ public class LoginActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
-                username = findViewById(R.id.phone_input);
+                userphone = findViewById(R.id.phone_input);
                 password = findViewById(R.id.pwd_input);
-                user = username.getText().toString();
+                user = userphone.getText().toString();
                 pwd = password.getText().toString();
                 //ToDo 与用户数据库做比较确认登入
-//                onlineDB db = new onlineDB();
-//                if ( !db.connect() ){
-//                    Toast.makeText(LoginActivity.this, "无法连接服务器，请稍后重试", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    if (db.userCheck(user, pwd)) {
-//                        Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("mode","online");
-//                        bundle.putString("username",user);
-//                        Intent intent = new Intent();
-//                        intent.setClass(LoginActivity.this,MainActivity.class);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                        LoginActivity.this.finish();
-//                    } else {
-//                        Toast.makeText(LoginActivity.this, "登陆失败，请检查用户名和密码", Toast.LENGTH_SHORT).show();
-//                    }
-                        Intent intent = new Intent();
-                        intent.setClass(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
+                ResultData<Post> postdata = userHelper.postLogin(user, pwd);
+                return_code = postdata.getRet_code();
+                msg = postdata.getMessage();
+
+                Log.i("postData", String.valueOf(return_code));
+                if (return_code == SUCCESSFUL_CODE){
+                    Intent intent = new Intent();
+                    intent.setClass(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    LoginActivity.this.finish();
+                }
+                else if (return_code == FAILED_CODE){
+                    Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         register_btn.setOnClickListener(new View.OnClickListener()
@@ -73,6 +81,7 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                LoginActivity.this.finish();
             }
         });
 

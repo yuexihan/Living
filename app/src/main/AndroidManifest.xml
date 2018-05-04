@@ -41,8 +41,8 @@
         </activity>
 
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register" />
         <activity android:name=".FloatEditorActivity"
             android:windowSoftInputMode="stateAlwaysVisible"
             android:theme="@style/NoTitleDialogTheme"/>

@@ -25,6 +25,7 @@
     <string name="ground_more_comment_but">查看更多评论......</string>
     <string name="ground_respond_text">" 回复 "</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_register">Register</string>
     <string name="emotion_key">3df039d064bc49f49a81c02d50c3c861</string>
     <string name="emotion_endpoint">https://westcentralus.api.cognitive.microsoft.com/face/v1.0</string>
     <string name="emotion_prog_title">识别你的心情</string>
