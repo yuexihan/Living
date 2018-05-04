@@ -75,10 +75,13 @@ public class LivingServerAgent {
             connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setRequestMethod(method);
+            connection.setUseCaches(false);
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            if (method.equals(LivingServerAgent.HTTP_METHOD_POST))
+                connection.setDoOutput(true);
             connection.setDoInput(true);
-
             Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+
             //添加参数
             if (method.equals(LivingServerAgent.HTTP_METHOD_POST)) {
                 String param = gson.toJson(bodyParm);

@@ -69,6 +69,8 @@ public class RecordFragment extends Fragment {
             listDialog.show();
         }
     };
+
+
     //心情时候结束后的函数
     private FaceDetect.FaceDetectDoneAction faceDetectDoneAction = new FaceDetect.FaceDetectDoneAction(){
        public void onDetectDone(Face face[]){
@@ -85,7 +87,6 @@ public class RecordFragment extends Fragment {
                degreeBar.setProgress(emo[1]);
                degreeText.setText(getString(R.string.emotion_value) + emo[1]);
            }
-
            //显示一个对话框提醒用户检测结果
            final EmotionDetectResultDialog resultDialog =
                    new EmotionDetectResultDialog(RecordFragment.this.getActivity());

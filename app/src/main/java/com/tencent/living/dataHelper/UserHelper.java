@@ -20,6 +20,7 @@ public class UserHelper {
         lsa.putData("password", password);
         lsa.putData("nickname", nickname);
         lsa.putData("avatar", avatar);
+        lsa.putData("qq_number", phone_number);
         return  lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
         }.getType());
     }
