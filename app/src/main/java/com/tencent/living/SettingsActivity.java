@@ -2,6 +2,7 @@ package com.tencent.living;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.View;
@@ -35,7 +36,12 @@ public class SettingsActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
-                //ToDo 用户数据库写入新成员
+                SharedPreferences settings = getSharedPreferences(Living.config, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                // 清空登陆数据
+                editor.putString("phone", "");
+                editor.putString("pwd", "");
+
                 //直接到主界面
                 Intent intent = new Intent();
                 intent.setClass(SettingsActivity.this,LoginActivity.class);

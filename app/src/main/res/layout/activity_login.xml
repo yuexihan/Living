@@ -35,7 +35,7 @@
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="45dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -88,7 +88,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="10"
-            android:password="true"
             android:text="@string/password"
             android:textSize="@dimen/index_text_size" />
     </LinearLayout>
@@ -102,7 +101,6 @@
         android:ems="10"
         android:hint="@string/pls_input_pwd"
         android:inputType="textPassword"
-        android:password="true"
         android:textSize="@dimen/input_text_size" />
 
     <Button
@@ -123,8 +121,7 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_height="0dp"
         android:visibility="invisible" />
 
     <LinearLayout
