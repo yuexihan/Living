@@ -24,11 +24,11 @@ public class LivingServerAgent {
     public static final String ACTION_GET_USER =   "/api/user";
     public static final String ACTION_POST_RECORD = "/api/emotion";
     public static final String ACTION_SELF_RECORD = "/api/emotion/self";
-    public static final String ACTION_ALL_RECORD = " /api/emotion";
+    public static final String ACTION_ALL_RECORD = "/api/emotion";
     public static final String ACTION_POST_COMMENT = "/api/comment";
     public static final String ACTION_GET_COMMENT = "/api/comment";
     public static final String ACTION_POST_LIKE = "/api/like";
-    public static final String ACTION_GET_MESSAGE = "GET /api/message";
+    public static final String ACTION_GET_MESSAGE = "/api/message";
     public static final String ACTION_LOGOUT = "/api/user/logout";
 
     public static final String HTTP_METHOD_POST = "POST";

@@ -1,27 +1,13 @@
 package com.tencent.living.dataHelper;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.tencent.living.Living;
 import com.tencent.living.models.Comment;
 import com.tencent.living.models.Message;
 import com.tencent.living.models.Post;
-import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CommentHelper {
