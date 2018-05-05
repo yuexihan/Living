@@ -38,7 +38,7 @@
     <string name="login_failed">账号或密码错误！</string>
     <string name="pthone">手机</string>
     <string name="passwd">密码</string>
-    <string name="passwd2">确认</string>
+    <string name="passwd2">确认密码</string>
     <string name="pwd_check_err">两次密码不一致</string>
     <string name="register_fail">注册失败，手机号已被注册过了</string>
     <!-- Strings related to Settings -->

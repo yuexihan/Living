@@ -107,7 +107,7 @@ public class RegisterActivity extends Activity {
                 register_btn.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.INVISIBLE);
                 Toast.makeText(RegisterActivity.this, RegisterActivity.this.getString(R.string.register_fail)
-                        , 3000).show();
+                        , Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -121,7 +121,7 @@ public class RegisterActivity extends Activity {
             //检测两次密码是否一致
             if (!pwd1.getText().toString().equals(pwd2.getText().toString())){
                 Toast.makeText(RegisterActivity.this, RegisterActivity.this.getString(R.string.pwd_check_err)
-                        ,3000).show();
+                        ,Toast.LENGTH_LONG).show();
                 return ;
             }
             //起线程操作

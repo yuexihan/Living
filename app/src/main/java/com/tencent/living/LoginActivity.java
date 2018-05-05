@@ -94,9 +94,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             } else{
                 login_btn.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.INVISIBLE);
-                Toast.makeText(LoginActivity.this, R.string.login_failed, 2000).show();
+                Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_LONG).show();
             }
-
         }
     };
 
