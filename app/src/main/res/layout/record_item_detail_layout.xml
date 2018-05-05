@@ -5,8 +5,9 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    android:orientation="vertical">
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -22,18 +23,16 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_weight="0"
             android:cropToPadding="false"
-            android:src="@drawable/profile3"
-            app:civ_border_color="@color/colorAccent"
-            app:civ_border_width="3dp" />
+            android:src="@drawable/profile3" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:layout_weight="2"
             android:orientation="vertical"
             android:padding="5dp">
@@ -45,14 +44,14 @@
                 android:layout_weight="0"
                 android:text="Raylhuang"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2018-4-11 11:30"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
         </LinearLayout>
 
@@ -60,17 +59,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:gravity="right"
+            android:layout_gravity="end|center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/emoView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:scaleX="0.6"
-                android:scaleY="0.6"
-                app:srcCompat="@drawable/happy" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/happy" />
 
             <ProgressBar
                 android:id="@+id/emoBar"
@@ -78,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="1dp"
                 android:layout_marginRight="6dp"
                 android:layout_weight="0"
                 android:max="100"
@@ -96,7 +93,8 @@
         android:layout_margin="5dp"
         android:layout_weight="0"
         android:text="真的好气啊！hahahahahahahahahahhahahfdafdafdafda"
-        android:textSize="21sp" />
+        android:textSize="15sp"
+        android:textColor="#585858"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,39 +105,39 @@
 
         <ImageButton
             android:id="@+id/upButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="15dp"
             android:layout_weight="0"
             android:background="#00000000"
-            app:srcCompat="@android:drawable/ic_menu_upload" />
+            android:src="@drawable/record_red_heart"
+            android:tint="#ff5c4b"
+            android:scaleType="fitCenter"/>
 
         <TextView
             android:id="@+id/upCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
+            android:layout_width="24dp"
+            android:layout_height="15dp"
             android:layout_weight="0"
             android:text="11"
-            android:textSize="10sp" />
+            android:textColor="#8c8c8c"/>
 
         <ImageButton
             android:id="@+id/commentButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="15dp"
             android:layout_weight="0"
             android:background="#00000000"
-            app:srcCompat="@android:drawable/ic_input_get" />
+            android:src="@drawable/record_comment"
+            android:scaleType="fitCenter"
+            android:tint="#8c8c8c"/>
 
         <TextView
             android:id="@+id/commentCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="10dp"
+            android:layout_width="24dp"
+            android:layout_height="15dp"
             android:layout_weight="0"
             android:text="999"
-            android:textSize="10sp" />
+            android:textColor="#8c8c8c"/>
 
     </LinearLayout>
 

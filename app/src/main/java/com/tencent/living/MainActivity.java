@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         // add badge
         return new QBadgeView(this)
                 .setBadgeNumber(number)
+                .setShowShadow(false)
                 .setGravityOffset(12, 2, true)
                 .bindTarget(navigation.getBottomNavigationItemView(position))
                 .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {

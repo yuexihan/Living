@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
     <RadioGroup
         android:id="@+id/emoGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_weight="0"
-        android:background="@color/colorAccent"
+        android:background="@android:color/white"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -19,7 +20,6 @@
             android:id="@+id/rbut_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="0"
             android:button="@null"
@@ -91,11 +91,15 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/id_swipe_ly"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp">
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:dividerHeight="3dp"
+            />
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

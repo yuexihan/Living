@@ -1,5 +1,7 @@
 package com.tencent.living;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,8 +9,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,6 +27,8 @@ import com.tencent.living.models.User;
 
 import java.util.Random;
 
+import static android.os.SystemClock.sleep;
+
 public class RegisterActivity extends Activity {
     private RadioGroup rgroup;
     private TextView nickName;
@@ -29,6 +36,7 @@ public class RegisterActivity extends Activity {
     private EditText pwd1;
     private EditText pwd2;
     private Button register_btn;
+    private ImageButton dice_button;
     private ProgressBar pb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +49,9 @@ public class RegisterActivity extends Activity {
         phone = (EditText) findViewById(R.id.phone);
         pb = (ProgressBar)findViewById(R.id.progressBar);
         register_btn = findViewById(R.id.confirm_button);
+        dice_button = findViewById(R.id.dice_button);
         register_btn.setOnClickListener(finishAction);
-        nickName.setOnClickListener(nickChangeAction);
+        dice_button.setOnClickListener(nickChangeAction);
         String nickStr = Living.nickNames[Math.abs(new Random().nextInt()) % Living.nickNames.length];
         nickName.setText(nickStr);
     }
@@ -54,8 +63,14 @@ public class RegisterActivity extends Activity {
     private View.OnClickListener nickChangeAction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //onScaleAnimation(); // 骰子放大效果
+            Animation shake = AnimationUtils.loadAnimation(RegisterActivity.this, R.anim.button_shake);
+            shake.reset();
+            shake.setFillAfter(true);
+            dice_button.startAnimation(shake);
             String nickStr = Living.nickNames[Math.abs(new Random().nextInt()) % Living.nickNames.length];
             nickName.setText(nickStr);
+//            dice_button.clearAnimation();
         }
     };
 
@@ -144,4 +159,12 @@ public class RegisterActivity extends Activity {
         }
     };
 
+    private void onScaleAnimation(){
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(dice_button,"scaleX",1.0f,1.5f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(dice_button,"scaleY",1.0f,1.5f);
+        AnimatorSet set =new AnimatorSet();
+        set.setDuration(900);
+        set.playTogether(animatorX,animatorY);
+        set.start();
+    }
 }
