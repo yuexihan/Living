@@ -1,6 +1,4 @@
 package com.tencent.living;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +9,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.tencent.living.dataHelper.LivingServerAgent;
 import com.tencent.living.dataHelper.RecordHelper;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
@@ -83,7 +82,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
         listView.setOnScrollListener(this);
     }
 
-
     /**
      * 数据获得完毕后再这里处理界面，加载更多和更新数据都会在这里处理
      */
@@ -96,12 +94,19 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             boolean isOk = data.getBoolean("isOk");
             int target = data.getInt("target");
             if (isOk) {
-                if (target == 0)//刷新数据
+                if (target == 0) //刷新数据
                     adapter.clear();
+                //清除多余记录
+                int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
+                for (int i = 0; i < giveUp ;i++)
+                    if (adapter.getCount() != 0)
+                        adapter.removeItem(adapter.getCount() - 1);
+                //加入新记录
                 if (newRecords != null) {
                     for (int i = 0; i < newRecords.size(); i++)
                         adapter.addItem(newRecords.get(i));
                 }
+                curPage = adapter.getCount() / LivingServerAgent.DATA_DATA_PER_PAGE;
                 adapter.notifyDataSetChanged();
             } else
                 Toast.makeText(listView.getContext(), R.string.pub_record_fail, 2000).show();
@@ -114,12 +119,12 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     /**
      * 清除当前LIST中所有心情状态，重新请求
      */
-    public boolean updateData() {
+    public boolean updateData(int curPage) {
         ResultData<ArrayList<Record>> res;
         if (user == null)
-            res = RecordHelper.getRecordsInGround(targetEmotion, 0);
+            res = RecordHelper.getRecordsInGround(targetEmotion, curPage);
         else
-            res = RecordHelper.getRecordsByUserId(0);
+            res = RecordHelper.getRecordsByUserId(curPage);
         if (res == null || !res.isOk())
             return false;
         newRecords = res.getData();
@@ -139,12 +144,13 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             return;
         isLoading = true;
         final int _target = target;
+        final int page = target == 0 ? 0 : curPage;
         new Thread() {
             public void run() {
                 Message msg = Message.obtain();
                 Bundle bundle = new Bundle();
                 bundle.putInt("target", _target); //区别是刷新数据还是拉取更多数据
-                if (updateData())
+                if (updateData(page))
                     bundle.putBoolean("isOk", true);
                 else
                     bundle.putBoolean("isOk", false);
@@ -160,13 +166,7 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (this.totalItem == lastItem && scrollState == SCROLL_STATE_IDLE) {
-            if (!isLoading) {
-                isLoading = true;
-                footer.setVisibility(View.VISIBLE);
-                getRecords(1);
-                footer.setVisibility(View.INVISIBLE);
-                isLoading = false;
-            }
+            getRecords(1);
         }
     }
 

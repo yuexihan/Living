@@ -18,8 +18,12 @@ public class RecordItemAdapter extends BaseAdapter {
         this.commentsLineLimit = commentsLineLimit;
         this.context = context;
     }
+
     public int getCount() {
         return data.size();
+    }
+    public void removeItem(int index){
+        data.remove(index);
     }
     public Object getItem(int position) {
         return data.get(position);
