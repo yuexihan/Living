@@ -2,7 +2,6 @@ package com.tencent.living;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -10,16 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import com.tencent.living.Data.Comment;
-import com.tencent.living.Data.Record;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GroundFragment extends Fragment {
     private ListView listView;
@@ -33,13 +22,13 @@ public class GroundFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.ground_frag_layout, container, false);
-        listView = (ListView)view.findViewById(R.id.listView);
-        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.id_swipe_ly);
-        radioGroup = (RadioGroup)view.findViewById(R.id.emoGroup);
+        listView = view.findViewById(R.id.listView);
+        swipeRefreshLayout = view.findViewById(R.id.id_swipe_ly);
+        radioGroup = view.findViewById(R.id.emoGroup);
         radioGroup.setOnCheckedChangeListener(checkedChangeListener);
         refreshListManager = new RecordsRefreshListManager(swipeRefreshLayout, listView, MAX_COMMENTS_LINE);
         setRefreshTarget();
-        refreshListManager.updateData();
+        refreshListManager.onRefresh();
         return view;
     }
     private void setRefreshTarget(){

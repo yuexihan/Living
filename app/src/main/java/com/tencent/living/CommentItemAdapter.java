@@ -5,8 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.tencent.living.Data.Comment;
-import com.tencent.living.Data.Record;
+import com.tencent.living.models.Comment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -52,7 +52,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 startActivityForResult(intent, 0);
             }
         });
-        loadUserFromConfig();
+        //loadUserFromConfig();
         if (et_phone.getText().toString().length() >= 1)
             onClick(null);
     }

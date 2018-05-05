@@ -9,13 +9,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -24,13 +28,21 @@ import android.widget.Toast;
 
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
+import com.tencent.living.dataHelper.RecordHelper;
+import com.tencent.living.models.Post;
+import com.tencent.living.models.ResultData;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import static com.tencent.living.dataHelper.RecordHelper.postRecord;
+
 public class RecordFragment extends Fragment {
+    public static final int PUB_TO_SELF = 1;
+    public static final int PUB_TO_PUB = 2;
+
     //用于存储拍到图片
     private File newImageFile;
 
@@ -44,6 +56,8 @@ public class RecordFragment extends Fragment {
     private TextView degreeText;
     private ImageButton selfPubButton;
     private ImageButton pubPubButton;
+    private EditText contentText;
+    private ProgressBar pb;
 
     //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
@@ -106,12 +120,79 @@ public class RecordFragment extends Fragment {
         }
     };
 
+    private int getCurrentCheckEmotion(){
+        switch (radioGroup.getCheckedRadioButtonId()){
+            case R.id.rbut_happy:
+                return 0;
+            case R.id.rbut_anger:
+                return 1;
+            case R.id.rbut_sad:
+                return 2;
+            case R.id.rbut_calm:
+                return 3;
+        }
+        return 0;
+    }
+
+    /**
+     * 数据线程处理完数据之后，会发送消息给handler来做界面处理
+     */
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            boolean isOk = data.getBoolean("isOk");
+            if (isOk) {
+                //跳转到我的
+                Toast.makeText(RecordFragment.this.getActivity(),"发布成功", 2000).show();
+            } else
+                Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_fail, 2000).show();
+
+            pb.setVisibility(View.INVISIBLE);
+            selfPubButton.setVisibility(View.VISIBLE);
+            pubPubButton.setVisibility(View.VISIBLE);
+        }
+    };
+
+    private boolean doPubRecord(int visiable){
+        String content = contentText.getText().toString();
+        int emotion = getCurrentCheckEmotion();
+        int emo_val = degreeBar.getProgress();
+        ResultData<Post> ret = RecordHelper.postRecord(content,emotion, emo_val, visiable);
+        if (ret == null || !ret.isOk())
+            return false;
+        return true;
+    }
+
+    private void tryToPubRecord(int visiable){
+        if (contentText.getText().toString().length() == 0 && visiable == PUB_TO_PUB){
+            Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_empty, 2000).show();
+            return ;
+        }
+        pb.setVisibility(View.VISIBLE);
+        selfPubButton.setVisibility(View.INVISIBLE);
+        pubPubButton.setVisibility(View.INVISIBLE);
+        final int isPrivate = visiable;
+        new Thread() {
+            public void run() {
+                Message msg = Message.obtain();
+                Bundle bundle = new Bundle();
+                if ( doPubRecord(isPrivate))
+                    bundle.putBoolean("isOk", true);
+                else
+                    bundle.putBoolean("isOk", false);
+                msg.setData(bundle);//bundle传值，耗时，效率低
+                handler.sendMessage(msg);//发送message信息
+            }
+        }.start();
+    }
+
     //点击发布给自己按钮时被调用
     private View.OnClickListener selfPubListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //@TODO 这里要写发布给自己的逻辑
-            Toast.makeText(getContext(),"发布给自己", 3000).show();
+            tryToPubRecord(PUB_TO_SELF);
         }
     };
 
@@ -119,8 +200,7 @@ public class RecordFragment extends Fragment {
     private View.OnClickListener pubPubListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //@TODO 这里要写发布到广场的逻辑
-            Toast.makeText(getContext(),"发布到广场", 3000).show();
+            tryToPubRecord(PUB_TO_PUB);
         }
     };
     private void startCamera(){
@@ -155,12 +235,14 @@ public class RecordFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.record_frag_layout, container, false);
-        camera_button = (ImageButton)view.findViewById(R.id.camera_but);
-        radioGroup = (RadioGroup)view.findViewById(R.id.emoGroup);
-        degreeBar = (SeekBar)view.findViewById(R.id.degreeBar);
-        degreeText = (TextView)view.findViewById(R.id.degreeText);
-        selfPubButton = (ImageButton)view.findViewById(R.id.self_pub);
-        pubPubButton = (ImageButton)view.findViewById(R.id.pub_pub);
+        camera_button = view.findViewById(R.id.camera_but);
+        radioGroup = view.findViewById(R.id.emoGroup);
+        degreeBar = view.findViewById(R.id.degreeBar);
+        degreeText = view.findViewById(R.id.degreeText);
+        selfPubButton = view.findViewById(R.id.self_pub);
+        pubPubButton = view.findViewById(R.id.pub_pub);
+        contentText = view.findViewById(R.id.pub_input);
+        pb = view.findViewById(R.id.pubProgress);
 
         camera_button.setOnClickListener(camera_but_lis);
         emotionProgressDialog = new ProgressDialog(this.getActivity());

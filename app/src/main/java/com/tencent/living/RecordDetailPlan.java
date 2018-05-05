@@ -13,16 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tencent.living.Data.Comment;
-import com.tencent.living.Data.Record;
+
+import com.tencent.living.models.Comment;
+import com.tencent.living.models.Record;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,24 +49,28 @@ public class RecordDetailPlan {
     private int commentsLineLimit;
     private ImageButton backButton;
 
+
     //是否支持点击进入详情页
     private boolean isClickAble = true;
+
     public static final int COMMENT_LINES_NO_LIMIT = Integer.MAX_VALUE;
+
+
     private void findAllComp(){
-        profile = (CircleImageView)view.findViewById(R.id.profileImage);
-        userName = (TextView)view.findViewById(R.id.userName);
-        time = (TextView)view.findViewById(R.id.time);
-        content = (TextView)view.findViewById(R.id.content);
-        emoDegree = (ProgressBar)view.findViewById(R.id.emoBar);
-        emoView = (ImageView)view.findViewById(R.id.emoView) ;
-        upButton = (ImageButton)view.findViewById(R.id.upButton);
-        upCount = (TextView)view.findViewById(R.id.upCount);
-        commentButton = (ImageButton)view.findViewById(R.id.commentButton);
-        commentCount = (TextView)view.findViewById(R.id.commentCount);
-        linearLayout = (LinearLayout)view.findViewById(R.id.linearLayout);
-        commentsList = (ListView)view.findViewById(R.id.commentsList);
-        backButton = (ImageButton)view.findViewById(R.id.backButton);
-        moreComment = (TextView) view.findViewById(R.id.moreComments);
+        profile = view.findViewById(R.id.profileImage);
+        userName = view.findViewById(R.id.userName);
+        time = view.findViewById(R.id.time);
+        content = view.findViewById(R.id.content);
+        emoDegree = view.findViewById(R.id.emoBar);
+        emoView = view.findViewById(R.id.emoView) ;
+        upButton = view.findViewById(R.id.upButton);
+        upCount = view.findViewById(R.id.upCount);
+        commentButton = view.findViewById(R.id.commentButton);
+        commentCount = view.findViewById(R.id.commentCount);
+        linearLayout = view.findViewById(R.id.linearLayout);
+        commentsList = view.findViewById(R.id.commentsList);
+        backButton = view.findViewById(R.id.backButton);
+        moreComment =  view.findViewById(R.id.moreComments);
     }
 
     private void setListViewHeightBasedOnChildren() {
@@ -87,6 +90,7 @@ public class RecordDetailPlan {
         commentsList.setLayoutParams(params);
     }
 
+    //是否显示回跳按钮
     public void setBackButtonVisiable(boolean visiable){
         if (visiable)
             backButton.setVisibility(View.VISIBLE);
@@ -117,19 +121,19 @@ public class RecordDetailPlan {
 
     private void resetCompsContent(){
         //profile.set  ...................
-        profile.setImageResource(Living.profileID[record.getImageType()]);
+        profile.setImageResource(Living.profileID[Integer.parseInt(record.getAvatar())]);
         //其他属性设置
-        userName.setText(record.getUserName());
-        time.setText(record.getTime());
+        userName.setText(record.getNickname());
+        time.setText(record.getCreate_time());
         content.setText(record.getContent());
-        emoDegree.setProgress(record.getEmoDegree());
-        upCount.setText(record.getUpCount() + "");
-        if (record.getCommentCount() >= 999){
+        emoDegree.setProgress(record.getStrong());
+        upCount.setText(record.getLike_cnt() + "");
+        if (record.getComment_cnt() >= 999){
             commentCount.setText("999");
         }else
-            commentCount.setText(record.getCommentCount() +"");
+            commentCount.setText(record.getComment_cnt() +"");
         //设置表情
-        switch(record.getEmoType()){
+        switch(record.getLabel_id()){
             case 0:
                 emoView.setImageResource(R.drawable.happy);
                 break;
@@ -176,7 +180,7 @@ public class RecordDetailPlan {
         public void onClick(View v) {
             if (!isClickAble)
                 return ;
-            Toast.makeText(context, record.getUserName(), 3000).show();
+            Toast.makeText(context, record.getNickname(), 3000).show();
         }
     };
 
@@ -220,7 +224,7 @@ public class RecordDetailPlan {
         @Override
         public void onCommentClick(Comment comment) {
             //@TODO 以下逻辑需要被替换成评论被点击时候的逻辑，其中可以从comment中获得被点击的评论内容
-            Toast.makeText(context, comment.getCommentFrom(), 3000).show();
+            Toast.makeText(context, comment.getPoster(), 3000).show();
         }
     };
 }

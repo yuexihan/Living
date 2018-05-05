@@ -25,9 +25,6 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
-/**
- * Created by yu on 2016/11/10.
- */
 public class BottomNavigationViewEx extends BottomNavigationView {
     // used for animation
     private int mShiftAmount;
@@ -40,9 +37,7 @@ public class BottomNavigationViewEx extends BottomNavigationView {
     private boolean visibilityHeightRecord;
     private int mItemHeight;
     private boolean textVisibility = true;
-    // used for animation end
 
-    // used for setupWithViewPager
     private ViewPager mViewPager;
     private MyOnNavigationItemSelectedListener mMyOnNavigationItemSelectedListener;
     private BottomNavigationViewExOnPageChangeListener mPageChangeListener;

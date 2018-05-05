@@ -41,6 +41,10 @@
     <string name="passwd2">确认密码</string>
     <string name="pwd_check_err">两次密码不一致</string>
     <string name="register_fail">注册失败，手机号已被注册过了</string>
+    <string name="pub_record_fail">心情发布失败，请检查您的网络</string>
+    <string name="pub_record_empty">在随笔处写点感想吧</string>
+    <string name="get_record_failed">无法获得心情记录，请检查您的网络</string>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

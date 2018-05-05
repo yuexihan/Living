@@ -16,6 +16,15 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:weightSum="0">
 
+        <ProgressBar
+            android:id="@+id/pubProgress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="0"
+            android:visibility="invisible" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,15 +174,15 @@
             android:id="@+id/pub_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_margin="5dp"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength ="2000"
+            android:layout_weight="2"
+            android:background="#eeeeee"
             android:ellipsize="start"
             android:gravity="center"
-            android:hint ="记录这一刻"
-            android:scrollHorizontally="false"
-            android:background="#eeeeee"
-            android:minHeight="100dp"/>
+            android:hint="记录这一刻"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:minHeight="100dp"
+            android:scrollHorizontally="false" />
     </LinearLayout>
 </ScrollView>

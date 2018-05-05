@@ -1,5 +1,8 @@
 package com.tencent.living.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by doublewu on 2018/4/30.
  */
@@ -16,6 +19,25 @@ public class Record {
     private int comment_cnt;
     private int is_like;
     private String userID;
+    private int emotion_id;
+
+    private List<Comment> comments = new ArrayList<>();
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public int getEmotion_id() {
+        return emotion_id;
+    }
+
+    public void setEmotion_id(int emotion_id) {
+        this.emotion_id = emotion_id;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public String getUserID() {
         return userID;

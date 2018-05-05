@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tencent.living.Data.Comment;
+import com.tencent.living.models.Comment;
+
 /*
 用于显示一条评论
  */
@@ -20,23 +20,24 @@ public class CommentDetailPlan {
     private TextView commentTime;
     private TextView respondText;
     private OnCommentClickListener oclistern;
+
     public CommentDetailPlan(Context context, Comment comment){
         this.context = context;
         this.comment = comment;
         view = LayoutInflater.from(this.context).inflate(R.layout.comment_item_layout, null);
-        commentFrom = (TextView)view.findViewById(R.id.commentFrom);
-        commentTo = (TextView)view.findViewById(R.id.commentTo);
-        commentContent = (TextView)view.findViewById(R.id.commentContent);
-        commentTime = (TextView)view.findViewById(R.id.commentTime);
-        respondText = (TextView)view.findViewById(R.id.respondText) ;
+        commentFrom = view.findViewById(R.id.commentFrom);
+        commentTo = view.findViewById(R.id.commentTo);
+        commentContent = view.findViewById(R.id.commentContent);
+        commentTime = view.findViewById(R.id.commentTime);
+        respondText = view.findViewById(R.id.respondText) ;
         //初始化评论内容
-        commentFrom.setText(comment.getCommentFrom());
-        commentTo.setText(comment.getCommentTo());
-        commentContent.setText(comment.getCommentContent());
-        commentTime.setText(comment.getTime());
-        if (comment.getCommentTo() == null ||
-                comment.getCommentTo().equals(""))
+        commentFrom.setText(comment.getPoster_nickname());
+        commentTo.setText(comment.getRspto_nickname());
+        commentContent.setText(comment.getComment());
+        commentTime.setText(comment.getCreate_time());
+        if (comment.getRspto() == 0) {
             respondText.setText("");
+        }
         view.setOnClickListener(clickListener);
     }
     //通过获得View可以让这个界面给其他组件复用
