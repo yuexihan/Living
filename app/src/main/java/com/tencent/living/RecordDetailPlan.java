@@ -50,11 +50,6 @@ public class RecordDetailPlan {
     private ListView commentsList;
     private CommentItemAdapter adapter;
     private int commentsLineLimit;
-    private ImageButton backButton;
-
-
-    //是否支持点击进入详情页
-    private boolean isClickAble = true;
 
     public static final int COMMENT_LINES_NO_LIMIT = Integer.MAX_VALUE;
 
@@ -71,7 +66,7 @@ public class RecordDetailPlan {
         commentCount = view.findViewById(R.id.commentCount);
         linearLayout = view.findViewById(R.id.linearLayout);
         commentsList = view.findViewById(R.id.commentsList);
-        backButton = view.findViewById(R.id.backButton);
+
         moreComment =  view.findViewById(R.id.moreComments);
     }
 
@@ -92,19 +87,6 @@ public class RecordDetailPlan {
         commentsList.setLayoutParams(params);
     }
 
-    /**
-     * 是否显示回跳按钮
-     */
-    public void setBackButtonVisiable(boolean visiable){
-        if (visiable)
-            backButton.setVisibility(View.VISIBLE);
-        else
-            backButton.setVisibility(View.GONE);
-    }
-
-    public void setClickAble(boolean isClickAble){
-        this.isClickAble = isClickAble;
-    }
 
     /**
      * 附加评论到状态下边
@@ -124,6 +106,15 @@ public class RecordDetailPlan {
             moreComment.setVisibility(View.VISIBLE);
         }else
             moreComment.setVisibility(View.GONE);
+        moreComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("emotion_id", record.getEmotion_id());
+                intent.setClass(RecordDetailPlan.this.context, RecordDetailActivity.class);
+                MainActivity.groundFragment.startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -172,6 +163,8 @@ public class RecordDetailPlan {
      * 将record的内容填充到界面上去
      */
     private void resetCompsContent(){
+        if (record == null)
+            return ;
         //profile.set  ...................
         profile.setImageResource(Living.profileID[Integer.parseInt(record.getAvatar())]);
         //其他属性设置
@@ -199,6 +192,8 @@ public class RecordDetailPlan {
         commentsList.setAdapter(adapter);
         likeButton.setOnClickListener(upClickListener);
         commentButton.setOnClickListener(commentClickListener);
+        likeCount.setOnClickListener(upClickListener);
+        commentButton.setOnClickListener(commentClickListener);
         pullComments();
         resetCommentsToList();
     }
@@ -208,9 +203,12 @@ public class RecordDetailPlan {
         this.context = context;
         this.record = record;
         view = LayoutInflater.from(this.context).inflate(R.layout.record_item_detail_layout, null);
-        view.setOnClickListener(planClickListener);
         findAllComp();
         resetCompsContent();
+    }
+
+    public RecordDetailPlan(Context context, int commentsLineLimit){
+        this(context, null, commentsLineLimit);
     }
     //通过获得View可以让这个界面给其他组件复用
     public View getView(){
@@ -219,18 +217,6 @@ public class RecordDetailPlan {
     public Record getData(){
         return record;
     }
-
-    /**
-     * 当该页面被点击的时候会被调用
-     * @param v
-     */
-    private View.OnClickListener planClickListener = new  View.OnClickListener(){
-        public void onClick(View v) {
-            if (!isClickAble)
-                return ;
-            Toast.makeText(context, record.getNickname(), 3000).show();
-        }
-    };
 
     /**
      * 点赞操作如果操作成功，就会执行下面的函数，用于将星星变成实的
@@ -350,5 +336,9 @@ public class RecordDetailPlan {
 
     public Record getRecord() {
         return record;
+    }
+    public void setRecord(Record record){
+        this.record = record;
+        resetCompsContent();
     }
 }

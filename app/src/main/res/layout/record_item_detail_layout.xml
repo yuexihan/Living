@@ -9,12 +9,6 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        app:srcCompat="@android:drawable/ic_media_rew" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,8 +99,8 @@
 
         <ImageButton
             android:id="@+id/upButton"
-            android:layout_width="24dp"
-            android:layout_height="15dp"
+            android:layout_width="28dp"
+            android:layout_height="18dp"
             android:layout_weight="0"
             android:background="#00000000"
             android:scaleType="fitCenter"
@@ -123,13 +117,13 @@
 
         <ImageButton
             android:id="@+id/commentButton"
-            android:layout_width="24dp"
-            android:layout_height="15dp"
+            android:layout_width="28dp"
+            android:layout_height="18dp"
             android:layout_weight="0"
             android:background="#00000000"
-            android:src="@drawable/record_comment"
             android:scaleType="fitCenter"
-            android:tint="#8c8c8c"/>
+            android:src="@drawable/record_comment"
+            android:tint="#8c8c8c" />
 
         <TextView
             android:id="@+id/commentCount"

@@ -35,8 +35,6 @@ public class RecordItemAdapter extends BaseAdapter {
     }
     public RecordDetailPlan addItem(Record record){
         RecordDetailPlan rdp = new RecordDetailPlan(context, record, commentsLineLimit);
-        rdp.setBackButtonVisiable(false);
-        rdp.setClickAble(true);
         data.add(rdp);
         return rdp;
     }
