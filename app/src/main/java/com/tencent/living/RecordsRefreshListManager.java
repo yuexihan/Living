@@ -40,6 +40,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     private boolean isLoading = false;
     private LayoutInflater inflater;
 
+    public static final int COMMENT_LINES_NO_LIMIT = RecordDetailPlan.COMMENT_LINES_NO_LIMIT;
+
     public RecordItemAdapter getAdapter() {
         return adapter;
     }

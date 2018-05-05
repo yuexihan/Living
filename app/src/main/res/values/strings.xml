@@ -49,7 +49,7 @@
     <string name="mesg_resp_emotion">" 评论了你的心情: "</string>
     <string name="mesg_resp_comment"> 回复了你的评论: </string>
     <string name="mesg_pull_failed"> 获得信息失败，请检查您的网络</string>
-
+    <string name="myground">我的心情广场</string>
 
     <!-- Strings related to Settings -->
 

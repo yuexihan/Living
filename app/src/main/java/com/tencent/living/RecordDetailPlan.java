@@ -195,7 +195,7 @@ public class RecordDetailPlan {
         likeCount.setOnClickListener(upClickListener);
         commentButton.setOnClickListener(commentClickListener);
         pullComments();
-        resetCommentsToList();
+       // resetCommentsToList();
     }
 
     public RecordDetailPlan(Context context, Record record, int commentsLineLimit){

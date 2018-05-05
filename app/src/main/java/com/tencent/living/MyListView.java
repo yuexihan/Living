@@ -24,5 +24,4 @@ public class MyListView  extends ListView{
         super(context, attrs, defStyle);
 
     }
-
 }
