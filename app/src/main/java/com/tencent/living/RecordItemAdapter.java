@@ -38,6 +38,7 @@ public class RecordItemAdapter extends BaseAdapter {
         data.add(rdp);
         return rdp;
     }
+
     public View getView(int position, View convertView, ViewGroup parent) {
         return data.get(position).getView();
     }

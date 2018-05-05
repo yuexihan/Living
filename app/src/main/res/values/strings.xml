@@ -45,6 +45,12 @@
     <string name="pub_record_empty">在随笔处写点感想吧</string>
     <string name="get_record_failed">无法获得心情记录，请检查您的网络</string>
     <string name="postlike_failed">无法点赞，请检查您的网络</string>
+    <string name="mesg_like">" 点赞了你的心情"</string>
+    <string name="mesg_resp_emotion">" 评论了你的心情: "</string>
+    <string name="mesg_resp_comment"> 回复了你的评论: </string>
+    <string name="mesg_pull_failed"> 获得信息失败，请检查您的网络</string>
+
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

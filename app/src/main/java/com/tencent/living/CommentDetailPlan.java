@@ -17,7 +17,7 @@ public class CommentDetailPlan {
     private TextView commentContent;
     private TextView commentFrom;
     private TextView commentTo;
-    private TextView commentTime;
+    //private TextView commentTime;
     private TextView respondText;
     private OnCommentClickListener oclistern;
 
@@ -28,13 +28,13 @@ public class CommentDetailPlan {
         commentFrom = view.findViewById(R.id.commentFrom);
         commentTo = view.findViewById(R.id.commentTo);
         commentContent = view.findViewById(R.id.commentContent);
-        commentTime = view.findViewById(R.id.commentTime);
+        //commentTime = view.findViewById(R.id.commentTime);
         respondText = view.findViewById(R.id.respondText) ;
         //初始化评论内容
         commentFrom.setText(comment.getPoster_nickname());
         commentTo.setText(comment.getRspto_nickname());
         commentContent.setText(comment.getComment());
-        commentTime.setText(comment.getCreate_time());
+        //commentTime.setText(comment.getCreate_time());
         if (comment.getRspto() == 0) {
             respondText.setText("");
         }

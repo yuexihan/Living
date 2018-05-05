@@ -42,12 +42,12 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        rgroup = (RadioGroup) findViewById(R.id.choose_profile_RG);
-        nickName = (TextView) findViewById(R.id.nickname);
-        pwd1 = (EditText) findViewById(R.id.passwd);
-        pwd2 = (EditText) findViewById(R.id.passwd2);
-        phone = (EditText) findViewById(R.id.phone);
-        pb = (ProgressBar)findViewById(R.id.progressBar);
+        rgroup =  findViewById(R.id.choose_profile_RG);
+        nickName = findViewById(R.id.nickname);
+        pwd1 = findViewById(R.id.passwd);
+        pwd2 =  findViewById(R.id.passwd2);
+        phone = findViewById(R.id.phone);
+        pb = findViewById(R.id.progressBar);
         register_btn = findViewById(R.id.confirm_button);
         dice_button = findViewById(R.id.dice_button);
         register_btn.setOnClickListener(finishAction);
@@ -55,7 +55,6 @@ public class RegisterActivity extends Activity {
         String nickStr = Living.nickNames[Math.abs(new Random().nextInt()) % Living.nickNames.length];
         nickName.setText(nickStr);
     }
-
 
     /**
      * 当点击昵称时候被调用

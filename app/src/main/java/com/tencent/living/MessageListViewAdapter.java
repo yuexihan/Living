@@ -9,84 +9,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.tencent.living.models.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.tencent.living.Living.profileID;
 
 public class MessageListViewAdapter extends BaseAdapter {
-
-    public List<Message> list;
-    public LayoutInflater inflater;
-
-    public MessageListViewAdapter(MessageFragment messageFragment, List<Message> list1) {
+    private List<MessageDetailPlan> list = new ArrayList<>();
+    private Context context;
+    public MessageListViewAdapter(Context context) {
+        this.context = context;
     }
-
-    public MessageListViewAdapter(Context context, List<Message> list) {
-        this.list = list;
-        this.inflater = LayoutInflater.from(context);
-    }
-
     @Override
     public int getCount() {
         return list.size();
     }
-
+    public void addItem(Message message){
+        list.add(new MessageDetailPlan(context, message));
+    }
     @Override
-    public Message getItem(int position) {
+    public MessageDetailPlan getItem(int position) {
         return list.get(position);
     }
-
     @Override
     public long getItemId(int position) {
         return 0;
     }
-
-    public void updateView(List<Message> nowList)
-    {
-        this.list = nowList;
-        this.notifyDataSetChanged();//强制动态刷新数据进而调用getView方法
-    }
+    public void removeItem(int position) {list.remove(position);}
+    public void clear(){list.clear();}
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
-        ViewHolder holder = null;
-        Message message = list.get(position);
-        if(convertView == null)
-        {
-            view = inflater.inflate(R.layout.message_item, null);
-            holder = new ViewHolder();
-            holder.headImage = (ImageView)view.findViewById(R.id.headImage);
-            holder.content = (TextView)view.findViewById(R.id.newsContent);
-            holder.praiseImage = (ImageView)view.findViewById(R.id.praiseImage);
-            holder.praiseNum = (TextView)view.findViewById(R.id.praiseText);
-            view.setTag(holder);//为了复用holder
-        }else
-        {
-            view = convertView;
-            holder = (ViewHolder) view.getTag();
-        }
-
-
-        holder.headImage.setImageResource(profileID[message.getPoster()]);
-        holder.content.setText(message.getContentString());
-        if(message.getType() == 1){
-            holder.praiseImage.setImageResource(R.drawable.heart);
-            holder.praiseNum.setText("+1");
-        }else{
-            holder.praiseImage.setImageResource(0);  //
-            holder.praiseNum.setText("");
-        }
-        return view;
-    }
-
-
-
-    static class ViewHolder
-    {
-        ImageView headImage;
-        TextView content;
-        ImageView praiseImage;
-        TextView praiseNum;
+        return list.get(position).getView();
     }
 }
 
