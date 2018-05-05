@@ -1,4 +1,5 @@
 package com.tencent.living;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
@@ -91,14 +93,13 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle data = msg.getData();
-            boolean isOk = data.getBoolean("isOk");
             int target = data.getInt("target");
-            if (isOk) {
+            if (data.getBoolean("isOk")) {
                 if (target == 0) //刷新数据
                     adapter.clear();
                 //清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
-                for (int i = 0; i < giveUp ;i++)
+                for (int i = 0; i < giveUp; i++)
                     if (adapter.getCount() != 0)
                         adapter.removeItem(adapter.getCount() - 1);
                 //加入新记录
@@ -150,10 +151,7 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
                 Message msg = Message.obtain();
                 Bundle bundle = new Bundle();
                 bundle.putInt("target", _target); //区别是刷新数据还是拉取更多数据
-                if (updateData(page))
-                    bundle.putBoolean("isOk", true);
-                else
-                    bundle.putBoolean("isOk", false);
+                bundle.putBoolean("isOk", updateData(page));
                 msg.setData(bundle);//bundle传值，耗时，效率低
                 handler.sendMessage(msg);//发送message信息
             }
@@ -174,5 +172,18 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         this.lastItem = firstVisibleItem + visibleItemCount;
         this.totalItem = totalItemCount;
+    }
+
+
+    /**
+     * 某个心情状态被添加了一个评论
+     */
+    public void addComment(int emotionID, String to, int toID, String content){
+        List<RecordDetailPlan> plist = adapter.getData();
+        for (int i = 0 ; i < plist.size(); i++)
+            if(plist.get(i).getRecord().getEmotion_id() == emotionID) {
+                plist.get(i).addComment(content, to, toID);
+                break;
+            }
     }
 }

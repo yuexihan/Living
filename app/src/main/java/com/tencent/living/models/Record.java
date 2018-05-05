@@ -18,7 +18,6 @@ public class Record {
     private int like_cnt;
     private int comment_cnt;
     private int is_like;
-    private String userID;
     private int emotion_id;
 
     private List<Comment> comments = new ArrayList<>();
@@ -39,13 +38,7 @@ public class Record {
         this.comments = comments;
     }
 
-    public String getUserID() {
-        return userID;
-    }
 
-    public void setUserID(String id) {
-        this.userID = id;
-    }
 
     public String getContent() {
         return content;

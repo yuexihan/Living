@@ -2,12 +2,12 @@ package com.tencent.living;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.tencent.living.dataHelper.CommentHelper;
 import com.tencent.living.models.Comment;
+import com.tencent.living.models.Post;
 import com.tencent.living.models.Record;
+import com.tencent.living.models.ResultData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +38,8 @@ public class RecordDetailPlan {
     private TextView content;
     private ProgressBar emoDegree;
     private ImageView emoView;
-    private ImageButton upButton;
-    private TextView upCount;
+    private ImageButton likeButton;
+    private TextView likeCount;
     private ImageButton commentButton;
     private TextView commentCount;
     private TextView moreComment;
@@ -55,7 +58,6 @@ public class RecordDetailPlan {
 
     public static final int COMMENT_LINES_NO_LIMIT = Integer.MAX_VALUE;
 
-
     private void findAllComp(){
         profile = view.findViewById(R.id.profileImage);
         userName = view.findViewById(R.id.userName);
@@ -63,8 +65,8 @@ public class RecordDetailPlan {
         content = view.findViewById(R.id.content);
         emoDegree = view.findViewById(R.id.emoBar);
         emoView = view.findViewById(R.id.emoView) ;
-        upButton = view.findViewById(R.id.upButton);
-        upCount = view.findViewById(R.id.upCount);
+        likeButton = view.findViewById(R.id.upButton);
+        likeCount = view.findViewById(R.id.upCount);
         commentButton = view.findViewById(R.id.commentButton);
         commentCount = view.findViewById(R.id.commentCount);
         linearLayout = view.findViewById(R.id.linearLayout);
@@ -90,7 +92,9 @@ public class RecordDetailPlan {
         commentsList.setLayoutParams(params);
     }
 
-    //是否显示回跳按钮
+    /**
+     * 是否显示回跳按钮
+     */
     public void setBackButtonVisiable(boolean visiable){
         if (visiable)
             backButton.setVisibility(View.VISIBLE);
@@ -102,7 +106,10 @@ public class RecordDetailPlan {
         this.isClickAble = isClickAble;
     }
 
-    private void addCommentsToList(){
+    /**
+     * 附加评论到状态下边
+     */
+    private void resetCommentsToList(){
         adapter.clear();
         List<Comment> comments = record.getComments();
         for (int i = 0 ; i < comments.size() && i < commentsLineLimit; i++) {
@@ -119,6 +126,51 @@ public class RecordDetailPlan {
             moreComment.setVisibility(View.GONE);
     }
 
+    /**
+     * 根据点赞数和评论数显示组件内容
+     */
+    private void resetLikeAndComment(){
+        if (record.getLike_cnt() >= 999)
+            likeCount.setText("999");
+        else
+            likeCount.setText(record.getLike_cnt() + "");
+        if (record.getComment_cnt() >= 999){
+            commentCount.setText("999");
+        }else
+            commentCount.setText(record.getComment_cnt() +"");
+        if (record.getIs_like() == 1)
+            likeButton.setImageResource(R.drawable.record_red_heart);
+        else
+            likeButton.setImageResource(R.drawable.record_empty_heart);
+    }
+
+
+    /**
+     * 从服务器拉取评论
+     */
+    private void pullComments(){
+        new Thread() {
+            public void run() {
+                Message msg = Message.obtain();
+                Bundle bundle = new Bundle();
+                ResultData<ArrayList<Comment>> ret =
+                        CommentHelper.getCommentsByEmotionId(record.getEmotion_id(),0);
+                boolean isok = true;
+                if (ret == null || !ret.isOk())
+                    isok = false;
+                bundle.putBoolean("isOk", isok);
+                if (ret.getData() != null)
+                    record.setComments(ret.getData());
+                bundle.putInt("target", 2);
+                msg.setData(bundle);
+                handler.sendMessage(msg);//发送message信息
+            }
+        }.start();
+    }
+
+    /**
+     * 将record的内容填充到界面上去
+     */
     private void resetCompsContent(){
         //profile.set  ...................
         profile.setImageResource(Living.profileID[Integer.parseInt(record.getAvatar())]);
@@ -127,11 +179,7 @@ public class RecordDetailPlan {
         time.setText(record.getCreate_time());
         content.setText(record.getContent());
         emoDegree.setProgress(record.getStrong());
-        upCount.setText(record.getLike_cnt() + "");
-        if (record.getComment_cnt() >= 999){
-            commentCount.setText("999");
-        }else
-            commentCount.setText(record.getComment_cnt() +"");
+        resetLikeAndComment();
         //设置表情
         switch(record.getLabel_id()){
             case 0:
@@ -149,10 +197,10 @@ public class RecordDetailPlan {
         }
         adapter = new CommentItemAdapter(this.context);
         commentsList.setAdapter(adapter);
-        upButton.setOnClickListener(upClickListener);
+        likeButton.setOnClickListener(upClickListener);
         commentButton.setOnClickListener(commentClickListener);
-
-        addCommentsToList();
+        pullComments();
+        resetCommentsToList();
     }
 
     public RecordDetailPlan(Context context, Record record, int commentsLineLimit){
@@ -185,25 +233,67 @@ public class RecordDetailPlan {
     };
 
     /**
+     * 点赞操作如果操作成功，就会执行下面的函数，用于将星星变成实的
+     */
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            if (data == null) return ;
+            if (data.getBoolean("isOk")){
+                int target = data.getInt("target");
+                if (target == 0) {
+                    //新的点赞
+                    record.setIs_like(1);
+                    record.setLike_cnt(record.getLike_cnt() + 1);
+                    likeButton.setImageResource(R.drawable.record_red_heart);
+                }else if (target == 1){
+                    //新的评论 ,重新拉一下评论
+                    pullComments();
+                }else if (target == 2) //从服务器拉取评论的结果
+                    resetCommentsToList();
+                resetLikeAndComment();
+            }else
+                Toast.makeText(context, R.string.postlike_failed, 2000).show();
+        }
+    };
+
+    private boolean doPostLike(){
+        ResultData<Post> ret = CommentHelper.postLike(record.getEmotion_id());
+        if (ret == null || !ret.isOk())
+            return false;
+        return true;
+    }
+    /**
      * 当点赞被点击的时候
      */
     private View.OnClickListener upClickListener = new View.OnClickListener(){
         public void onClick(View v) {
-            //@TODO 以下逻辑需要被替换成点赞的真正处理逻辑
-            Toast.makeText(context, "点赞", 3000).show();
+            if (record.getIs_like() == 1) //不能点赞两次
+                return ;
+            new Thread() {
+                public void run() {
+                    Message msg = Message.obtain();
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("isOk", doPostLike());
+                    bundle.putInt("target", 0);
+                    msg.setData(bundle);
+                    handler.sendMessage(msg);//发送message信息
+                }
+            }.start();
         }
     };
 
-    private void startFloatEditor(String from, String to, String fromID, String toID){
+    private void startFloatEditor(String to,int toID){
         Intent intent = new Intent();
         // 设置要跳转的页面
-        intent.setClass((Activity)context , FloatEditorActivity.class);
-        intent.putExtra("from", from);
+        intent.setClass(MainActivity.groundFragment.getContext() , FloatEditorActivity.class);
         intent.putExtra("to", to);
-        intent.putExtra("fromID", fromID);
         intent.putExtra("toID", toID);
+        intent.putExtra("emotionID", record.getEmotion_id());
         // 开始Activity
-        ((Activity)context).startActivityForResult(intent ,MainActivity.COMMENT_EDIT_REQUEST_CODE);
+        MainActivity.groundFragment.startActivityForResult(intent ,MainActivity.COMMENT_EDIT_REQUEST_CODE);
     }
 
     /**
@@ -211,20 +301,54 @@ public class RecordDetailPlan {
      */
     private View.OnClickListener commentClickListener = new View.OnClickListener(){
         public void onClick(View v) {
-            //@TODO 以下逻辑需要被替换成真正的评论逻辑
-            Toast.makeText(context, "评论", 3000).show();
-            startFloatEditor("","","","");
+            startFloatEditor("", 0);
         }
     };
 
     /**
-     * 当评论被点击的时候的回调函数
+     * 当评论列表被点击的时候的回调函数
      */
     private CommentDetailPlan.OnCommentClickListener onCommentClickListener = new CommentDetailPlan.OnCommentClickListener() {
         @Override
         public void onCommentClick(Comment comment) {
-            //@TODO 以下逻辑需要被替换成评论被点击时候的逻辑，其中可以从comment中获得被点击的评论内容
-            Toast.makeText(context, comment.getPoster(), 3000).show();
+            startFloatEditor(comment.getPoster_nickname(), comment.getPoster());
         }
     };
+
+    //向服务器发送一个新的评论
+    private boolean doPostComment(int emoID, Comment comment){
+        ResultData<Post> ret =
+                CommentHelper.postComment(emoID, comment.getRspto(), comment.getComment());
+        if (ret == null || !ret.isOk())
+            return false;
+        record.getComments().add(0, comment);
+        return true;
+    }
+    /**
+     * 往这个界面所管理的record中添加一个评论
+     */
+    public void addComment(final String content, String to, int toID){
+        final int _toID = toID;
+        final String _to = to;
+        new Thread() {
+            public void run() {
+                Message msg = Message.obtain();
+                Bundle bundle = new Bundle();
+                Comment comment = new Comment();
+                comment.setComment(content);
+                comment.setRspto(_toID);
+                comment.setRspto_nickname(_to);
+                comment.setPoster(record.getPoster());
+                comment.setPoster_nickname(record.getNickname());
+                bundle.putBoolean("isOk", doPostComment(record.getEmotion_id(), comment));
+                bundle.putInt("target", 1);
+                msg.setData(bundle);
+                handler.sendMessage(msg);//发送message信息
+            }
+        }.start();
+    }
+
+    public Record getRecord() {
+        return record;
+    }
 }

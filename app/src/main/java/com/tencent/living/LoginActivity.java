@@ -84,8 +84,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle data = msg.getData();
-            boolean isOk = data.getBoolean("isOk");
-            if (isOk) {
+            if (data.getBoolean("isOk")) {
                 saveUserToConfig();
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this, MainActivity.class);
@@ -132,10 +131,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             public void run() {
                 Message msg = Message.obtain();
                 Bundle bundle = new Bundle();
-                if (doLogin())
-                    bundle.putBoolean("isOk", true);
-                else
-                    bundle.putBoolean("isOk", false);
+                bundle.putBoolean("isOk", doLogin());
                 msg.setData(bundle);//bundle传值，耗时，效率低
                 handler.sendMessage(msg);//发送message信息
             }

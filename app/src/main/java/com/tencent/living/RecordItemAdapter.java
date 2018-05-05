@@ -28,6 +28,8 @@ public class RecordItemAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return data.get(position);
     }
+    public List<RecordDetailPlan> getData(){return data;}
+
     public long getItemId(int position) {
         return position;
     }

@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int GALLERY_REQUEST_CODE = 2;
     public static final int COMMENT_EDIT_REQUEST_CODE = 3;
 
+    public static RecordFragment recordFragment = new RecordFragment();
+    public static GroundFragment groundFragment = new GroundFragment();
+    public static MessageFragment messageFragment = new MessageFragment();
+    public static UserFragment userFragment = new UserFragment();
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -83,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
     private void initViewPager() {
         homeViewPager = (ViewPager)findViewById(R.id.homeViewPager);
         List<Fragment> fragList = new ArrayList<>();
-        fragList.add(new RecordFragment());
-        fragList.add(new GroundFragment());
-        fragList.add(new MessageFragment());
-        fragList.add(new UserFragment());
+        fragList.add(recordFragment);
+        fragList.add(groundFragment);
+        fragList.add(messageFragment);
+        fragList.add(userFragment);
         homeViewPager.setAdapter(new FragmentAdapter(
                 this.getSupportFragmentManager(), fragList));
     }

@@ -44,7 +44,7 @@
     <string name="pub_record_fail">心情发布失败，请检查您的网络</string>
     <string name="pub_record_empty">在随笔处写点感想吧</string>
     <string name="get_record_failed">无法获得心情记录，请检查您的网络</string>
-
+    <string name="postlike_failed">无法点赞，请检查您的网络</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

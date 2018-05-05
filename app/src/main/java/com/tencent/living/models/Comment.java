@@ -6,10 +6,10 @@ package com.tencent.living.models;
 
 public class Comment {
     private int comment_id;
-    private String comment;
+    private String comment = "";
     private int poster;
-    private String poster_nickname;
-    private String create_time;
+    private String poster_nickname = "";
+    private String create_time = "";
     private int rspto;
     private String rspto_nickname;
 

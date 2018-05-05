@@ -1,5 +1,6 @@
 package com.tencent.living;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+
+import com.tencent.living.models.Comment;
 
 public class GroundFragment extends Fragment {
     private ListView listView;
@@ -80,13 +83,19 @@ public class GroundFragment extends Fragment {
         }
     };
 
-    /**
-     * 用于处理Activity的会跳
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-
+        if (resultCode != Activity.RESULT_OK)
+            return ;
+        switch(requestCode){
+            //评论编辑框返回
+            case MainActivity.COMMENT_EDIT_REQUEST_CODE:
+                int emoID = data.getIntExtra("emotionID", 0);
+                String content = data.getStringExtra("content");
+                String to = data.getStringExtra("to");
+                int toID = data.getIntExtra("toID", 0);
+                refreshListManager.addComment(emoID, to, toID, content);
+                break;
+        }
     }
 }
