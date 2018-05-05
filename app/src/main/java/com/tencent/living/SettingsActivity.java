@@ -41,7 +41,8 @@ public class SettingsActivity extends Activity {
                 // 清空登陆数据
                 editor.putString("phone", "");
                 editor.putString("pwd", "");
-
+                // Commit the edits!
+                editor.commit();
                 //直接到主界面
                 Intent intent = new Intent();
                 intent.setClass(SettingsActivity.this,LoginActivity.class);

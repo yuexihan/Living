@@ -153,6 +153,10 @@
 
         <ImageButton
             android:id="@+id/dice_button"
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:scaleType="fitStart"
+            android:background="@android:color/transparent"
             android:layout_toEndOf="@+id/nickname"
             android:src="@drawable/dice"/>
     </android.support.percent.PercentRelativeLayout>
