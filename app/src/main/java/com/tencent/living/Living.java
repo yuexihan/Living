@@ -43,7 +43,9 @@ public class Living  extends Application{
             "甄姬",
             "女娲",
             "大乔",
-            "小乔"
+            "小乔",
+            "小猪",
+            "雷神"
     };
 
 
