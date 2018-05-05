@@ -91,7 +91,7 @@ public class RecordDetailPlan {
         if (visiable)
             backButton.setVisibility(View.VISIBLE);
         else
-            backButton.setVisibility(View.INVISIBLE);
+            backButton.setVisibility(View.GONE);
     }
 
     public void setClickAble(boolean isClickAble){
@@ -112,7 +112,7 @@ public class RecordDetailPlan {
         if (comments.size() >= commentsLineLimit){
             moreComment.setVisibility(View.VISIBLE);
         }else
-            moreComment.setVisibility(View.INVISIBLE);
+            moreComment.setVisibility(View.GONE);
     }
 
     private void resetCompsContent(){
