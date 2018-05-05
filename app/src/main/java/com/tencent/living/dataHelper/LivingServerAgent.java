@@ -41,11 +41,9 @@ public class LivingServerAgent {
     private String method = HTTP_METHOD_POST;
     private Map<String, String> httpParm = new HashMap<String, String>();
 
-
     public void setAction(String action){
         this.action = action;
     }
-
     //放入body发送的参数
     public void putData(String key, Object val){
         bodyParm.put(key, val);
@@ -54,11 +52,9 @@ public class LivingServerAgent {
     public void putParam(String key, String val){
         httpParm.put(key, val);
     }
-
     public void setHttpsMethod(String m){
         this.method = m;
     }
-
     private String getParamString(){
         if (httpParm.size() == 0)
             return "";
@@ -74,7 +70,6 @@ public class LivingServerAgent {
         }
         return ret;
     }
-
     public <T> ResultData<T> execAndGetResult(Type objectType){
         ResultData<T> resultData = new ResultData<>();
         try{
@@ -111,12 +106,11 @@ public class LivingServerAgent {
             return null;
         }
     }
-
     private  String getResponseBody(InputStream is) {
         StringBuilder sb = new StringBuilder();
         String line = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"));
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
             }
