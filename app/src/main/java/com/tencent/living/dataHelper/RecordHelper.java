@@ -8,7 +8,7 @@ import com.tencent.living.models.ResultData;
 import java.util.ArrayList;
 
 public class RecordHelper {
-    public ResultData<Post> postRecord(String content, int label_id, int strong, int visiable) {
+    public static ResultData<Post> postRecord(String content, int label_id, int strong, int visiable) {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_RECORD);
         lsa.putParam("token", Living.token);
@@ -19,7 +19,7 @@ public class RecordHelper {
         }.getType());
     }
 
-    public ResultData<ArrayList<Record>> getRecordsByUserId(int pageno) {
+    public static ResultData<ArrayList<Record>> getRecordsByUserId(int pageno) {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_SELF_RECORD);
         lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
@@ -29,7 +29,7 @@ public class RecordHelper {
         }.getType());
     }
 
-    public ResultData<ArrayList<Record>> getRecordsInGround(int label_id, int pageno) {
+    public static ResultData<ArrayList<Record>> getRecordsInGround(int label_id, int pageno) {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_ALL_RECORD);
         lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);

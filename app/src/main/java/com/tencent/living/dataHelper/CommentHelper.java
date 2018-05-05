@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 public class CommentHelper {
-    public ResultData<Post> postComment(int emotion_id, int rspto, String content){
+    public static ResultData<Post> postComment(int emotion_id, int rspto, String content){
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_COMMENT);
         lsa.putParam("token", Living.token);
@@ -36,7 +36,7 @@ public class CommentHelper {
         }.getType());
     }
 
-    public ResultData<ArrayList<Comment>> getCommentsByEmotionId(int emotion_id, int pageno){
+    public static ResultData<ArrayList<Comment>> getCommentsByEmotionId(int emotion_id, int pageno){
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_GET_COMMENT);
         lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
@@ -47,7 +47,7 @@ public class CommentHelper {
         }.getType());
     }
 
-    public ResultData<Post> postLike(int emotion_id){
+    public static ResultData<Post> postLike(int emotion_id){
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_LIKE);
         lsa.putParam("token", Living.token);
@@ -56,7 +56,7 @@ public class CommentHelper {
         }.getType());
     }
 
-    public ResultData<ArrayList<Message>> getMessagesByUserId(int pageno){
+    public static ResultData<ArrayList<Message>> getMessagesByUserId(int pageno){
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_GET_MESSAGE);
         lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
