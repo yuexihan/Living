@@ -5,60 +5,67 @@ package com.tencent.living.models;
  */
 
 public class Comment {
-    private int id;
-    private int emotionId;
-    private String content;
-    private int posterId;
-    private String createTime;
-    private int rsptoId;
+    private int comment_id;
+    private String comment;
+    private int poster;
+    private String poster_nickname;
+    private String create_time;
+    private int rspto;
+    private String rspto_nickname;
 
-    public int getId() {
-        return id;
+    public int getComment_id() {
+        return comment_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setComment_id(int comment_id) {
+        this.comment_id = comment_id;
     }
 
-    public int getEmotionId() {
-        return emotionId;
+    public String getComment() {
+        return comment;
     }
 
-    public void setEmotionId(int emotionId) {
-        this.emotionId = emotionId;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public String getContent() {
-        return content;
+    public int getPoster() {
+        return poster;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setPoster(int poster) {
+        this.poster = poster;
     }
 
-    public int getPosterId() {
-        return posterId;
+    public String getPoster_nickname() {
+        return poster_nickname;
     }
 
-    public void setPosterId(int posterId) {
-        this.posterId = posterId;
+    public void setPoster_nickname(String poster_nickname) {
+        this.poster_nickname = poster_nickname;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 
-    public int getRsptoId() {
-        return rsptoId;
+    public int getRspto() {
+        return rspto;
     }
 
-    public void setRsptoId(int rsptoId) {
-        this.rsptoId = rsptoId;
+    public void setRspto(int rspto) {
+        this.rspto = rspto;
     }
 
+    public String getRspto_nickname() {
+        return rspto_nickname;
+    }
 
+    public void setRspto_nickname(String rspto_nickname) {
+        this.rspto_nickname = rspto_nickname;
+    }
 }

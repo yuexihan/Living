@@ -13,17 +13,22 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager homeViewPager;
-    private BottomNavigationView navigation;
+    private BottomNavigationViewEx navigation;
     private TextView title;
     //用于Activity跳转
     public static final int CAMERA_REQUEST_CODE = 1;
@@ -68,9 +73,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavigation(){
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation);
+        navigation = (BottomNavigationViewEx) findViewById(R.id.navigation);
+        navigation.enableAnimation(false);
+        navigation.enableShiftingMode(false);
+        navigation.enableItemShiftingMode(false);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        addBadgeAt(2, 2);
     }
     private void initViewPager() {
         homeViewPager = (ViewPager)findViewById(R.id.homeViewPager);
@@ -98,5 +106,20 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+    private Badge addBadgeAt(int position, int number) {
+        // add badge
+        return new QBadgeView(this)
+                .setBadgeNumber(number)
+                .setGravityOffset(12, 2, true)
+                .bindTarget(navigation.getBottomNavigationItemView(position))
+                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                    @Override
+                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+                        if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState)
+                            Toast.makeText(MainActivity.this, "Badge 被消除了", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

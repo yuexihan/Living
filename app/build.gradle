@@ -35,7 +35,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.microsoft.projectoxford:face:1.4.3'
     implementation 'com.google.code.gson:gson:2.8.3'
-
+    implementation 'q.rorbin:badgeview:1.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -45,5 +45,4 @@ dependencies {
     //此行为百分比布局依赖库
     compile 'com.android.support:percent:27.1.1'
     testCompile 'junit:junit:4.12'
-
 }
