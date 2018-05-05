@@ -12,9 +12,10 @@ public class RecordHelper {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_RECORD);
         lsa.putParam("token", Living.token);
-        lsa.putData("content",content);
-        lsa.putData("lable_id", label_id+"");
-        lsa.putData("visiable", visiable + "");
+        lsa.putData("content",content + "");
+        lsa.putData("lable_id", label_id);
+        lsa.putData("visiable", visiable );
+        lsa.putData("strong", strong );
         return lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
         }.getType());
     }

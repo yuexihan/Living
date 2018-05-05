@@ -29,9 +29,9 @@ public class CommentHelper {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_COMMENT);
         lsa.putParam("token", Living.token);
-        lsa.putData("emotion_id",emotion_id + "");
+        lsa.putData("emotion_id",emotion_id );
         lsa.putData("comment", content);
-        lsa.putData("rspto", rspto + "");
+        lsa.putData("rspto", rspto);
         return lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
         }.getType());
     }
@@ -51,7 +51,7 @@ public class CommentHelper {
         LivingServerAgent lsa = new LivingServerAgent();
         lsa.setAction(LivingServerAgent.ACTION_POST_LIKE);
         lsa.putParam("token", Living.token);
-        lsa.putData("emotion_id",emotion_id + "");
+        lsa.putData("emotion_id",emotion_id);
         return lsa.execAndGetResult(new TypeToken<ResultData<Post>>() {
         }.getType());
     }
