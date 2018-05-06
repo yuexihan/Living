@@ -36,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Raylhuang"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
 
@@ -44,7 +43,6 @@
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2018-4-11 11:30"
                 android:textSize="10sp" />
 
         </LinearLayout>
@@ -86,9 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="0"
-        android:text="真的好气啊！hahahahahahahahahahhahahfdafdafdafda"
-        android:textSize="15sp"
-        android:textColor="#585858"/>
+        android:textColor="#585858"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,8 +109,7 @@
             android:layout_width="24dp"
             android:layout_height="15dp"
             android:layout_weight="0"
-            android:text="11"
-            android:textColor="#8c8c8c"/>
+            android:textColor="#8c8c8c" />
 
         <ImageButton
             android:id="@+id/commentButton"
@@ -130,8 +126,7 @@
             android:layout_width="24dp"
             android:layout_height="15dp"
             android:layout_weight="0"
-            android:text="999"
-            android:textColor="#8c8c8c"/>
+            android:textColor="#8c8c8c" />
 
     </LinearLayout>
 

@@ -5,16 +5,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.params.StreamConfigurationMap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,7 +21,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -71,9 +64,7 @@ public class RecordFragment extends Fragment {
     private EditText contentText;
     private ProgressBar pb;
     private ScrollView sv;
-
-    private CameraManager cameraManager;
-    private int currentCameraId = CameraCharacteristics.LENS_FACING_FRONT;
+    private RadioButton rut_button;
 
     //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
@@ -152,6 +143,13 @@ public class RecordFragment extends Fragment {
         return 0;
     }
 
+    private void resetContent(){
+        rut_button.setChecked(true);
+        contentText.setText("");
+        degreeBar.setProgress(50);
+        degreeText.setText(getString(R.string.emotion_value) + degreeBar.getProgress());
+        camera_button.setImageResource(R.drawable.camera);
+    }
     /**
      * 数据线程处理完数据之后，会发送消息给handler来做界面处理
      */
@@ -162,10 +160,10 @@ public class RecordFragment extends Fragment {
             Bundle data = msg.getData();
             boolean isOk = data.getBoolean("isOk");
             if (isOk) {
-                //跳转到我的
-                Toast.makeText(RecordFragment.this.getActivity(), "发布成功", Toast.LENGTH_LONG).show();
+                resetContent();
+                Toast.makeText(RecordFragment.this.getActivity(), "发布成功", 2000).show();
             } else
-                Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_fail, Toast.LENGTH_LONG).show();
+                Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_fail, 2000).show();
 
             pb.setVisibility(View.GONE);
             selfPubButton.setVisibility(View.VISIBLE);
@@ -245,6 +243,10 @@ public class RecordFragment extends Fragment {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (!newImageFile.exists())
                 newImageFile.createNewFile();
+            // 默认前置
+            intent.putExtra("camerasensortype", 2);
+            //intent.putExtra("autofocus", true);
+
             if (android.os.Build.VERSION.SDK_INT < 24) {
                 // 从文件中创建uri
                 uri = Uri.fromFile(newImageFile);
@@ -255,14 +257,6 @@ public class RecordFragment extends Fragment {
                 contentValues.put(MediaStore.Images.Media.DATA, newImageFile.getAbsolutePath());
                 uri = getActivity().getApplication().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            }
-            int cameraId = findFrontFacingCamera();
-            if (cameraId < 0) {
-                Toast.makeText(RecordFragment.this.getActivity(), "没有前置摄像头，打开后置摄像头", Toast.LENGTH_LONG).show();
-            } else {
-                // 调用前置摄像头
-                intent.putExtra("camerasensortype", 2);
-                intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
             }
 
             startActivityForResult(intent, MainActivity.CAMERA_REQUEST_CODE);
@@ -290,14 +284,13 @@ public class RecordFragment extends Fragment {
         contentText = view.findViewById(R.id.pub_input);
         pb = view.findViewById(R.id.pubProgress);
         sv = view.findViewById(R.id.scrollView);
-
+        rut_button = view.findViewById(R.id.rbut_happy);
         camera_button.setOnClickListener(camera_but_lis);
         emotionProgressDialog = new ProgressDialog(this.getActivity());
         degreeBar.setOnSeekBarChangeListener(seekBarListener);
         degreeText.setText(getString(R.string.emotion_value) + degreeBar.getProgress());
         selfPubButton.setOnClickListener(selfPubListener);
         pubPubButton.setOnClickListener(pubPubListener);
-
         return view;
     }
 
@@ -380,19 +373,5 @@ public class RecordFragment extends Fragment {
             emotionType = 0;
         }
         return new int[]{emotionType, (int) (emotionValue * 100)};
-    }
-    private int findFrontFacingCamera() {
-        int cameraId = -1;
-        // Search for the front facing camera
-        int numberOfCameras = Camera.getNumberOfCameras();
-        for (int i = 0; i < numberOfCameras; i++) {
-            Camera.CameraInfo info = new Camera.CameraInfo();
-            Camera.getCameraInfo(i, info);
-            if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-                cameraId = i;
-                break;
-            }
-        }
-        return cameraId;
     }
 }

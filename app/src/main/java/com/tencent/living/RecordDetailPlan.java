@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +23,6 @@ import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
-import com.tencent.living.tools.FloatEditorActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,17 +186,19 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         likeCount.setOnClickListener(upClickListener);
         commentButton.setOnClickListener(commentClickListener);
         pullComments(0);//相服务器请求第一页评论
-        moreComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("emotion_id", record.getEmotion_id());
-                intent.setClass(RecordDetailPlan.this.context, RecordDetailActivity.class);
-                MainActivity.groundFragment.startActivity(intent);
-            }
-        });
+        moreComment.setOnClickListener(gotoDetailAction);
+        content.setOnClickListener(gotoDetailAction);
         // resetCommentsToList();
     }
+    private View.OnClickListener gotoDetailAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.putExtra("emotion_id", record.getEmotion_id());
+            intent.setClass(RecordDetailPlan.this.context, RecordDetailActivity.class);
+            MainActivity.groundFragment.startActivity(intent);
+        }
+    };
 
     public RecordDetailPlan(Context context, Record record, int commentsLineLimit){
         this.commentsLineLimit = commentsLineLimit;

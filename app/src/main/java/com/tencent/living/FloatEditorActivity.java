@@ -1,11 +1,13 @@
-package com.tencent.living.tools;
+package com.tencent.living;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -47,6 +49,9 @@ public class FloatEditorActivity extends Activity {
                 intent.putExtra("content", input.getText().toString());
                 intent.putExtra("emotionID",emotionID);
                 setResult(Activity.RESULT_OK, intent);
+                InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 finish();
             }
         });

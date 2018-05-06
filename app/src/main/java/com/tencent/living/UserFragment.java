@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.tencent.living.tools.FontManager;
 
 public class UserFragment extends Fragment {
     private ListView listView;
+    private View userView;
     private SwipeRefreshLayout layout;
     private TextView settings_button;
     private ImageView profile;
@@ -29,7 +31,9 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.user_frag_layout, container, false);
+        userView = inflater.inflate(R.layout.user_profile_layout, null);//用户状态
         listView = view.findViewById(R.id.listViewForUser);
+        listView.addHeaderView(userView);
         layout = view.findViewById(R.id.refreshLayout);
         profile = view.findViewById(R.id.profile);
         name = view.findViewById(R.id.name);

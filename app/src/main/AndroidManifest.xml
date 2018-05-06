@@ -46,7 +46,7 @@
                   android:name=".RegisterActivity" />
         <activity
             android:name=".RecordDetailActivity" />
-        <activity android:name=".tools.FloatEditorActivity"
+        <activity android:name=".FloatEditorActivity"
             android:windowSoftInputMode="stateAlwaysVisible"
             android:theme="@style/NoTitleDialogTheme"/>
 
