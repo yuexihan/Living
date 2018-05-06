@@ -2,19 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarAlwaysDrawHorizontalTrack="false"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:scrollbarAlwaysDrawVerticalTrack="false">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:weightSum="0">
+        android:padding="10dp">
 
         <ProgressBar
             android:id="@+id/pubProgress"
@@ -74,17 +72,18 @@
         <RadioGroup
             android:id="@+id/emoGroup"
             android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:gravity="center"
+            android:layout_gravity="center_horizontal|top"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rbut_happy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
                 android:button="@null"
                 android:checked="true"
                 android:drawableTop="@drawable/radio_happy_bg"
@@ -97,10 +96,9 @@
 
             <RadioButton
                 android:id="@+id/rbut_anger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_anger_bg"
                 android:scaleX="0.7"
@@ -112,10 +110,9 @@
 
             <RadioButton
                 android:id="@+id/rbut_sad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_sad_bg"
                 android:scaleX="0.7"
@@ -127,9 +124,9 @@
 
             <RadioButton
                 android:id="@+id/rbut_calm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
                 android:button="@null"
                 android:drawableTop="@drawable/radio_calm_bg"
                 android:scaleX="0.7"
