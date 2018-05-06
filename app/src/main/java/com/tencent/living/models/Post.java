@@ -6,6 +6,15 @@ package com.tencent.living.models;
 
 public class Post {
     private String token;
+    private int num_msg;
+
+    public int getNum_msg() {
+        return num_msg;
+    }
+
+    public void setNum_msg(int num_msg) {
+        this.num_msg = num_msg;
+    }
 
     public String getToken() {
         return token;
