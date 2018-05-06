@@ -93,9 +93,6 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         if (newComments == null)
             return ;
         List<Comment> comments = record.getComments();
-        if (comments.size() > 0) {
-            commentsList.setVisibility(View.VISIBLE);
-        }
         for (int i = 0 ; i < newComments.size() && comments.size() + i < commentsLineLimit; i++) {
             CommentDetailPlan cdp = adapter.addItem(newComments.get(i));
             cdp.setOnCommentClick(onCommentClickListener);
@@ -109,6 +106,9 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         }else
             moreComment.setVisibility(View.INVISIBLE);
 
+        if (comments.size() > 0) {
+            commentsList.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
