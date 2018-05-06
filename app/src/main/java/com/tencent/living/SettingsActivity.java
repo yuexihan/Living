@@ -74,8 +74,7 @@ public class SettingsActivity extends Activity {
                 SharedPreferences settings = getSharedPreferences(Living.config, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 // 清空登陆数据
-                editor.putString("phone", "");
-                editor.putString("pwd", "");
+                editor.clear();
                 // Commit the edits!
                 editor.commit();
 //                Intent intent = new Intent();

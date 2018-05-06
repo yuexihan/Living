@@ -16,6 +16,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +64,7 @@ public class RecordFragment extends Fragment {
     private ImageButton pubPubButton;
     private EditText contentText;
     private ProgressBar pb;
+    private ScrollView sv;
 
     //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
@@ -154,7 +158,7 @@ public class RecordFragment extends Fragment {
             } else
                 Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_fail, 2000).show();
 
-            pb.setVisibility(View.INVISIBLE);
+            pb.setVisibility(View.GONE);
             selfPubButton.setVisibility(View.VISIBLE);
             pubPubButton.setVisibility(View.VISIBLE);
         }
@@ -273,6 +277,7 @@ public class RecordFragment extends Fragment {
         pubPubButton = view.findViewById(R.id.pub_pub);
         contentText = view.findViewById(R.id.pub_input);
         pb = view.findViewById(R.id.pubProgress);
+        sv = view.findViewById(R.id.scrollView);
 
         camera_button.setOnClickListener(camera_but_lis);
         emotionProgressDialog = new ProgressDialog(this.getActivity());
