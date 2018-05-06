@@ -283,14 +283,13 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
     };
 
     private void startFloatEditor(String to,int toID){
-        Intent intent = new Intent();
+        Intent intent = new Intent(context, FloatEditorActivity.class);
         // 设置要跳转的页面
-        intent.setClass(MainActivity.groundFragment.getContext() , FloatEditorActivity.class);
         intent.putExtra("to", to);
         intent.putExtra("toID", toID);
         intent.putExtra("emotionID", record.getEmotion_id());
         // 开始Activity
-        MainActivity.groundFragment.startActivityForResult(intent ,MainActivity.COMMENT_EDIT_REQUEST_CODE);
+        ((Activity)context).startActivityForResult(intent ,MainActivity.COMMENT_EDIT_REQUEST_CODE);
     }
 
     /**

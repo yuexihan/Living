@@ -1,6 +1,7 @@
 package com.tencent.living;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,5 +58,19 @@ public class RecordDetailActivity extends Activity {
                 handler.sendMessage(msg);//发送message信息
             }
         }.start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return ;
+        if(requestCode == MainActivity.COMMENT_EDIT_REQUEST_CODE){
+            int emoID = data.getIntExtra("emotionID", 0);
+            String content = data.getStringExtra("content");
+            String to = data.getStringExtra("to");
+            int toID = data.getIntExtra("toID", 0);
+            recordDetailPlan.addComment(content, to, toID);
+        }
     }
 }

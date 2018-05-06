@@ -250,6 +250,7 @@ public class RecordFragment extends Fragment {
                 uri = getActivity().getApplication().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
             }
+
             startActivityForResult(intent, MainActivity.CAMERA_REQUEST_CODE);
         } catch (Exception e) {
             e.printStackTrace();

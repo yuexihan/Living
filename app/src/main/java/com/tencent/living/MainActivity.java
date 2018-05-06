@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int GALLERY_REQUEST_CODE = 2;
     public static final int COMMENT_EDIT_REQUEST_CODE = 3;
-    public static final int COMMENT_LOGOUT_REQUEST_CODE = 4;
+    public static final int LOGOUT_REQUEST_CODE = 4;
 
     public static RecordFragment recordFragment = new RecordFragment();
     public static GroundFragment groundFragment = new GroundFragment();
@@ -133,11 +133,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK)
             return ;
-        if(requestCode == MainActivity.COMMENT_LOGOUT_REQUEST_CODE){
-            Intent intent = new Intent();
-            intent.setClass(this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        groundFragment.onActivityResult(requestCode, resultCode, data);
+        recordFragment.onActivityResult(requestCode, resultCode, data);
+        userFragment.onActivityResult(requestCode, resultCode, data);
+        messageFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

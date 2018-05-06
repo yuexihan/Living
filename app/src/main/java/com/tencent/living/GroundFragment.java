@@ -92,7 +92,8 @@ public class GroundFragment extends Fragment {
                 String content = data.getStringExtra("content");
                 String to = data.getStringExtra("to");
                 int toID = data.getIntExtra("toID", 0);
-                refreshListManager.addComment(emoID, to, toID, content);
+                if (refreshListManager != null)
+                    refreshListManager.addComment(emoID, to, toID, content);
                 break;
         }
     }
