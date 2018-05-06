@@ -129,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("Did you in there?");
-        System.out.println(requestCode);
         if(requestCode==1&&resultCode==0){
             Intent intent = new Intent();
             intent.setClass(this,LoginActivity.class);
