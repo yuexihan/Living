@@ -58,6 +58,7 @@
             android:enabled="true"
             android:focusable="true"
             android:padding="5dp"
+            android:hint="@string/pls_input_phonenum"
             android:textSize="@dimen/input_text_size" />
     </android.support.percent.PercentRelativeLayout>
 
@@ -88,6 +89,7 @@
             android:enabled="true"
             android:inputType="textPassword"
             android:padding="5dp"
+            android:hint="@string/pls_input_pwd"
             android:textSize="@dimen/input_text_size" />
     </android.support.percent.PercentRelativeLayout>
 
