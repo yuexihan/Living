@@ -48,10 +48,12 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
         listView.setAdapter(adapter);
         layout.setOnRefreshListener(this);
         isLoading = false;
-        startPullData(0);
+
         return view;
     }
-
+    public void refreashData(){
+        startPullData(0);
+    }
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
