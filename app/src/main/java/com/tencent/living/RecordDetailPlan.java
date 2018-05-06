@@ -106,6 +106,9 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         }else
             moreComment.setVisibility(View.INVISIBLE);
 
+        if (comments.size() > 0) {
+            commentsList.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

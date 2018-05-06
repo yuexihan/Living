@@ -142,6 +142,7 @@
         android:layout_margin="3dp"
         android:divider="#00000000"
         android:fadingEdge="none"
+        android:visibility="gone"
         android:focusable="false" />
 
     <TextView
@@ -151,6 +152,7 @@
         android:layout_gravity="left"
         android:layout_weight="0"
         android:paddingBottom="5dp"
+        android:visibility="gone"
         android:text="@string/ground_more_comment_but" />
 
 </LinearLayout>
