@@ -6,82 +6,50 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/setting_little_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_weight="0.1">
+
+        <TextView
+            android:id="@+id/icon_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:text="@string/fa_info_circle"
+            android:textSize="@dimen/index_icon_size" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/head_profile_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_weight="2"
-        android:gravity="top"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
+        android:layout_weight="20"
+        android:gravity="top|center_horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:src="@mipmap/ic_launcher_round"
             app:civ_border_color="@color/colorAccent"
             app:civ_border_width="3dp" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/settingsbtn"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:layout_marginBottom="2dp"-->
-            <!--android:layout_marginEnd="2dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/setting_button" />-->
-
-        <TextView
-            android:id="@+id/icon_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fa_info_circle"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"
-            android:textSize="@dimen/index_icon_size"
-            android:layout_weight="1" />
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/nickname_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="10"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="昵称: Gerald"
             android:textSize="18sp" />
@@ -90,7 +58,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/myground"
             android:textSize="24sp" />
@@ -100,14 +68,14 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingTop="30dp"
-        android:layout_weight="4">
+        android:layout_marginTop="10dp"
+        android:layout_weight="40">
 
         <ListView
             android:id="@+id/listViewForUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="10"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

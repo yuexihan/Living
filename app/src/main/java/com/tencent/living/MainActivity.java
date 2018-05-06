@@ -17,8 +17,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.microsoft.projectoxford.face.FaceServiceClient;
-
 import java.util.ArrayList;
 import java.util.List;
 

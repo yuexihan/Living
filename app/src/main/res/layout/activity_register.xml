@@ -86,7 +86,7 @@
             android:focusable="true"
             android:ems="8"
             android:enabled="true"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:padding="5dp"
             android:textSize="@dimen/input_text_size" />
     </android.support.percent.PercentRelativeLayout>
@@ -117,7 +117,7 @@
             android:focusable="true"
             android:ems="8"
             android:enabled="true"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:padding="5dp"
             android:textSize="@dimen/input_text_size" />
     </android.support.percent.PercentRelativeLayout>

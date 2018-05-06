@@ -1,10 +1,8 @@
 package com.tencent.living;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -38,6 +36,7 @@ public class UserFragment extends Fragment {
 
         refreshListManager = new RecordsRefreshListManager(layout, listView, 3);
         refreshListManager.setUser(Living.user.getNickname());
+        refreshListManager.onRefresh();
 
         settings_button = view.findViewById(R.id.icon_setting);
         if (getActivity() != null){
