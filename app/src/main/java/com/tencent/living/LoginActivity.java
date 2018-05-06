@@ -55,7 +55,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 startActivityForResult(intent, 0);
             }
         });
-        //loadUserFromConfig();
+        loadUserFromConfig();
         if (et_phone.getText().toString().length() >= 1)
             onClick(null);
     }
@@ -88,7 +88,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             super.handleMessage(msg);
             Bundle data = msg.getData();
             if (data.getBoolean("isOk")) {
-                //saveUserToConfig();
+                saveUserToConfig();
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
