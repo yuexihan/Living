@@ -104,7 +104,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         if (comments.size() >= commentsLineLimit){
             moreComment.setVisibility(View.VISIBLE);
         }else
-            moreComment.setVisibility(View.INVISIBLE);
+            moreComment.setVisibility(View.GONE);
 
         if (comments.size() > 0) {
             commentsList.setVisibility(View.VISIBLE);
