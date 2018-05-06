@@ -25,6 +25,7 @@ public class CommentItemAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+    public void removeItem(int position) {data.remove(position);}
     public CommentDetailPlan addItem(Comment comment){
         CommentDetailPlan cdp = new CommentDetailPlan(context, comment);
         data.add(cdp);

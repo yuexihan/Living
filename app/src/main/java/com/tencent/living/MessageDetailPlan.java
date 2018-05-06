@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Message;
 
 public class MessageDetailPlan {

@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,11 +38,11 @@ import com.microsoft.projectoxford.face.contract.Face;
 import com.tencent.living.dataHelper.RecordHelper;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
+import com.tencent.living.dataHelper.ImageHelper;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-
 
 public class RecordFragment extends Fragment {
     public static final int PUB_TO_SELF = 1;
@@ -176,12 +175,12 @@ public class RecordFragment extends Fragment {
 
     private void tryToPubRecord(int visiable) {
         if (contentText.getText().toString().length() == 0 && visiable == PUB_TO_PUB) {
-            Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_empty, 2000).show();
+            Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_empty, Toast.LENGTH_LONG).show();
             return;
         }
         pb.setVisibility(View.VISIBLE);
-        selfPubButton.setVisibility(View.INVISIBLE);
-        pubPubButton.setVisibility(View.INVISIBLE);
+        selfPubButton.setVisibility(View.GONE);
+        pubPubButton.setVisibility(View.GONE);
         final int isPrivate = visiable;
         new Thread() {
             public void run() {
@@ -214,9 +213,7 @@ public class RecordFragment extends Fragment {
     };
 
     private void startCamera() {
-
         File dir = new File(Environment.getExternalStorageDirectory(), "pictures");
-
         if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -240,7 +237,7 @@ public class RecordFragment extends Fragment {
                 newImageFile.createNewFile();
             // 默认前置
             intent.putExtra("camerasensortype", 2);
-            intent.putExtra("autofocus", true);
+            //intent.putExtra("autofocus", true);
 
             if (android.os.Build.VERSION.SDK_INT < 24) {
                 // 从文件中创建uri

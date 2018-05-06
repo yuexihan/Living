@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.tencent.living.models.Living;
 import com.tencent.living.tools.FontManager;
 
 public class UserFragment extends Fragment {
@@ -52,7 +53,7 @@ public class UserFragment extends Fragment {
                 // 设置要跳转的页面
                 intent.setClass(getActivity(), SettingsActivity.class);
                 // 开始Activity
-                getActivity().startActivityForResult(intent,1);
+                getActivity().startActivityForResult(intent,MainActivity.COMMENT_LOGOUT_REQUEST_CODE);
 //                startActivity(intent);
             }
         });

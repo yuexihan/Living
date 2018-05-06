@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 
-import com.tencent.living.models.Comment;
-
 public class GroundFragment extends Fragment {
     private ListView listView;
     private RecordsRefreshListManager refreshListManager;

@@ -1,18 +1,14 @@
 package com.tencent.living;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
 import com.tencent.living.models.Message;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.tencent.living.Living.profileID;
 
 public class MessageListViewAdapter extends BaseAdapter {
     private List<MessageDetailPlan> list = new ArrayList<>();

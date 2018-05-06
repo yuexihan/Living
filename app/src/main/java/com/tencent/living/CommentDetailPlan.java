@@ -31,9 +31,12 @@ public class CommentDetailPlan {
         //commentTime = view.findViewById(R.id.commentTime);
         respondText = view.findViewById(R.id.respondText) ;
         //初始化评论内容
-        commentFrom.setText(comment.getPoster_nickname());
-        commentTo.setText(comment.getRspto_nickname());
-        commentContent.setText(comment.getComment());
+        if (comment.getPoster_nickname() != null)
+            commentFrom.setText(comment.getPoster_nickname());
+        if (comment.getRspto_nickname() != null)
+            commentTo.setText(comment.getRspto_nickname());
+        if (comment.getComment() != null)
+            commentContent.setText(comment.getComment());
         //commentTime.setText(comment.getCreate_time());
         if (comment.getRspto() == 0) {
             respondText.setText("");

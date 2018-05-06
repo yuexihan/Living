@@ -138,9 +138,8 @@
     <com.tencent.living.MyListView
         android:id="@+id/commentsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="3dp"
-        android:layout_weight="1"
         android:divider="#00000000"
         android:fadingEdge="none"
         android:visibility="gone"

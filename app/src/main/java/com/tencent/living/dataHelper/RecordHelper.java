@@ -1,7 +1,7 @@
 package com.tencent.living.dataHelper;
 
 import com.google.gson.reflect.TypeToken;
-import com.tencent.living.Living;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
@@ -38,6 +38,17 @@ public class RecordHelper {
         lsa.putParam("pageno",pageno + "");
         if (label_id != -1)
             lsa.putParam("label_id",label_id + "");
+        return lsa.execAndGetResult(new TypeToken<ResultData<ArrayList<Record>>>() {
+        }.getType());
+    }
+
+
+    public static ResultData<ArrayList<Record>> getOneRecord(int emotion_id){
+        LivingServerAgent lsa = new LivingServerAgent();
+        lsa.setAction(LivingServerAgent.ACTION_EMOTION_ONE);
+        lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
+        lsa.putParam("token", Living.token);
+        lsa.putParam("emotion_id",emotion_id+"");
         return lsa.execAndGetResult(new TypeToken<ResultData<ArrayList<Record>>>() {
         }.getType());
     }

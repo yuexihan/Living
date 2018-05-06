@@ -1,6 +1,6 @@
 package com.tencent.living.dataHelper;
 import com.google.gson.reflect.TypeToken;
-import com.tencent.living.Living;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
 import com.tencent.living.models.User;
