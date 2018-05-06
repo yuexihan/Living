@@ -1,12 +1,11 @@
 package com.tencent.living;
 
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
-import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
+import com.tencent.living.models.Living;
 
 import java.io.InputStream;
 

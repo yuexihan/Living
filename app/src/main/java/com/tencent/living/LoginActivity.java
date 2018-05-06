@@ -15,12 +15,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.tencent.living.dataHelper.UserHelper;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
 import com.tencent.living.models.User;
 import com.tencent.living.tools.FontManager;
-
-import java.util.regex.Pattern;
 
 
 public class LoginActivity extends Activity implements View.OnClickListener {

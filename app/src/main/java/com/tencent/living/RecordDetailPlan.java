@@ -1,5 +1,4 @@
 package com.tencent.living;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +16,11 @@ import android.widget.Toast;
 
 import com.tencent.living.dataHelper.CommentHelper;
 import com.tencent.living.models.Comment;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
+import com.tencent.living.tools.FloatEditorActivity;
 
 import java.util.ArrayList;
 import java.util.List;
