@@ -5,14 +5,23 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 public class MyListView  extends ListView{
+
+    private  boolean autoMeasure;
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
-                MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
+        if (autoMeasure) {
+            int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+                    MeasureSpec.AT_MOST);
+            super.onMeasure(widthMeasureSpec, expandSpec);
+        }else
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+    public void setAutoMeasure(boolean autoMeasure){
+        this.autoMeasure = autoMeasure;
     }
     public MyListView(Context context) {
         super(context);
+        autoMeasure = false;
     }
 
     public  MyListView(Context context, AttributeSet attrs) {

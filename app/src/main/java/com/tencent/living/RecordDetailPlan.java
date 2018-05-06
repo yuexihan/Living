@@ -47,7 +47,7 @@ public class RecordDetailPlan {
     private Context context;
     private Record record;
     private LinearLayout linearLayout;
-    private ListView commentsList;
+    private MyListView commentsList;
     private CommentItemAdapter adapter;
     private int commentsLineLimit;
 
@@ -66,25 +66,7 @@ public class RecordDetailPlan {
         commentCount = view.findViewById(R.id.commentCount);
         linearLayout = view.findViewById(R.id.linearLayout);
         commentsList = view.findViewById(R.id.commentsList);
-
         moreComment =  view.findViewById(R.id.moreComments);
-    }
-
-    private void setListViewHeightBasedOnChildren() {
-        if (adapter == null) {
-            return;
-        }
-        int totalHeight = 0;
-        for (int i = 0; i < adapter.getCount(); i++) {
-            View listItem = adapter.getView(i, null, commentsList);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = commentsList.getLayoutParams();
-        params.height = totalHeight
-                + (commentsList.getDividerHeight() * (adapter.getCount() - 1));
-        commentsList.setLayoutParams(params);
     }
 
 
@@ -100,7 +82,7 @@ public class RecordDetailPlan {
             adapter.notifyDataSetChanged();
         }
         if (commentsLineLimit != COMMENT_LINES_NO_LIMIT)
-            setListViewHeightBasedOnChildren();
+            commentsList.setAutoMeasure(true);
 
         if (comments.size() >= commentsLineLimit){
             moreComment.setVisibility(View.VISIBLE);
@@ -162,7 +144,7 @@ public class RecordDetailPlan {
     /**
      * 将record的内容填充到界面上去
      */
-    private void resetCompsContent(){
+    public void resetCompsContent(){
         if (record == null)
             return ;
         //profile.set  ...................
