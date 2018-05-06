@@ -51,7 +51,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-
 public class RecordFragment extends Fragment {
     public static final int PUB_TO_SELF = 1;
     public static final int PUB_TO_PUB = 2;
@@ -190,8 +189,8 @@ public class RecordFragment extends Fragment {
             return;
         }
         pb.setVisibility(View.VISIBLE);
-        selfPubButton.setVisibility(View.INVISIBLE);
-        pubPubButton.setVisibility(View.INVISIBLE);
+        selfPubButton.setVisibility(View.GONE);
+        pubPubButton.setVisibility(View.GONE);
         final int isPrivate = visiable;
         new Thread() {
             public void run() {
@@ -224,9 +223,7 @@ public class RecordFragment extends Fragment {
     };
 
     private void startCamera() {
-
         File dir = new File(Environment.getExternalStorageDirectory(), "pictures");
-
         if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -248,7 +245,6 @@ public class RecordFragment extends Fragment {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (!newImageFile.exists())
                 newImageFile.createNewFile();
-
             if (android.os.Build.VERSION.SDK_INT < 24) {
                 // 从文件中创建uri
                 uri = Uri.fromFile(newImageFile);

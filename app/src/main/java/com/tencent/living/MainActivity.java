@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int GALLERY_REQUEST_CODE = 2;
     public static final int COMMENT_EDIT_REQUEST_CODE = 3;
+    public static final int LOGOUT_REQUEST_CODE = 4;
 
     public static RecordFragment recordFragment = new RecordFragment();
     public static GroundFragment groundFragment = new GroundFragment();
@@ -48,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_ground:
                     homeViewPager.setCurrentItem(1);
+                    groundFragment.refreashData();
                     break;
                 case R.id.navigation_message:
                     homeViewPager.setCurrentItem(2);
+                    messageFragment.refreashData();
                     break;
                 case R.id.navigation_user:
                     homeViewPager.setCurrentItem(3);
+                    userFragment.refreashData();
                     break;
             }
-
             return true;
         }
     };
@@ -130,11 +133,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&resultCode==0){
-            Intent intent = new Intent();
-            intent.setClass(this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        if (resultCode != RESULT_OK)
+            return ;
+        groundFragment.onActivityResult(requestCode, resultCode, data);
+        recordFragment.onActivityResult(requestCode, resultCode, data);
+        userFragment.onActivityResult(requestCode, resultCode, data);
+        messageFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

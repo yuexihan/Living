@@ -28,9 +28,12 @@ public class GroundFragment extends Fragment {
         radioGroup = view.findViewById(R.id.emoGroup);
         radioGroup.setOnCheckedChangeListener(checkedChangeListener);
         refreshListManager = new RecordsRefreshListManager(swipeRefreshLayout, listView, MAX_COMMENTS_LINE);
+        return view;
+    }
+
+    public void refreashData(){
         setRefreshTarget();
         refreshListManager.onRefresh();
-        return view;
     }
     private void setRefreshTarget(){
         refreshListManager.setUser(null);
@@ -92,7 +95,8 @@ public class GroundFragment extends Fragment {
                 String content = data.getStringExtra("content");
                 String to = data.getStringExtra("to");
                 int toID = data.getIntExtra("toID", 0);
-                refreshListManager.addComment(emoID, to, toID, content);
+                if (refreshListManager != null)
+                    refreshListManager.addComment(emoID, to, toID, content);
                 break;
         }
     }

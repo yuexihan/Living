@@ -39,7 +39,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     private int totalItem;
     private int lastItem;
     private boolean isLoading = false;
-    private LayoutInflater inflater;
 
     public static final int COMMENT_LINES_NO_LIMIT = RecordDetailPlan.COMMENT_LINES_NO_LIMIT;
 
@@ -102,12 +101,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
                     adapter.clear();
                 //清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
-                for (int i = 0; i < giveUp; i++)
-                    if (adapter.getCount() != 0)
-                        adapter.removeItem(adapter.getCount() - 1);
-                //加入新记录
                 if (newRecords != null) {
-                    for (int i = 0; i < newRecords.size(); i++)
+                    for (int i = giveUp; i < newRecords.size(); i++)
                         adapter.addItem(newRecords.get(i));
                 }
                 curPage = adapter.getCount() / LivingServerAgent.DATA_DATA_PER_PAGE;
@@ -131,15 +126,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             res = RecordHelper.getRecordsByUserId(curPage);
         if (res == null || !res.isOk())
             return false;
-        if (user != null && res.getData() != null) {
-            //发现后端传回来的数据里面没有用户信息，我们自己补上
-            for (int i = 0; i < res.getData().size(); i++){
-                Record r = res.getData().get(i);
-                r.setAvatar(Living.user.getAvatar());
-                r.setNickname(Living.user.getNickname());
-            }
-
-        }
         newRecords = res.getData();
         return true;
     }

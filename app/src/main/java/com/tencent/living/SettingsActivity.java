@@ -79,9 +79,7 @@ public class SettingsActivity extends Activity {
                 editor.clear();
                 // Commit the edits!
                 editor.commit();
-//                Intent intent = new Intent();
-//                intent.setClass(SettingsActivity.this, MainActivity.class);
-//                startActivity(intent);
+                setResult(RESULT_OK);
                 finish();
             } else{
                 Toast.makeText(SettingsActivity.this, R.string.logout_failed, Toast.LENGTH_LONG).show();
