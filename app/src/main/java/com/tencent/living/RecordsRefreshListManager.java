@@ -99,6 +99,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             if (data.getBoolean("isOk")) {
                 if (target == 0) //刷新数据
                     adapter.clear();
+                footer.setVisibility(View.GONE);
+                listView.removeFooterView(footer);
                 //清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
                 if (newRecords != null) {
@@ -142,6 +144,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
         if (isLoading)
             return;
         isLoading = true;
+        listView.addFooterView(footer);
+        footer.setVisibility(View.VISIBLE);
         final int _target = target;
         final int page = target == 0 ? 0 : curPage;
         new Thread() {
