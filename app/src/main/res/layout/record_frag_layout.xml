@@ -178,7 +178,7 @@
             android:gravity="center"
             android:hint="记录这一刻"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
+            android:maxLength="140"
             android:minHeight="100dp"
             android:scrollHorizontally="false" />
     </LinearLayout>
