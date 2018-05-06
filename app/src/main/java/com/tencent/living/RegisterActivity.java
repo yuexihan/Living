@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 
 import com.tencent.living.dataHelper.UserHelper;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
 

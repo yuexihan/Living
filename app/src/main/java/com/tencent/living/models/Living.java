@@ -1,9 +1,10 @@
-package com.tencent.living;
+package com.tencent.living.models;
 
 import android.app.Application;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
+import com.tencent.living.R;
 import com.tencent.living.models.User;
 
 public class Living  extends Application{

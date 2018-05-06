@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,6 +38,7 @@ import com.microsoft.projectoxford.face.contract.Face;
 import com.tencent.living.dataHelper.RecordHelper;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
+import com.tencent.living.dataHelper.ImageHelper;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -175,7 +175,7 @@ public class RecordFragment extends Fragment {
 
     private void tryToPubRecord(int visiable) {
         if (contentText.getText().toString().length() == 0 && visiable == PUB_TO_PUB) {
-            Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_empty, 2000).show();
+            Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_empty, Toast.LENGTH_LONG).show();
             return;
         }
         pb.setVisibility(View.VISIBLE);

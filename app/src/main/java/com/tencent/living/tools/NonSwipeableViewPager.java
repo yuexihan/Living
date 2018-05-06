@@ -1,4 +1,4 @@
-package com.tencent.living;
+package com.tencent.living.tools;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

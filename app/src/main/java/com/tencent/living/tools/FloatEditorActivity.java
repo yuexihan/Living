@@ -1,4 +1,4 @@
-package com.tencent.living;
+package com.tencent.living.tools;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.tencent.living.R;
 
 public class FloatEditorActivity extends Activity {
     private EditText input;

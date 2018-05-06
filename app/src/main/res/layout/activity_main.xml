@@ -27,7 +27,7 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <com.tencent.living.NonSwipeableViewPager
+    <com.tencent.living.tools.NonSwipeableViewPager
         android:id="@+id/homeViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

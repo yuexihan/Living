@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.tencent.living.models.Living;
 import com.tencent.living.tools.FontManager;
 
 public class UserFragment extends Fragment {

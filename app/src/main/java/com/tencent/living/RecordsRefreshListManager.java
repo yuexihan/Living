@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.tencent.living.dataHelper.LivingServerAgent;
 import com.tencent.living.dataHelper.RecordHelper;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
 
