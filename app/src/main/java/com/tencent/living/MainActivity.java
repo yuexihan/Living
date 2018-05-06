@@ -137,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     public void  clearBadgeAt() {
-        bd.hide(true);
+        if (bd != null)
+            bd.hide(true);
     }
 
     @Override

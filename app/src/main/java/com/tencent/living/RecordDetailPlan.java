@@ -264,6 +264,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         ResultData<Post> ret = CommentHelper.postLike(record.getEmotion_id());
         if (ret == null || !ret.isOk())
             return false;
+        PushHelper.pushMessage(record.getPoster());
         return true;
     }
     /**
