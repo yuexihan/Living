@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.tencent.living.dataHelper.PushHelper;
 import com.tencent.living.dataHelper.UserHelper;
 import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
@@ -116,6 +117,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             ResultData<User> userRes = UserHelper.getUserInfo();
             if (userRes.isOk()) {
                 Living.user = userRes.getData();
+                PushHelper.bindPushAccount(this,Living.user.getId());
                 return true;
             }
         }

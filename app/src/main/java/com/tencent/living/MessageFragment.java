@@ -16,6 +16,7 @@ import com.tencent.living.dataHelper.CommentHelper;
 import com.tencent.living.dataHelper.LivingServerAgent;
 import com.tencent.living.dataHelper.RecordHelper;
 import com.tencent.living.models.Comment;
+import com.tencent.living.models.Living;
 import com.tencent.living.models.Message;
 import com.tencent.living.models.Record;
 import com.tencent.living.models.ResultData;
@@ -64,6 +65,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
             if (data.getBoolean("isOk")) {
                 if (target == 0) //刷新数据
                     adapter.clear();
+                Living.mainActivity.clearBadgeAt();
                 loadmoreView.setVisibility(View.GONE);//设置刷新界面不可见
                 listView.removeFooterView(loadmoreView);
                 // 清除多余记录

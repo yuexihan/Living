@@ -19,6 +19,9 @@ import java.util.Map;
 
 public class LivingServerAgent {
     public static final String HOST_URL = "https://iliving.name";
+    public static final String PUSH_HOST_URL = "http://openapi.xg.qq.com/v2/push/single_account";
+    public static final String GET_HOST_PREFIX = "GETopenapi.xg.qq.com/v2/push/single_account";
+
     public static final String ACTION_LOGIN =  "/api/user/login";
     public static final String ACTION_REGISTER =  "/api/user";
     public static final String ACTION_GET_USER =   "/api/user";
@@ -108,6 +111,44 @@ public class LivingServerAgent {
             return null;
         }
     }
+
+    public <T> ResultData<T> execPush(Type objectType){
+        ResultData<T> resultData = new ResultData<>();
+        try{
+            //初始化连接
+            URL url = new URL(PUSH_HOST_URL +  getParamString()) ;
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(5000);
+            connection.setRequestMethod("GET");
+            connection.setUseCaches(false);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            if (method.equals(LivingServerAgent.HTTP_METHOD_POST))
+                connection.setDoOutput(true);
+            connection.setDoInput(true);
+            Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+
+            //添加参数
+            if (method.equals(LivingServerAgent.HTTP_METHOD_POST)) {
+                String param = gson.toJson(bodyParm);
+                OutputStream out = connection.getOutputStream();
+                out.write(param.getBytes("utf-8"));
+                out.close();
+            }
+            //获得结果
+            int responseCode = connection.getResponseCode();
+            if (responseCode == 200) { //请求成功 获得返回的流
+                String json = getResponseBody(connection.getInputStream()) ;
+                resultData = gson.fromJson(json, objectType);
+            }
+            if (resultData != null)
+                resultData.setConn_code(responseCode);
+            return resultData;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private  String getResponseBody(InputStream is) {
         StringBuilder sb = new StringBuilder();
         String line = null;

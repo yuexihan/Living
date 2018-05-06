@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.tencent.living.dataHelper.CommentHelper;
 import com.tencent.living.dataHelper.LivingServerAgent;
+import com.tencent.living.dataHelper.PushHelper;
 import com.tencent.living.models.Comment;
 import com.tencent.living.models.Living;
 import com.tencent.living.models.Post;
@@ -240,6 +241,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
                     likeButton.setImageResource(R.drawable.record_red_heart);
                 }else if (target == 1){
                     //新的评论 ,重新拉一下评论
+
                     adapter.clear();
                     record.getComments().clear();
                     curInitPageNum = 0;
@@ -319,12 +321,17 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
                 CommentHelper.postComment(emoID, comment.getRspto(), comment.getComment());
         if (ret == null || !ret.isOk())
             return false;
+        if(comment.getRspto() == 0)
+            PushHelper.pushMessage(record.getPoster());
+        else
+            PushHelper.pushMessage(comment.getRspto());
+
         return true;
     }
     /**
      * 往这个界面所管理的record中添加一个评论
      */
-    public void addComment(final String content, String to, int toID){
+    public void addComment(final String content, String to, final int toID){
         final int _toID = toID;
         final String _to = to;
         new Thread() {
@@ -338,6 +345,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
                 comment.setPoster(record.getPoster());
                 comment.setPoster_nickname(record.getNickname());
                 bundle.putBoolean("isOk", doPostComment(record.getEmotion_id(), comment));
+                bundle.putInt("toID", _toID);
                 bundle.putInt("target", 1);
                 msg.setData(bundle);
                 handler.sendMessage(msg);//发送message信息

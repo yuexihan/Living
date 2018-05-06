@@ -4,10 +4,13 @@ import android.app.Application;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
+import com.tencent.living.MainActivity;
 import com.tencent.living.R;
 import com.tencent.living.models.User;
 
 public class Living  extends Application{
+
+    public static MainActivity mainActivity;
     //当前正在登录的用户信息，在LoginActivity的doLogin中被初始化
     public static User user;
     public static String token;

@@ -1,6 +1,7 @@
 package com.tencent.living;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -17,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tencent.living.dataHelper.MessageReceiver;
+import com.tencent.living.models.Living;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public static MessageFragment messageFragment = new MessageFragment();
     public static UserFragment userFragment = new UserFragment();
 
+    private MessageReceiver messageReceiver;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -76,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         title.setTypeface(title.getTypeface(), Typeface.ITALIC);
         initViewPager();
         initNavigation();
+        Living.mainActivity = this;
+
     }
 
     private void initNavigation(){
@@ -113,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
             return fragmentList.size();
         }
     }
-
-    private Badge addBadgeAt(int position, int number) {
+    private Badge bd ;
+    public void  addBadgeAt(int position, int number) {
         // add badge
-        return new QBadgeView(this)
+        bd = new QBadgeView(this)
                 .setBadgeNumber(number)
                 .setShowShadow(false)
                 .setGravityOffset(12, 2, true)
@@ -124,10 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
                     @Override
                     public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-                        if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState)
-                            Toast.makeText(MainActivity.this, "Badge 被消除了", Toast.LENGTH_SHORT).show();
+//                        if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState)
+//                            Toast.makeText(MainActivity.this, "Badge 被消除了", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    public void  clearBadgeAt() {
+        bd.hide(true);
     }
 
     @Override
