@@ -1,5 +1,6 @@
 package com.tencent.living;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
@@ -125,5 +125,17 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Badge 被消除了", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Did you in there?");
+        System.out.println(requestCode);
+        if(requestCode==1&&resultCode==0){
+            Intent intent = new Intent();
+            intent.setClass(this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

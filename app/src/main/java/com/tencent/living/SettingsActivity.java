@@ -1,12 +1,24 @@
 package com.tencent.living;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.tencent.living.dataHelper.UserHelper;
+import com.tencent.living.models.Post;
+import com.tencent.living.models.ResultData;
+import com.tencent.living.models.User;
+
+import java.util.Set;
 
 
 /**
@@ -36,6 +48,29 @@ public class SettingsActivity extends Activity {
         {
             @Override
             public void onClick(View view) {
+
+                //直接到主界面
+                new Thread() {
+                    public void run() {
+                        Message msg = Message.obtain();
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("isOk", doLogout());
+                        msg.setData(bundle);//bundle传值，耗时，效率低
+                        handler.sendMessage(msg);//发送message信息
+                    }
+                }.start();
+            }
+        });
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle data = msg.getData();
+            if (data.getBoolean("isOk")) {
+                //saveUserToConfig();
                 SharedPreferences settings = getSharedPreferences(Living.config, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 // 清空登陆数据
@@ -43,13 +78,21 @@ public class SettingsActivity extends Activity {
                 editor.putString("pwd", "");
                 // Commit the edits!
                 editor.commit();
-                //直接到主界面
-                Intent intent = new Intent();
-                intent.setClass(SettingsActivity.this,LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(SettingsActivity.this, MainActivity.class);
+//                startActivity(intent);
                 finish();
+            } else{
+                Toast.makeText(SettingsActivity.this, R.string.logout_failed, Toast.LENGTH_LONG).show();
             }
-        });
+        }
+    };
+
+    private boolean doLogout() {
+        //检测logout
+        ResultData<Post> res = UserHelper.postLogout();
+        return res != null && res.isOk();
     }
+
 
 }
