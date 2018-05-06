@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,10 +40,7 @@ import com.tencent.living.models.ResultData;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
-import static com.tencent.living.dataHelper.RecordHelper.postRecord;
 
 public class RecordFragment extends Fragment {
     public static final int PUB_TO_SELF = 1;

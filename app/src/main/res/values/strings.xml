@@ -36,10 +36,12 @@
     <string name="send">发送</string>
     <string name="Loginig">正在登录</string>
     <string name="login_failed">账号或密码错误！</string>
+    <string name="logout_failed">登出失败！</string>
     <string name="pthone">手机</string>
     <string name="passwd">密码</string>
     <string name="passwd2">确认密码</string>
     <string name="pwd_check_err">两次密码不一致</string>
+    <string name="phone_check_err">手机号不正确</string>
     <string name="register_fail">注册失败，手机号已被注册过了</string>
     <string name="pub_record_fail">心情发布失败，请检查您的网络</string>
     <string name="pub_record_empty">在随笔处写点感想吧</string>
