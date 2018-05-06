@@ -64,6 +64,7 @@ public class RecordFragment extends Fragment {
     private EditText contentText;
     private ProgressBar pb;
     private ScrollView sv;
+    private RadioButton rut_button;
 
     //点击相机图片按钮时的回调函数
     private View.OnClickListener camera_but_lis = new View.OnClickListener() {
@@ -142,6 +143,13 @@ public class RecordFragment extends Fragment {
         return 0;
     }
 
+    private void resetContent(){
+        rut_button.setChecked(true);
+        contentText.setText("");
+        degreeBar.setProgress(50);
+        degreeText.setText(getString(R.string.emotion_value) + degreeBar.getProgress());
+        camera_button.setImageResource(R.drawable.camera);
+    }
     /**
      * 数据线程处理完数据之后，会发送消息给handler来做界面处理
      */
@@ -152,7 +160,7 @@ public class RecordFragment extends Fragment {
             Bundle data = msg.getData();
             boolean isOk = data.getBoolean("isOk");
             if (isOk) {
-                //跳转到我的
+                resetContent();
                 Toast.makeText(RecordFragment.this.getActivity(), "发布成功", 2000).show();
             } else
                 Toast.makeText(RecordFragment.this.getActivity(), R.string.pub_record_fail, 2000).show();
@@ -276,7 +284,7 @@ public class RecordFragment extends Fragment {
         contentText = view.findViewById(R.id.pub_input);
         pb = view.findViewById(R.id.pubProgress);
         sv = view.findViewById(R.id.scrollView);
-
+        rut_button = view.findViewById(R.id.rbut_happy);
         camera_button.setOnClickListener(camera_but_lis);
         emotionProgressDialog = new ProgressDialog(this.getActivity());
         degreeBar.setOnSeekBarChangeListener(seekBarListener);
