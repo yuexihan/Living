@@ -3,7 +3,6 @@ package com.tencent.living;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,11 +22,10 @@ import android.widget.Toast;
 import com.tencent.living.dataHelper.UserHelper;
 import com.tencent.living.models.Post;
 import com.tencent.living.models.ResultData;
-import com.tencent.living.models.User;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 
-import static android.os.SystemClock.sleep;
 
 public class RegisterActivity extends Activity {
     private RadioGroup rgroup;
@@ -38,6 +36,8 @@ public class RegisterActivity extends Activity {
     private Button register_btn;
     private ImageButton dice_button;
     private ProgressBar pb;
+    private static final String PHONE_NUMBER_REG = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +132,12 @@ public class RegisterActivity extends Activity {
     private View.OnClickListener finishAction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //正则检查手机号
+            if ( !Pattern.matches(PHONE_NUMBER_REG, phone.getText().toString())){
+                Toast.makeText(RegisterActivity.this, RegisterActivity.this.getString(R.string.phone_check_err)
+                        ,Toast.LENGTH_LONG).show();
+                return ;
+            }
             //检测两次密码是否一致
             if (!pwd1.getText().toString().equals(pwd2.getText().toString())){
                 Toast.makeText(RegisterActivity.this, RegisterActivity.this.getString(R.string.pwd_check_err)
