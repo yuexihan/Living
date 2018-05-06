@@ -40,6 +40,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    // font-awesome 字体
+    compile 'com.shamanland:fonticon:0.1.8'
     compile 'com.android.support:appcompat-v7:27.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.1.0'
     //此行为百分比布局依赖库

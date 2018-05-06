@@ -1,27 +1,29 @@
 package com.tencent.living;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import com.tencent.living.tools.FontManager;
 
 public class UserFragment extends Fragment {
     private ListView listView;
     private SwipeRefreshLayout layout;
-    private ImageButton settingsbutton;
+    private TextView settings_button;
     private ImageView profile;
     private TextView name;
     private RecordsRefreshListManager refreshListManager;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -37,8 +39,14 @@ public class UserFragment extends Fragment {
         refreshListManager = new RecordsRefreshListManager(layout, listView, 3);
         refreshListManager.setUser(Living.user.getNickname());
 
-        settingsbutton = view.findViewById(R.id.settingsbtn);
-        settingsbutton.setOnClickListener(new View.OnClickListener() {
+        settings_button = view.findViewById(R.id.icon_setting);
+        if (getActivity() != null){
+            //获取assets文件夹里的字体文件,getAssets()是context中的方法，fragment不可用
+            Typeface font = Typeface.createFromAsset( getActivity().getAssets(), FontManager.FONTAWESOME);
+            //给指定的TextView加载字体
+            settings_button.setTypeface(font);
+        }
+        settings_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
