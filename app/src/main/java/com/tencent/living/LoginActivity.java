@@ -46,7 +46,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         pb = findViewById(R.id.progressBar);
 
         et_phone.setInputType(InputType.TYPE_CLASS_PHONE);
-        et_pwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        et_pwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         login_btn.setOnClickListener(this);
         register_btn.setOnClickListener(new View.OnClickListener() {

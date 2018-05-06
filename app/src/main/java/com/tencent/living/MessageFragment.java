@@ -42,10 +42,11 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
         listView = view.findViewById(R.id.message_frag_layout);
         layout = view.findViewById(R.id.layout);
         adapter = new MessageListViewAdapter(getActivity());
-        loadmoreView.setVisibility(View.INVISIBLE);//设置刷新视图默认情况下是不可见的
+        loadmoreView.setVisibility(View.GONE);//设置刷新视图默认情况下是不可见的
         listView.setOnScrollListener(this);
         listView.addFooterView(loadmoreView, null, false);
         listView.setAdapter(adapter);
+        listView.removeFooterView(loadmoreView);
         layout.setOnRefreshListener(this);
         isLoading = false;
 
@@ -64,6 +65,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
                 if (target == 0) //刷新数据
                     adapter.clear();
                 loadmoreView.setVisibility(View.GONE);//设置刷新界面不可见
+                listView.removeFooterView(loadmoreView);
                 // 清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
                 if (newMesg != null) {
@@ -111,6 +113,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
             if (!isLoading) {
                 //不处于加载状态的话对其进行加载
                 isLoading = true;
+                listView.addFooterView(loadmoreView, null, false);
                 loadmoreView.setVisibility(View.VISIBLE);
                 startPullData(adapter.getCount() / LivingServerAgent.DATA_DATA_PER_PAGE );
             }

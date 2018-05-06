@@ -4,6 +4,7 @@
     <string name="nav_item_ground">广场</string>
     <string name="nav_item_message">消息</string>
     <string name="nav_item_user">我的</string>
+    <string name="nav_subitem_info">信息</string>
     <string name="record_camera_but">我最懂你</string>
     <string name="record_pub_switch">公开</string>
     <string name="record_pub_button">发布</string>
