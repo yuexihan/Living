@@ -20,6 +20,8 @@ import com.tencent.living.models.ResultData;
 import com.tencent.living.models.User;
 import com.tencent.living.tools.FontManager;
 
+import java.util.regex.Pattern;
+
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     private Button login_btn;
@@ -27,6 +29,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText et_phone;
     private EditText et_pwd;
     private ProgressBar pb;
+    private static final String PHONE_NUMBER_REG = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +111,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         String user = et_phone.getText().toString();
         String pwd = et_pwd.getText().toString();
         ResultData<Post> res = UserHelper.postLogin(user, pwd);
+
+//        //正则检查手机号
+//        if ( !Pattern.matches(PHONE_NUMBER_REG, user)){
+//            Toast.makeText(LoginActivity.this, LoginActivity.this.getString(R.string.phone_check_err)
+//                    ,Toast.LENGTH_LONG).show();
+//            return true; //TODO 严格来说，要return false
+//        }
         if (res != null && res.isOk()) {
             //初始化全局User;
             Living.token = res.getData().getToken();
