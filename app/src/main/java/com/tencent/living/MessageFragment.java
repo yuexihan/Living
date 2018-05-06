@@ -60,8 +60,10 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
             if (data.getBoolean("isOk")) {
                 loadmoreView.setVisibility(View.GONE);//设置刷新界面不可见
                 isLoading = false;//设置正在刷新标志位false
+                // 清除多余记录
+                int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
                 if (newMesg != null) {
-                    for (int i = 0; i < newMesg.size(); i++)
+                    for (int i = giveUp; i < newMesg.size(); i++)
                         adapter.addItem(newMesg.get(i));
                 }
                 adapter.notifyDataSetChanged();
@@ -104,11 +106,6 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
                 //不处于加载状态的话对其进行加载
                 isLoading = true;
                 loadmoreView.setVisibility(View.VISIBLE);
-                //清除多余记录
-                int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
-                for (int i = 0; i < giveUp; i++)
-                    if (adapter.getCount() != 0)
-                        adapter.removeItem(adapter.getCount() - 1);
                 startPullData(adapter.getCount() / LivingServerAgent.DATA_DATA_PER_PAGE );
             }
         }

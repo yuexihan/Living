@@ -76,6 +76,9 @@ public class RecordDetailPlan {
     private void resetCommentsToList(){
         adapter.clear();
         List<Comment> comments = record.getComments();
+        if (comments.size() > 0) {
+            commentsList.setVisibility(View.VISIBLE);
+        }
         for (int i = 0 ; i < comments.size() && i < commentsLineLimit; i++) {
             CommentDetailPlan cdp = adapter.addItem(comments.get(i));
             cdp.setOnCommentClick(onCommentClickListener);

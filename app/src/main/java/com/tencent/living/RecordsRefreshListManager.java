@@ -101,12 +101,8 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
                     adapter.clear();
                 //清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
-                for (int i = 0; i < giveUp; i++)
-                    if (adapter.getCount() != 0)
-                        adapter.removeItem(adapter.getCount() - 1);
-                //加入新记录
                 if (newRecords != null) {
-                    for (int i = 0; i < newRecords.size(); i++)
+                    for (int i = giveUp; i < newRecords.size(); i++)
                         adapter.addItem(newRecords.get(i));
                 }
                 curPage = adapter.getCount() / LivingServerAgent.DATA_DATA_PER_PAGE;
