@@ -79,7 +79,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
     /**
      * 起线程拉数据
      */
-    public void startPullData(int curPage){
+    public void startPullData(final int curPage){
         final int _curPage = curPage;
         new Thread() {
             public void run() {
@@ -89,6 +89,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
                         = CommentHelper.getMessagesByUserId(_curPage);
                 newMesg = ret.getData();
                 bundle.putBoolean("isOk", (ret != null && ret.isOk()));
+                bundle.putInt("target", curPage); //区别是刷新数据还是拉取更多数据
                 msg.setData(bundle);
                 handler.sendMessage(msg);//发送message信息
             }
