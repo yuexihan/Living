@@ -57,9 +57,11 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
         public void handleMessage(android.os.Message msg) {
             super.handleMessage(msg);
             Bundle data = msg.getData();
+            int target = data.getInt("target");
             if (data.getBoolean("isOk")) {
+                if (target == 0) //刷新数据
+                    adapter.clear();
                 loadmoreView.setVisibility(View.GONE);//设置刷新界面不可见
-                isLoading = false;//设置正在刷新标志位false
                 // 清除多余记录
                 int giveUp = adapter.getCount() % LivingServerAgent.DATA_DATA_PER_PAGE;
                 if (newMesg != null) {
@@ -68,6 +70,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
                 }
                 adapter.notifyDataSetChanged();
                 layout.setRefreshing(false);
+                isLoading = false;//设置正在刷新标志位false
             }else{
                 Toast.makeText(listView.getContext(), R.string.mesg_pull_failed, 2000).show();
             }
@@ -76,7 +79,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
     /**
      * 起线程拉数据
      */
-    public void startPullData(int curPage){
+    public void startPullData(final int curPage){
         final int _curPage = curPage;
         new Thread() {
             public void run() {
@@ -86,6 +89,7 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
                         = CommentHelper.getMessagesByUserId(_curPage);
                 newMesg = ret.getData();
                 bundle.putBoolean("isOk", (ret != null && ret.isOk()));
+                bundle.putInt("target", curPage); //区别是刷新数据还是拉取更多数据
                 msg.setData(bundle);
                 handler.sendMessage(msg);//发送message信息
             }
@@ -116,7 +120,6 @@ public class MessageFragment extends Fragment implements AbsListView.OnScrollLis
         if (isLoading)
             return ;
         isLoading = true;
-        adapter.clear();
         startPullData(0);
     }
 }
