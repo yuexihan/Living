@@ -1,5 +1,6 @@
 package com.tencent.living;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -53,10 +54,33 @@ public class UserFragment extends Fragment {
                 // 设置要跳转的页面
                 intent.setClass(getActivity(), SettingsActivity.class);
                 // 开始Activity
-                getActivity().startActivityForResult(intent,MainActivity.COMMENT_LOGOUT_REQUEST_CODE);
+                getActivity().startActivityForResult(intent,MainActivity.LOGOUT_REQUEST_CODE);
 //                startActivity(intent);
             }
         });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (resultCode != Activity.RESULT_OK)
+            return ;
+        switch(requestCode){
+            //评论编辑框返回
+            case MainActivity.COMMENT_EDIT_REQUEST_CODE:
+                int emoID = data.getIntExtra("emotionID", 0);
+                String content = data.getStringExtra("content");
+                String to = data.getStringExtra("to");
+                int toID = data.getIntExtra("toID", 0);
+                if (refreshListManager!= null)
+                    refreshListManager.addComment(emoID, to, toID, content);
+                break;
+            case MainActivity.LOGOUT_REQUEST_CODE:
+                Intent intent = new Intent();
+                intent.setClass(this.getActivity(),LoginActivity.class);
+                startActivity(intent);
+                this.getActivity().finish();
+                break;
+        }
     }
 }
