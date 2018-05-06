@@ -5,6 +5,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +38,7 @@ import com.tencent.living.models.User;
  */
 public class SettingsActivity extends Activity {
 
+    private TextView title;
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -44,6 +49,13 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.settings_layout);
         //设置信息
         setVal();
+        title = (TextView) findViewById(R.id.toolbar_title);
+        Shader textShader=new LinearGradient(0, 0, 500, 0,
+                new int[]{Color.argb(0xff, 254, 197, 181),
+                        Color.argb(0xff, 0xff, 0xf7, 0xa8)},
+                null, Shader.TileMode.CLAMP);
+        title.getPaint().setShader(textShader);
+        title.setTypeface(title.getTypeface(), Typeface.ITALIC);
 
         Button logout_button = findViewById(R.id.logout_button);
         logout_button.setOnClickListener(new View.OnClickListener()
