@@ -123,22 +123,26 @@ public class MainActivity extends AppCompatActivity {
     private Badge bd ;
     public void  addBadgeAt(int position, int number) {
         // add badge
-        bd = new QBadgeView(this)
-                .setBadgeNumber(number)
-                .setShowShadow(false)
-                .setGravityOffset(12, 2, true)
-                .bindTarget(navigation.getBottomNavigationItemView(position))
-                .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
-                    @Override
-                    public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+        if (bd == null) {
+            bd = new QBadgeView(this)
+                    .setBadgeNumber(number)
+                    .setShowShadow(false)
+                    .setGravityOffset(12, 2, true)
+                    .bindTarget(navigation.getBottomNavigationItemView(position))
+                    .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+                        @Override
+                        public void onDragStateChanged(int dragState, Badge badge, View targetView) {
 //                        if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState)
 //                            Toast.makeText(MainActivity.this, "Badge 被消除了", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        }
+                    });
+        }
     }
     public void  clearBadgeAt() {
-        if (bd != null)
+        if (bd != null) {
             bd.hide(true);
+            bd = null;
+        }
     }
 
     @Override
