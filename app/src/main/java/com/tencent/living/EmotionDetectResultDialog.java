@@ -5,13 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class EmotionDetectResultDialog extends Dialog {
     private Context context;
     private TextView emoDegreeText;
-    private SeekBar emoDegree;
+    private ProgressBar emoDegree;
     private ImageView emoImage;
     private TextView emoName;
     private int emoType = -1;
@@ -21,10 +22,10 @@ public class EmotionDetectResultDialog extends Dialog {
         super.onCreate(savedInstanceState);
         View view = View.inflate(context,R.layout.emotion_detect_result_dialog,null);
         setContentView(view);
-        emoDegreeText = (TextView)view.findViewById(R.id.emoDegreeText);
-        emoDegree = (SeekBar)view.findViewById(R.id.emoDegree);
-        emoImage = (ImageView)view.findViewById(R.id.emoImage);
-        emoName = (TextView)view.findViewById(R.id.emoName);
+        emoDegreeText = view.findViewById(R.id.emoDegreeText);
+        emoDegree = view.findViewById(R.id.emoBar);
+        emoImage = view.findViewById(R.id.emoImage);
+        emoName = view.findViewById(R.id.emoName);
         initEmotionToView();
     }
 
@@ -72,5 +73,6 @@ public class EmotionDetectResultDialog extends Dialog {
                 break;
         }
         emoDegreeText.setText(context.getString(R.string.emotion_value) + emoValue);
+        emoDegree.setProgress(emoValue);
     }
 }
