@@ -30,8 +30,8 @@ public class FloatEditorActivity extends Activity {
         to = intent.getStringExtra("to");
         toID = intent.getIntExtra("toID", 0);
         emotionID = intent.getIntExtra("emotionID", 0);
-        if (!to.equals(""))
-            input.setHint(getString(R.string.ground_respond_text) + ":");
+        if (toID != 0)
+            input.setHint(getString(R.string.ground_respond_text) + to +":");
 
         //点击发送
         send.setOnClickListener(new View.OnClickListener() {

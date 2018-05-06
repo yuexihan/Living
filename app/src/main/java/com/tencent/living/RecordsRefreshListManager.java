@@ -38,7 +38,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
     private int totalItem;
     private int lastItem;
     private boolean isLoading = false;
-    private LayoutInflater inflater;
 
     public static final int COMMENT_LINES_NO_LIMIT = RecordDetailPlan.COMMENT_LINES_NO_LIMIT;
 
@@ -130,15 +129,6 @@ public class RecordsRefreshListManager implements SwipeRefreshLayout.OnRefreshLi
             res = RecordHelper.getRecordsByUserId(curPage);
         if (res == null || !res.isOk())
             return false;
-        if (user != null && res.getData() != null) {
-            //发现后端传回来的数据里面没有用户信息，我们自己补上
-            for (int i = 0; i < res.getData().size(); i++){
-                Record r = res.getData().get(i);
-                r.setAvatar(Living.user.getAvatar());
-                r.setNickname(Living.user.getNickname());
-            }
-
-        }
         newRecords = res.getData();
         return true;
     }

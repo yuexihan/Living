@@ -41,4 +41,15 @@ public class RecordHelper {
         return lsa.execAndGetResult(new TypeToken<ResultData<ArrayList<Record>>>() {
         }.getType());
     }
+
+
+    public static ResultData<ArrayList<Record>> getOneRecord(int emotion_id){
+        LivingServerAgent lsa = new LivingServerAgent();
+        lsa.setAction(LivingServerAgent.ACTION_EMOTION_ONE);
+        lsa.setHttpsMethod(LivingServerAgent.HTTP_METHOD_GET);
+        lsa.putParam("token", Living.token);
+        lsa.putParam("emotion_id",emotion_id+"");
+        return lsa.execAndGetResult(new TypeToken<ResultData<ArrayList<Record>>>() {
+        }.getType());
+    }
 }

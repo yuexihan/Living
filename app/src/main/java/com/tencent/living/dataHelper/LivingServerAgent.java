@@ -30,6 +30,7 @@ public class LivingServerAgent {
     public static final String ACTION_POST_LIKE = "/api/like";
     public static final String ACTION_GET_MESSAGE = "/api/message";
     public static final String ACTION_LOGOUT = "/api/user/logout";
+    public static final String ACTION_EMOTION_ONE = "/api/emotion/this";
     public static final int DATA_DATA_PER_PAGE = 10;
 
     public static final String HTTP_METHOD_POST = "POST";
