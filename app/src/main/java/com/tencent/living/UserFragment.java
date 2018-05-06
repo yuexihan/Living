@@ -35,10 +35,8 @@ public class UserFragment extends Fragment {
         name = view.findViewById(R.id.name);
         profile.setImageResource(Living.profileID[Integer.parseInt(Living.user.getAvatar())]);
         name.setText(Living.user.getNickname());
-
         refreshListManager = new RecordsRefreshListManager(layout, listView, 3);
         refreshListManager.setUser(Living.user.getNickname());
-        refreshListManager.onRefresh();
 
         settings_button = view.findViewById(R.id.icon_setting);
         if (getActivity() != null){
@@ -60,7 +58,9 @@ public class UserFragment extends Fragment {
         });
         return view;
     }
-
+    public void refreashData(){
+        refreshListManager.onRefresh();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (resultCode != Activity.RESULT_OK)

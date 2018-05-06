@@ -28,9 +28,12 @@ public class GroundFragment extends Fragment {
         radioGroup = view.findViewById(R.id.emoGroup);
         radioGroup.setOnCheckedChangeListener(checkedChangeListener);
         refreshListManager = new RecordsRefreshListManager(swipeRefreshLayout, listView, MAX_COMMENTS_LINE);
+        return view;
+    }
+
+    public void refreashData(){
         setRefreshTarget();
         refreshListManager.onRefresh();
-        return view;
     }
     private void setRefreshTarget(){
         refreshListManager.setUser(null);

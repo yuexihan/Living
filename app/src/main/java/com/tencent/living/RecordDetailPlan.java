@@ -64,7 +64,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
     private boolean isLoading = false;
     //如果最多显示的评论有限制那么我们就在初始化的时候拉取1页，
     //如果最多显示的评论没有限制，那么我们就最多初始化5页数据
-    private int initPageNum = 5;
+    private int initPageNum = 3;
     private int curInitPageNum = 0;
     public static final int COMMENT_LINES_NO_LIMIT = Integer.MAX_VALUE;
     private ArrayList<Comment> newComments;
@@ -209,6 +209,7 @@ public class RecordDetailPlan implements AbsListView.OnScrollListener {
         view = LayoutInflater.from(this.context).inflate(R.layout.record_item_detail_layout, null);
 
         findAllComp();
+        commentsList.setOnScrollListener(this);
         resetCompsContent();
     }
 

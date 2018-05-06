@@ -49,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_ground:
                     homeViewPager.setCurrentItem(1);
+                    groundFragment.refreashData();
                     break;
                 case R.id.navigation_message:
                     homeViewPager.setCurrentItem(2);
+                    messageFragment.refreashData();
                     break;
                 case R.id.navigation_user:
                     homeViewPager.setCurrentItem(3);
+                    userFragment.refreashData();
                     break;
             }
-
             return true;
         }
     };
