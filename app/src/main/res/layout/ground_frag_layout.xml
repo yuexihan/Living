@@ -98,7 +98,7 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:divider="@color/colorPrimaryDark"
             android:dividerHeight="3dp"
             />
     </android.support.v4.widget.SwipeRefreshLayout>

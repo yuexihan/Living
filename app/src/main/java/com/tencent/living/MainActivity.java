@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.enableShiftingMode(false);
         navigation.enableItemShiftingMode(false);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        addBadgeAt(2, 2);
+//        addBadgeAt(2, 2);
     }
     private void initViewPager() {
         homeViewPager = (ViewPager)findViewById(R.id.homeViewPager);
